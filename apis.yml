@@ -1,0 +1,54 @@
+name: ChannelIndex (tgAtlas)
+description: >-
+  A read-only HTTP API over public Telegram data: resolve @usernames to numeric IDs, read channel size/description, walk
+  post history with per-post views/forwards, pull Telegram similar-channel recommendations, and search the public
+  directory. No phone number or MTProto session required. Auth via RapidAPI gateway headers. Also ships
+  channelindex-mcp, a local/stdio MCP server wrapping the same REST API.
+url: https://raw.githubusercontent.com/api-evangelist/tgatlas/refs/heads/main/apis.yml
+created: '2026-09-16'
+modified: '2026-09-16'
+specificationVersion: '0.21'
+tags:
+  - Telegram
+  - public channels
+  - social media
+  - social monitoring
+  - messaging
+  - directory
+  - search
+  - analytics
+  - OSINT
+  - market research
+  - AI-agent context
+apis:
+  - name: ChannelIndex Telegram Channel Data API
+    description: >-
+      Read-only REST API over public Telegram data with 19 GET endpoints behind the RapidAPI gateway. Public OpenAPI 3.1
+      contract; key-based auth via RapidAPI headers; free tier available.
+    humanURL: https://channelindex.starnikovoleg.workers.dev/docs
+    baseURL: https://telegram155.p.rapidapi.com/v1
+    tags:
+      - Telegram
+      - public channels
+      - social media
+      - social monitoring
+      - messaging
+      - directory
+      - search
+      - analytics
+      - OSINT
+      - market research
+      - AI-agent context
+    properties:
+      - type: OpenAPI
+        url: https://channelindex.starnikovoleg.workers.dev/openapi.json
+      - type: Documentation
+        url: https://channelindex.starnikovoleg.workers.dev/docs
+maintainers:
+  - FN: starnikovoleg
+    url: mailto:starnikovoleg@gmail.com
+generated:
+  by: apis.io/add
+  model: claude-opus-4-8
+  confidence: 90
+  at: '2026-09-16T09:06:47.049Z'
