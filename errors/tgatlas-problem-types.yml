@@ -1,0 +1,73 @@
+generated: '2026-09-16'
+method: derived
+source: >-
+  openapi/tgatlas-openapi.json (components.schemas.Error + shared responses),
+  enriched from https://channelindex.starnikovoleg.workers.dev/docs error reference
+provider: tgAtlas
+api: tgAtlas Telegram Channel Data API
+description: >-
+  Error catalog derived from the OpenAPI contract. The API does NOT use RFC 9457
+  problem+json; it returns a compact custom envelope on every non-2xx response.
+format: custom
+media_type: application/json
+envelope:
+  fields:
+    - name: code
+      type: string
+      description: Stable machine-readable error identifier (enum below).
+    - name: error
+      type: string
+      description: Short human-readable message.
+    - name: hint
+      type: string
+      optional: true
+      description: >-
+        Recovery hint suggesting a concrete next call. Set on RESOURCE_UNAVAILABLE
+        (how to seed an unknown peer id) and SERVICE_UNAVAILABLE.
+http_status_codes:
+  - 400
+  - 404
+  - 409
+  - 429
+  - 503
+  - 504
+problem_types:
+  - code: INVALID_REQUEST
+    http_status: 400
+    title: Invalid request
+    meaning: A path/query parameter is missing, malformed or out of range.
+    remediation: Fix the parameter and retry. limit above the maximum is clamped, not rejected.
+  - code: NOT_FOUND
+    http_status: 404
+    title: Not found
+    meaning: The peer, message, story or file does not exist or is not public.
+    remediation: Verify the id; seed an unknown peer via /v1/usernames/{username}.
+  - code: RESOURCE_UNAVAILABLE
+    http_status: 409
+    title: Resource unavailable
+    meaning: >-
+      The peer id is not yet known to the service and must be seeded before it
+      can be read.
+    remediation: Call /v1/usernames/{username} or a resolve route first (see hint).
+  - code: RATE_LIMITED
+    http_status: 429
+    title: Rate limited
+    meaning: A monthly request, discovery-lookup or phone-resolution counter is exhausted.
+    remediation: >-
+      Inspect the x-ratelimit-*-remaining/-reset response headers and back off
+      until reset, or upgrade the plan.
+  - code: SERVICE_UNAVAILABLE
+    http_status: 503
+    title: Service unavailable
+    meaning: Upstream Telegram/MTProto layer is temporarily unavailable.
+    remediation: Retry shortly (see hint).
+  - code: TIMEOUT
+    http_status: 504
+    title: Upstream timeout
+    meaning: The upstream read did not complete in time.
+    remediation: Retry the request.
+  - code: INTERNAL_ERROR
+    http_status: 500
+    title: Internal error
+    meaning: Unexpected server-side failure.
+    remediation: Retry; if persistent, contact the maintainer via security.txt.

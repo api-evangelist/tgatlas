@@ -1,0 +1,56 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+provider: tgAtlas
+providerId: tgatlas
+serviceCategory: API
+created: '2026-09-16'
+modified: '2026-09-16'
+method: published
+description: Cost mapping for the tgAtlas Telegram API. Spend is metered per call and
+  reported back to the consumer inside every response, so usage, allocation and forecasting need no
+  separate billing integration.
+tags:
+  - Telegram
+  - Cost Management
+  - Metering
+domains:
+  - name: Understand Usage and Cost
+    capabilities:
+      - name: Real-time metering
+        description: Every response carries its own counters, so consumption is visible to the
+          consumer at the moment of the call rather than at the end of a billing period.
+        artifacts:
+          - name: x-ratelimit-requests-limit / -remaining / -reset
+            description: Monthly request budget and what is left of it. Any call to any route spends one.
+          - name: x-ratelimit-lookups-limit / -remaining / -reset
+            description: Discovery budget, spent by four search routes only. Reading a channel or its
+              post history spends none, which is what makes large monitoring runs cheap.
+          - name: x-ratelimit-resolve-phone-number-endpoint-limit / -remaining / -reset
+            description: Phone resolution is metered on its own and never draws down the other two.
+        url: https://channelindex.starnikovoleg.workers.dev/status
+  - name: Quantify Business Value
+    capabilities:
+      - name: Unit economics
+        description: The billable unit is one HTTP request, and one request returns up to a hundred
+          posts with views and forwards, so cost per useful record is a division a consumer can do
+          before subscribing.
+        artifacts:
+          - name: Plans
+            description: Published plans and quotas in API Commons Plans format.
+            url: https://channelindex.starnikovoleg.workers.dev/plans.yaml
+          - name: Worked cost examples
+            description: Four recipes with their measured call counts.
+            url: https://channelindex.starnikovoleg.workers.dev/cookbook
+  - name: Manage the FinOps Practice
+    capabilities:
+      - name: Free evaluation
+        description: 2500 calls a month with no card, on the full specification, so a
+          consumer can measure real cost per record before any spend.
+        artifacts:
+          - name: Pricing
+            url: https://channelindex.starnikovoleg.workers.dev/pricing
+          - name: Sign-up
+            url: https://rapidapi.com/starnikovoleg/api/telegram155

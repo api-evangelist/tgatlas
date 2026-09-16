@@ -1,0 +1,35 @@
+generated: '2026-09-16'
+method: searched
+source: >-
+  https://channelindex.starnikovoleg.workers.dev/status,
+  https://channelindex.starnikovoleg.workers.dev/changelog,
+  openapi/tgatlas-openapi.json
+provider: tgAtlas
+api: tgAtlas Telegram Channel Data API
+description: Versioning, deprecation and operational-status posture for the tgAtlas Telegram API.
+versioning:
+  scheme: path
+  current: v1
+  contract: The OpenAPI at /openapi.json is declared the contract.
+deprecation:
+  policy_documented: true
+  policy_url: https://channelindex.starnikovoleg.workers.dev/changelog
+  policy_summary: >-
+    "Breaking changes to the API are announced here before they ship." The spec
+    is the contract; changes are announced on the changelog ahead of shipping.
+  headers:
+    sunset: not observed
+    deprecation: not observed
+  deprecated_operations:
+    - operationId: searchMessages
+      path: GET /v1/messages/search
+      note: Deprecated in the spec — aliases searchContacts (GET /v1/contacts/search).
+status_page:
+  present: true
+  url: https://channelindex.starnikovoleg.workers.dev/status
+  note: Live status/health surface; the /health route is a machine liveness probe.
+sla:
+  documented: false
+support:
+  contact: mailto:starnikovoleg@gmail.com
+  security_txt: https://channelindex.starnikovoleg.workers.dev/.well-known/security.txt

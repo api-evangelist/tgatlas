@@ -1,0 +1,75 @@
+overlay: 1.0.0
+info:
+  title: 'tgAtlas measured enrichment for the tgAtlas Telegram API'
+  version: '1.0.0'
+extends: https://channelindex.starnikovoleg.workers.dev/openapi.json
+x-generated: '2026-09-16'
+x-method: measured
+x-source: 'live calls to telegram155.p.rapidapi.com with a subscriber key'
+actions:
+  - target: "$.info"
+    description: 'Machine-readable descriptors the API publishes next to this specification, so a client that starts from the spec can find plans, limits and the agent-facing files without crawling the site.'
+    update:
+      x-tgatlas-documentation: 'https://channelindex.starnikovoleg.workers.dev/docs'
+      x-tgatlas-apis-json: 'https://channelindex.starnikovoleg.workers.dev/apis.json'
+      x-tgatlas-llms-txt: 'https://channelindex.starnikovoleg.workers.dev/llms.txt'
+      x-tgatlas-plans: 'https://channelindex.starnikovoleg.workers.dev/plans.yaml'
+      x-tgatlas-rate-limits: 'https://channelindex.starnikovoleg.workers.dev/rate-limits.yaml'
+      x-tgatlas-vocabulary: 'https://channelindex.starnikovoleg.workers.dev/vocabulary.yaml'
+      x-tgatlas-spectral-rules: 'https://channelindex.starnikovoleg.workers.dev/spectral-rules.yaml'
+      x-measured: '2026-09-16'
+  - target: "$.components"
+    description: 'The two headers the marketplace host authenticates on. The base specification leaves security to the gateway, so a generated client has no place to put the key; declaring the schemes here makes generated clients work without editing the spec that the listing serves.'
+    update:
+      securitySchemes:
+        RapidAPIKey:
+          type: 'apiKey'
+          in: 'header'
+          name: 'X-RapidAPI-Key'
+          description: 'Subscriber key from RapidAPI. The free plan issues one without a card.'
+        RapidAPIHost:
+          type: 'apiKey'
+          in: 'header'
+          name: 'X-RapidAPI-Host'
+          description: 'Host the key is scoped to: telegram155.p.rapidapi.com.'
+  - target: "$"
+    description: 'Both headers are required together on every path.'
+    update:
+      security:
+        -
+          RapidAPIKey: []
+          RapidAPIHost: []
+  - target: "$.paths['/v1/usernames/{username}'].get"
+    description: 'Measured response shapes. A chat may own several public handles, and then the primary `username` field is an empty string while the handles live in `usernames[]`.'
+    update:
+      x-measured: '2026-09-16'
+      x-measured-shapes:
+        - 'channel 1006503122 (@durov): username "", usernames[] with six active aliases, exactly one also editable'
+        - 'channel 1005640892 (@telegram): username "telegram", usernames null'
+      x-measured-rule: 'The handle to build a link from is the entry that is both active and editable.'
+  - target: "$.paths['/v1/channels/{peer_id}/participants'].get"
+    description: 'Precondition measured on both kinds of peer: member lists are a property of groups, which is Telegram''s own rule rather than a limit of this API.'
+    update:
+      x-measured: '2026-09-16'
+      x-measured-precondition: 'full_chat.can_view_participants from GET /v1/channels/{peer_id} tells you which answer to expect'
+      x-measured-shapes:
+        - 'megagroup 1256902287: 200 with participants[], and filter=admins also 200'
+        - 'broadcast channel 1006503122: 404 NOT_FOUND'
+  - target: "$.paths['/v1/peers/{peer_id}/stories'].get"
+    description: 'Measured empty-state shape: when the peer has nothing live, the answer is a 200 whose inner `stories` field is null rather than an empty array.'
+    update:
+      x-measured: '2026-09-16'
+      x-measured-shapes:
+        - 'channel 1006503122 with no live stories: 200, stories.stories null'
+  - target: "$.paths['/v1/peers/{peer_id}/stories/{ids}'].get"
+    description: 'Measured id behaviour: story ids stay resolvable long after the 24-hour window, so an archive built from earlier calls keeps reading.'
+    update:
+      x-measured: '2026-09-16'
+      x-measured-shapes:
+        - 'channel 1006503122, ids 1,2,3: 200 with count 3, including a story posted 3 December 2023'
+        - 'an id nobody posted: 200 with count 0 and stories null'
+  - target: "$.components.parameters.LimitQuery"
+    description: 'Measured tolerance: a limit above the declared maximum is clamped to it instead of failing the request, so a client that asks for too much still gets a page.'
+    update:
+      x-measured: '2026-09-16'
+      x-measured-behaviour: 'limit=500 answered 200 and was clamped, not rejected with a validation error'

@@ -1,0 +1,74 @@
+generated: '2026-09-16'
+method: derived
+source: >-
+  mcp/tgatlas-mcp.yml (tool list from the channelindex-mcp README) bound to
+  openapi/tgatlas-openapi.json operationIds
+provider: tgAtlas
+api: tgAtlas Telegram Channel Data API
+description: >-
+  Crosswalk binding each channelindex-mcp tool to its backing OpenAPI
+  operation(s). The MCP server calls the REST endpoints directly, so every tool
+  maps to real operationIds; bindings are by documented behaviour (the live
+  tools/list schema is a local stdio process and was not introspected). The MCP
+  surface is a curated subset — 3 tools over 19 REST operations — so most
+  operations are REST-only.
+surfaces:
+  openapi: openapi/tgatlas-openapi.json
+  graphql: null
+  mcp:
+    package: https://github.com/starnikovoleg/channelindex-mcp
+    transport: local-stdio
+    gated: true
+    note: Requires a RapidAPI key; tools call telegram155.p.rapidapi.com behind the gateway.
+crosswalk:
+  - tool: telegram_channel
+    category: channels
+    rest:
+      - getFullChannel
+      - getChannelMessages
+    binding: composite
+    confidence: high
+    note: >-
+      Profile + posting cadence. README states three REST calls with cadence on
+      (full channel + recent messages to compute rate), two with cadence:false.
+  - tool: telegram_similar_channels
+    category: channels
+    rest:
+      - getChannelRecommendations
+      - getFullChannel
+    binding: composite
+    confidence: high
+    note: >-
+      Telegram recommendation graph; enrich:true adds one getFullChannel per
+      result for exact subscriber counts (capped at 12).
+  - tool: telegram_search_channels
+    category: identity
+    rest:
+      - searchContacts
+    binding: direct
+    confidence: medium
+    note: Global public directory search (searchContacts backs /v1/contacts/search).
+mcp_only: []
+rest_only:
+  - { operationId: health, reason: liveness probe, no tool }
+  - { operationId: getChannels, reason: batch fetch, not exposed as a tool }
+  - { operationId: getChannelParticipants, reason: group member lists, out of MCP scope }
+  - { operationId: getHistory, reason: full post history, not a curated tool }
+  - { operationId: getDiscussionMessage, reason: discussion-thread resolve, not exposed }
+  - { operationId: getReplies, reason: reply thread, not exposed }
+  - { operationId: getPeerStories, reason: stories, not exposed }
+  - { operationId: getStoriesByID, reason: stories, not exposed }
+  - { operationId: resolvePhone, reason: phone resolution, out of MCP scope }
+  - { operationId: resolveUsername, reason: username resolve, not a standalone tool }
+  - { operationId: getFullUser, reason: user profile, not exposed }
+  - { operationId: getUserPhotos, reason: user photos, not exposed }
+  - { operationId: downloadFile, reason: media download, not exposed }
+  - { operationId: searchMessages, reason: deprecated alias of searchContacts }
+  - { operationId: getOpenAPIDocument, reason: spec self-serve, not a tool }
+coverage:
+  rest_operations: 19
+  mcp_tools: 3
+  tools_bound: 3
+  rest_operations_bound: 4
+  rest_only: 15
+  mcp_only: 0

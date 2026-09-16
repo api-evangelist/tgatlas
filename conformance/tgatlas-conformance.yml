@@ -1,0 +1,36 @@
+generated: '2026-09-16'
+method: derived
+source: openapi/tgatlas-openapi.json + https://channelindex.starnikovoleg.workers.dev/docs
+provider: tgAtlas
+api: tgAtlas Telegram Channel Data API
+description: >-
+  Cross-cutting standards conformance derived from the contract and docs. This is
+  a niche OSINT/social-data API; its market (public Telegram data) has no formal
+  domain interoperability standard to declare, so domain_standard_conformance is
+  not applicable rather than absent (reward-only).
+entries:
+  - id: openapi-3.1
+    conforms: true
+    evidence: openapi 3.1.0 document served at /openapi.json
+  - id: cursor-pagination
+    conforms: true
+    evidence: >-
+      Opaque cursor + bounded limit (1..100) across list routes; components.parameters
+      CursorQuery / LimitQuery.
+  - id: rfc9457-problem-json
+    conforms: false
+    evidence: >-
+      Uses a custom {code,error,hint} error envelope, not application/problem+json.
+      See errors/tgatlas-problem-types.yml.
+  - id: oauth2
+    conforms: false
+    evidence: Auth is RapidAPI gateway apiKey headers; no OAuth flow.
+  - id: openapi-overlay-1.0
+    conforms: true
+    evidence: Provider publishes an OpenAPI Overlay 1.0.0 at /overlay.yaml.
+domain_standard_conformance:
+  applicable: false
+  note: >-
+    Public-Telegram-data / social monitoring has no ratified message or schema
+    standard (no SCIM/OData/FHIR/OpenRTB/ActivityPub analogue applies), so no
+    domain standard is claimed.

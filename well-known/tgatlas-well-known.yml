@@ -1,0 +1,44 @@
+generated: '2026-09-16'
+method: searched
+source: live probes of /.well-known/* on every known host
+description: >-
+  Well-known discovery documents for tgAtlas. The provider serves a real
+  security.txt and a machine-readable api-onboarding descriptor (AOD 0.1) on the
+  Cloudflare Worker host. OAuth/OIDC well-knowns are absent because auth is
+  delegated to the RapidAPI gateway (subscriber key headers), not an OAuth issuer.
+hosts:
+  - host: channelindex.starnikovoleg.workers.dev
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: tgatlas-security.txt
+      - path: /.well-known/api-onboarding
+        status: 200
+        file: tgatlas-api-onboarding.json
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: telegram155.p.rapidapi.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 429
+        file: null
+        note: RapidAPI gateway rejects unauthenticated/anonymous requests (429).

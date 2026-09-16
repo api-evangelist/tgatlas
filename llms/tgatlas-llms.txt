@@ -1,0 +1,33 @@
+# tgAtlas
+
+> Every public Telegram channel worth knowing, measured weekly. Public Telegram data read live through MTProto, with an API for channel lookup, history and discovery.
+
+## API
+
+- [API overview](https://channelindex.starnikovoleg.workers.dev/api): what the API returns and how it differs from the Bot API.
+- [Documentation](https://channelindex.starnikovoleg.workers.dev/docs): endpoints, pagination, errors.
+- [Pricing](https://channelindex.starnikovoleg.workers.dev/pricing): plans, the monthly request counter and the separate lookup counter.
+- [Method](https://channelindex.starnikovoleg.workers.dev/method): how the weekly snapshot is built and what "measured" means here.
+
+## Machine-readable
+
+- [OpenAPI specification](https://channelindex.starnikovoleg.workers.dev/openapi.json): all paths with request and response schemas, grouped by subject.
+- [Overlay](https://channelindex.starnikovoleg.workers.dev/overlay.yaml): OpenAPI Overlay 1.0.0 on top of that specification — the two authentication headers plus response shapes taken from live calls.
+- [Postman collection](https://channelindex.starnikovoleg.workers.dev/tgatlas.postman_collection.json): all 19 requests with both RapidAPI headers, importable by URL.
+- [Vocabulary](https://channelindex.starnikovoleg.workers.dev/vocabulary.yaml): the domain in one file — entities, operations, workflows and who uses them.
+- [apis.json](https://channelindex.starnikovoleg.workers.dev/apis.json): typed index of everything the API publishes, for catalogues and agents.
+- [Plans](https://channelindex.starnikovoleg.workers.dev/plans.yaml) and [rate limits](https://channelindex.starnikovoleg.workers.dev/rate-limits.yaml): quotas and counters as data, not prose.
+
+## Data
+
+- [Channels](https://channelindex.starnikovoleg.workers.dev/channels): the directory of measured public channels.
+- [Topics](https://channelindex.starnikovoleg.workers.dev/topics): channels grouped by subject.
+- [Similar channels](https://channelindex.starnikovoleg.workers.dev/similar): Telegram's own recommendation graph, one page per seed channel.
+- [Reports](https://channelindex.starnikovoleg.workers.dev/reports): written analyses, each carrying its own measurement date.
+- [Open data](https://channelindex.starnikovoleg.workers.dev/data): what is published and what is deliberately not in it.
+
+## Optional
+
+- [Blog](https://channelindex.starnikovoleg.workers.dev/blog): tutorials and write-ups.
+- [Glossary](https://channelindex.starnikovoleg.workers.dev/glossary): terms used across the site and API.
+- [About](https://channelindex.starnikovoleg.workers.dev/about): who runs this and how to reach us.

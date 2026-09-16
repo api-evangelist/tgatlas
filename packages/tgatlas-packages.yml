@@ -1,0 +1,38 @@
+generated: '2026-09-16'
+method: searched
+source: >-
+  https://registry.npmjs.org/channelindex-mcp,
+  https://github.com/starnikovoleg/channelindex-mcp
+provider: tgAtlas
+api: tgAtlas Telegram Channel Data API
+description: >-
+  First-party distributables for tgAtlas. No REST client SDK is published; the
+  only first-party package is the MCP server, and a Postman collection is served
+  from the docs host. There is no Python/Java/Go/Ruby/.NET client library.
+packages:
+  - name: channelindex-mcp
+    kind: mcp-server
+    official: true
+    registry: npm
+    version: null
+    published: null
+    repository: https://github.com/starnikovoleg/channelindex-mcp
+    license: MIT
+    note: >-
+      channelindex-mcp@0.1.0 was published to npm 2026-09-05T08:28Z and
+      UNPUBLISHED the same day (2026-09-05T08:41Z); the registry record now has
+      empty dist-tags and no installable version. `npx -y channelindex-mcp`
+      therefore resolves nothing today — installation is effectively via the
+      GitHub repo (last pushed 2026-09-05). version:null is a checked gap, not a
+      guess.
+  - name: tgAtlas Postman collection
+    kind: postman-collection
+    official: true
+    registry: cdn
+    version: null
+    published: '2026-09-16'
+    url: https://channelindex.starnikovoleg.workers.dev/tgatlas.postman_collection.json
+    note: >-
+      All 19 requests with both RapidAPI headers, importable by URL. Distribution
+      is an unpinned URL on the docs host (no versioned registry), so a consumer
+      cannot pin a version — recorded as version:null by design.

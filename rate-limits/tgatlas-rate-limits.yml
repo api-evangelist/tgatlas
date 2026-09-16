@@ -1,0 +1,120 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+name: tgAtlas rate limits
+description: 'Rate limits and quotas for the tgAtlas Telegram API. Three independent counters are metered — requests, discovery lookups and phone resolution — and each one reports its own budget back in the response headers, so consumption is visible per call instead of at the end of the month.'
+provider: tgAtlas
+providerId: tgatlas
+url: https://channelindex.starnikovoleg.workers.dev/rate-limits.yaml
+humanUrl: https://channelindex.starnikovoleg.workers.dev/status
+created: '2026-09-16'
+modified: '2026-09-16'
+method: published
+tags:
+  - Rate Limiting
+  - Quotas
+  - Throttling
+  - Telegram
+headers:
+  limit: x-ratelimit-requests-limit
+  remaining: x-ratelimit-requests-remaining
+  reset: x-ratelimit-requests-reset
+  lookupsLimit: x-ratelimit-lookups-limit
+  lookupsRemaining: x-ratelimit-lookups-remaining
+  lookupsReset: x-ratelimit-lookups-reset
+  phoneLimit: x-ratelimit-resolve-phone-number-endpoint-limit
+  phoneRemaining: x-ratelimit-resolve-phone-number-endpoint-remaining
+  phoneReset: x-ratelimit-resolve-phone-number-endpoint-reset
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+sources:
+  - https://channelindex.starnikovoleg.workers.dev/pricing
+  - https://channelindex.starnikovoleg.workers.dev/status
+  - https://channelindex.starnikovoleg.workers.dev/plans.yaml
+  - https://rapidapi.com/starnikovoleg/api/telegram155
+limits:
+  - tier: free
+    name: 'Monthly requests — Free'
+    scope: api-key
+    metric: requests_per_month
+    limit: 2500
+    timeFrame: month
+    applies:
+      - tgAtlas Telegram API
+    notes: 'Every call to every route spends one request, including /health.'
+  - tier: free
+    name: 'Lookups — Free'
+    scope: api-key
+    metric: lookups_per_month
+    limit: 2500
+    timeFrame: month
+    applies:
+      - GET /v1/usernames/{username}
+      - GET /v1/channels/recommendations
+      - GET /v1/contacts/search
+      - GET /v1/messages/search
+    notes: 'A separate counter, spent by the four discovery routes only. Reading a channel — /v1/channels/{peer_id} and /v1/peers/{peer_id}/history — spends no lookup, measured route by route on 2026-09-16 at 07:22 UTC.'
+  - tier: pro
+    name: 'Monthly requests — Pro'
+    scope: api-key
+    metric: requests_per_month
+    limit: 80000
+    timeFrame: month
+    applies:
+      - tgAtlas Telegram API
+    notes: 'Every call to every route spends one request, including /health.'
+  - tier: pro
+    name: 'Lookups — Pro'
+    scope: api-key
+    metric: lookups_per_day
+    limit: 100
+    timeFrame: day
+    applies:
+      - GET /v1/usernames/{username}
+      - GET /v1/channels/recommendations
+      - GET /v1/contacts/search
+      - GET /v1/messages/search
+    notes: 'A separate counter, spent by the four discovery routes only. Reading a channel — /v1/channels/{peer_id} and /v1/peers/{peer_id}/history — spends no lookup, measured route by route on 2026-09-16 at 07:22 UTC.'
+  - tier: ultra
+    name: 'Monthly requests — Ultra'
+    scope: api-key
+    metric: requests_per_month
+    limit: 250000
+    timeFrame: month
+    applies:
+      - tgAtlas Telegram API
+    notes: 'Every call to every route spends one request, including /health.'
+  - tier: ultra
+    name: 'Lookups — Ultra'
+    scope: api-key
+    metric: lookups_per_day
+    limit: 350
+    timeFrame: day
+    applies:
+      - GET /v1/usernames/{username}
+      - GET /v1/channels/recommendations
+      - GET /v1/contacts/search
+      - GET /v1/messages/search
+    notes: 'A separate counter, spent by the four discovery routes only. Reading a channel — /v1/channels/{peer_id} and /v1/peers/{peer_id}/history — spends no lookup, measured route by route on 2026-09-16 at 07:22 UTC.'
+  - tier: mega
+    name: 'Monthly requests — Mega'
+    scope: api-key
+    metric: requests_per_month
+    limit: 700000
+    timeFrame: month
+    applies:
+      - tgAtlas Telegram API
+    notes: 'Every call to every route spends one request, including /health.'
+  - tier: mega
+    name: 'Lookups — Mega'
+    scope: api-key
+    metric: lookups_per_day
+    limit: 1200
+    timeFrame: day
+    applies:
+      - GET /v1/usernames/{username}
+      - GET /v1/channels/recommendations
+      - GET /v1/contacts/search
+      - GET /v1/messages/search
+    notes: 'A separate counter, spent by the four discovery routes only. Reading a channel — /v1/channels/{peer_id} and /v1/peers/{peer_id}/history — spends no lookup, measured route by route on 2026-09-16 at 07:22 UTC.'

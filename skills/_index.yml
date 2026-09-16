@@ -1,0 +1,16 @@
+generated: '2026-09-16'
+method: generated
+source: openapi/tgatlas-openapi.json + conventions/tgatlas-conventions.yml + errors/tgatlas-problem-types.yml
+provider: tgAtlas
+api: tgAtlas Telegram Channel Data API
+description: >-
+  Packaged Agent Skills for the marquee tgAtlas flows, each grounded in real
+  operationIds from the OpenAPI contract. No provider-published skills/AGENTS.md
+  was found; these are generated from the spec and conventions.
+skills:
+  - file: tgatlas-resolve-and-profile-channel.md
+    name: Resolve and profile a Telegram channel
+    operations: [resolveUsername, getFullChannel, getChannelMessages]
+  - file: tgatlas-discover-similar-channels.md
+    name: Discover similar channels by walking the recommendation graph
+    operations: [getChannelRecommendations, getFullChannel, searchContacts]

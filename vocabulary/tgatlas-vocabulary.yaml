@@ -1,0 +1,529 @@
+vocabulary: '1.0.0'
+
+info:
+  provider: 'tgAtlas'
+  description: 'Domain vocabulary for the tgAtlas Telegram API: the entities of public Telegram it exposes (channels, supergroups, posts, discussion threads, stories, usernames and files), the operations that read them, and the workflows those operations combine into.'
+  url: https://channelindex.starnikovoleg.workers.dev/vocabulary.yaml
+  humanUrl: https://channelindex.starnikovoleg.workers.dev/glossary
+  created: '2026-09-16'
+  modified: '2026-09-16'
+
+operational:
+  apis:
+    - namespace: tgatlas-telegram
+      version: '1.0.0'
+      baseUrl: https://telegram155.p.rapidapi.com/v1
+      status: active
+      description: 'tgAtlas — Telegram Channel Data API'
+
+  resources:
+    - name: channels
+      description: 'Channel and supergroup profiles, batch lookups, recommendations and members.'
+      apis:
+        - tgatlas-telegram
+      operations:
+        - getChannels
+        - getChannelRecommendations
+        - getFullChannel
+        - getChannelMessages
+        - getChannelParticipants
+      actions:
+        - read
+    - name: messages
+      description: 'Post history, discussion threads and directory-backed search.'
+      apis:
+        - tgatlas-telegram
+      operations:
+        - searchMessages
+        - getHistory
+        - getDiscussionMessage
+        - getReplies
+      actions:
+        - read
+    - name: stories
+      description: 'Active and specific stories for a channel or user.'
+      apis:
+        - tgatlas-telegram
+      operations:
+        - getPeerStories
+        - getStoriesByID
+      actions:
+        - read
+    - name: identity
+      description: 'Turning a @username, phone number or id into a peer, and user profiles.'
+      apis:
+        - tgatlas-telegram
+      operations:
+        - searchContacts
+        - resolvePhone
+        - resolveUsername
+        - getFullUser
+        - getUserPhotos
+      actions:
+        - read
+    - name: files
+      description: 'Downloading media referenced by a message, story or profile photo.'
+      apis:
+        - tgatlas-telegram
+      operations:
+        - downloadFile
+      actions:
+        - read
+    - name: service
+      description: 'Liveness probe and the machine-readable contract.'
+      apis:
+        - tgatlas-telegram
+      operations:
+        - health
+        - getOpenAPIDocument
+      actions:
+        - read
+
+  actions:
+    - name: read
+      description: 'Every operation in the API reads public data and returns JSON. All 19 paths are GET: there is no write surface, so an agent given this key cannot post, join or modify anything.'
+      httpMethod: GET
+      pattern: read
+
+  schemas:
+    core:
+      - name: ChannelDetails
+        description: 'Get-full-channel envelope.'
+        keyProperties:
+          - chats
+          - full_chat
+          - users
+      - name: ChannelParticipants
+        description: 'Channel/supergroup members matching the requested filter.'
+        keyProperties:
+          - chats
+          - count
+          - participants
+          - users
+      - name: ChannelsBatch
+        description: 'Batch channels fetch result.'
+        keyProperties:
+          - chats
+          - skipped
+      - name: ChannelsList
+        description: 'Wrapper carrying a `chats[]` list.'
+        keyProperties:
+          - chats
+      - name: Chat
+        description: 'Telegram chat record.'
+        keyProperties:
+          - autotranslation
+          - broadcast
+          - date
+          - fake
+          - forum
+          - gigagroup
+      - name: ChatFull
+        description: 'Extended chat/channel profile.'
+        keyProperties:
+          - about
+          - admins_count
+          - antispam
+          - available_min_id
+          - available_reactions
+          - banned_count
+      - name: ContactsSearch
+        description: 'Hybrid contact + global directory search.'
+        keyProperties:
+          - chats
+          - my_results
+          - results
+          - users
+      - name: DiscussionMessage
+        description: 'Resolved discussion thread root for a channel post.'
+        keyProperties:
+          - chats
+          - flags
+          - max_id
+          - messages
+          - read_inbox_max_id
+          - read_outbox_max_id
+      - name: Error
+        description: 'Error envelope returned by all non-2xx responses.'
+        keyProperties:
+          - code
+          - error
+          - hint
+      - name: Message
+        description: 'Telegram message.'
+        keyProperties:
+          - date
+          - edit_date
+          - entities
+          - forwards
+          - from_id
+          - fwd_from
+      - name: MessagesEnvelope
+        description: 'Messages list with related chats/users.'
+        keyProperties:
+          - chats
+          - count
+          - flags
+          - inexact
+          - messages
+          - next_page
+      - name: Peer
+        description: 'Telegram peer reference.'
+        keyProperties:
+          - channel_id
+          - chat_id
+          - user_id
+      - name: PeerStories
+        description: 'Currently active stories for a peer.'
+        keyProperties:
+          - stories
+      - name: Photo
+        description: 'Photo metadata.'
+        keyProperties:
+          - dcid
+          - flags
+          - has_video
+          - photo_id
+          - stripped_thumb
+      - name: ResolvedPeer
+        description: 'Result of a username or phone lookup.'
+        keyProperties:
+          - chats
+          - peer
+          - users
+      - name: StoriesByID
+        description: 'Specific stories fetched by id for a peer.'
+        keyProperties:
+          - chats
+          - stories
+          - users
+      - name: User
+        description: 'Telegram user record.'
+        keyProperties:
+          - bot
+          - close_friend
+          - contact
+          - deleted
+          - fake
+          - first_name
+      - name: UserDetails
+        description: 'Get-full-user envelope.'
+        keyProperties:
+          - chats
+          - full_user
+          - users
+      - name: UserFull
+        description: 'Extended user profile.'
+        keyProperties:
+          - about
+          - birthday
+          - blocked
+          - bot_info
+          - business_intro
+          - business_location
+      - name: UserPhotos
+        description: 'Profile photo history for a user.'
+        keyProperties:
+          - count
+          - photos
+      - name: UsernameAlias
+        description: 'One public username alias bound to a user or chat.'
+        keyProperties:
+          - active
+          - editable
+          - flags
+          - username
+
+  parameters:
+    pagination:
+      - name: cursor
+        description: 'Opaque pagination cursor obtained from `next_page` or `prev_page` in a previous response.'
+        in: query
+        type: string
+      - name: limit
+        description: 'Maximum items to return.'
+        in: query
+        type: integer
+        default: 20
+        maximum: 100
+      - name: offset
+        description: 'Number of participants to skip.'
+        in: query
+        type: integer
+      - name: offset_id
+        description: 'Return messages with `id < offset_id`.'
+        in: query
+        type: integer
+      - name: offset_date
+        description: 'Return messages strictly older than this Unix timestamp.'
+        in: query
+        type: integer
+      - name: add_offset
+        description: 'Items to skip relative to `offset_id`.'
+        in: query
+        type: integer
+      - name: max_id
+        description: 'Return messages with `id < max_id`.'
+        in: query
+        type: integer
+      - name: min_id
+        description: 'Return messages with `id > min_id`.'
+        in: query
+        type: integer
+      - name: hash
+        description: 'Cache-busting hash; leave 0 unless you are reusing a prior result.'
+        in: query
+        type: integer
+    filters:
+      - name: ids
+        description: 'Comma-separated list of channel peer ids (e.g.'
+        in: query
+        type: string
+      - name: filter
+        description: 'One of `recent` (default), `admins`, `bots`, `kicked`, `banned`, `search`.'
+        in: query
+        type: string
+        enum:
+          - recent
+          - admins
+          - bots
+          - kicked
+          - banned
+          - search
+      - name: q
+        description: 'Search query, used by the `kicked`/`banned`/`search` filters.'
+        in: query
+        type: string
+    selectors:
+      - name: msg_id
+        description: 'Numeric message id within the given peer.'
+        in: path
+        type: integer
+      - name: peer_id
+        description: 'Numeric Telegram peer id (channel or user).'
+        in: path
+        type: integer
+      - name: file_id
+        description: 'Numeric file id obtained from a prior response (e.g.'
+        in: path
+        type: integer
+      - name: thumb_size
+        description: 'Photo files only: requested thumbnail size code (e.g.'
+        in: query
+        type: string
+      - name: phone
+        description: 'Phone number in international format.'
+        in: path
+        type: string
+      - name: username
+        description: 'Public @username, with or without leading @.'
+        in: path
+        type: string
+
+  enums:
+    groups:
+      - Channels
+      - Messages
+      - Stories
+      - Identity
+      - Files
+      - Service
+
+  authentication:
+    schemes:
+      - type: apiKey
+        in: header
+        name: X-RapidAPI-Key
+        description: 'Subscriber key from RapidAPI. The free plan issues one without a card, and the same key works on every path: plans meter volume, not capability.'
+        apisUsing:
+          - tgatlas-telegram
+      - type: apiKey
+        in: header
+        name: X-RapidAPI-Host
+        description: 'Marketplace host the key is scoped to: telegram155.p.rapidapi.com.'
+        apisUsing:
+          - tgatlas-telegram
+        signupUrl: https://rapidapi.com/starnikovoleg/api/telegram155
+
+capability:
+  workflows:
+    - name: 'Engagement per post'
+      id: engagement-per-post
+      url: https://channelindex.starnikovoleg.workers.dev/cookbook
+      description: 'Views and forwards for a channel''s recent posts, normalised by subscriber count.'
+      apisCombined:
+        - 'tgAtlas — Telegram Channel Data API'
+      operations:
+        - resolveUsername
+        - getFullChannel
+        - getHistory
+      personas:
+        - 'Market Researcher'
+        - 'API Developer'
+    - name: 'Find the posts that actually travelled'
+      id: posts-that-travelled
+      url: https://channelindex.starnikovoleg.workers.dev/cookbook
+      description: 'Ranking a channel''s history by forwards to separate reach from routine posting.'
+      apisCombined:
+        - 'tgAtlas — Telegram Channel Data API'
+      operations:
+        - resolveUsername
+        - getHistory
+      personas:
+        - 'Market Researcher'
+    - name: 'What is new since last time'
+      id: what-is-new
+      url: https://channelindex.starnikovoleg.workers.dev/cookbook
+      description: 'Incremental polling of a channel with min_id so each run reads only new posts.'
+      apisCombined:
+        - 'tgAtlas — Telegram Channel Data API'
+      operations:
+        - resolveUsername
+        - getHistory
+      personas:
+        - 'API Developer'
+        - 'AI Agent Builder'
+    - name: 'Export a channel to CSV'
+      id: export-channel-csv
+      url: https://channelindex.starnikovoleg.workers.dev/cookbook
+      description: 'Walking a channel''s history to a flat file with per-post views, forwards and dates.'
+      apisCombined:
+        - 'tgAtlas — Telegram Channel Data API'
+      operations:
+        - resolveUsername
+        - getFullChannel
+        - getHistory
+      personas:
+        - 'Market Researcher'
+    - name: 'Read the comments under a post'
+      id: read-the-comments
+      url: https://channelindex.starnikovoleg.workers.dev/blog/comments-are-not-on-the-post
+      description: 'Resolving a channel post to its discussion thread root and reading the replies.'
+      apisCombined:
+        - 'tgAtlas — Telegram Channel Data API'
+      operations:
+        - getHistory
+        - getDiscussionMessage
+        - getReplies
+      personas:
+        - 'API Developer'
+        - 'AI Agent Builder'
+    - name: 'Pick a channel''s canonical handle'
+      id: canonical-handle
+      url: https://channelindex.starnikovoleg.workers.dev/blog/the-channel-whose-username-is-an-empty-string
+      description: 'Choosing the active and editable username when a chat owns several public handles.'
+      apisCombined:
+        - 'tgAtlas — Telegram Channel Data API'
+      operations:
+        - resolveUsername
+      personas:
+        - 'API Developer'
+
+  personas:
+    - id: api-developer
+      name: 'API Developer'
+      description: 'Builds a product on top of Telegram data and wants one HTTP call instead of an MTProto client and a session file.'
+      workflows:
+        - 'Engagement per post'
+        - 'What is new since last time'
+        - 'Read the comments under a post'
+        - 'Pick a channel''s canonical handle'
+    - id: market-researcher
+      name: 'Market Researcher'
+      description: 'Measures channels and their reach — size, posting cadence, views and forwards — and exports the numbers.'
+      workflows:
+        - 'Engagement per post'
+        - 'Find the posts that actually travelled'
+        - 'Export a channel to CSV'
+    - id: ai-agent-builder
+      name: 'AI Agent Builder'
+      description: 'Gives an agent a read-only key so it can look up channels and posts without any way to write to Telegram.'
+      workflows:
+        - 'What is new since last time'
+        - 'Read the comments under a post'
+
+  domains:
+    - name: Channels
+      description: 'Channel and supergroup profiles, batch lookups, recommendations and members.'
+      resources:
+        - channels
+    - name: Messages
+      description: 'Post history, discussion threads and directory-backed search.'
+      resources:
+        - messages
+    - name: Stories
+      description: 'Active and specific stories for a channel or user.'
+      resources:
+        - stories
+    - name: Identity
+      description: 'Turning a @username, phone number or id into a peer, and user profiles.'
+      resources:
+        - identity
+    - name: Files
+      description: 'Downloading media referenced by a message, story or profile photo.'
+      resources:
+        - files
+    - name: Service
+      description: 'Liveness probe and the machine-readable contract.'
+      resources:
+        - service
+
+  namespaces:
+    - id: tgatlas-telegram
+      type: rest
+      description: 'REST exposure of the tgAtlas Telegram API on the RapidAPI marketplace host.'
+    - id: tgatlas-telegram-mcp
+      type: mcp
+      description: 'MCP server wrapping the same paths for agent clients.'
+
+  binds:
+    - name: RAPIDAPI_KEY
+      description: 'Subscriber key sent as X-RapidAPI-Key; the only credential a client needs.'
+
+crossReference:
+  - resource: channels
+    operations:
+      - getChannels
+      - getChannelRecommendations
+      - getFullChannel
+      - getChannelMessages
+      - getChannelParticipants
+    workflows:
+      - 'Engagement per post'
+      - 'Export a channel to CSV'
+  - resource: messages
+    operations:
+      - searchMessages
+      - getHistory
+      - getDiscussionMessage
+      - getReplies
+    workflows:
+      - 'Engagement per post'
+      - 'Find the posts that actually travelled'
+      - 'What is new since last time'
+      - 'Export a channel to CSV'
+      - 'Read the comments under a post'
+  - resource: stories
+    operations:
+      - getPeerStories
+      - getStoriesByID
+  - resource: identity
+    operations:
+      - searchContacts
+      - resolvePhone
+      - resolveUsername
+      - getFullUser
+      - getUserPhotos
+    workflows:
+      - 'Engagement per post'
+      - 'Find the posts that actually travelled'
+      - 'What is new since last time'
+      - 'Export a channel to CSV'
+      - 'Pick a channel''s canonical handle'
+  - resource: files
+    operations:
+      - downloadFile
+  - resource: service
+    operations:
+      - health
+      - getOpenAPIDocument

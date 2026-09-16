@@ -1,0 +1,85 @@
+# Spectral-правила для нашей спеки. Отдаются сайтом как /spectral-rules.yaml и объявлены в
+# apis.json свойством type: SpectralRules (и в корневом common[], и в apis[].properties[]).
+#
+# Составил @marketing_pidaras_bot 16.09.2026, забрано в product/ 16.09.2026 08:1x UTC.
+# Правила выбраны не наугад: каждое закрывает то, что в нашей спеке действительно замерено
+# сегодня. Проверить локально:
+#   npx @stoplight/spectral-cli lint https://channelindex.starnikovoleg.workers.dev/openapi.json \
+#     --ruleset product/spectral-rules.yaml
+
+extends: ["spectral:oas"]
+
+rules:
+  # Замер 16.09: примеры ответа 200 есть у 9 путей из 20. Это главное, что мешает покупателю
+  # оценить интеграцию до подписки, поэтому правило наше, а не из коробки.
+  # Сужено 16.09 08:35 UTC: с `content[*]` правило требовало JSON-пример от
+  # application/octet-stream (выгрузка файла в /v1/files/{file_id}) и от /v1/openapi.json,
+  # который отдаёт саму спеку. Там примера не бывает по природе содержимого.
+  response-200-has-example:
+    description: Every JSON 200 response must carry an example payload.
+    # Исключён `/v1/openapi.json`: примером для него была бы вся спека целиком.
+    given: $.paths[?(@property != '/v1/openapi.json')][get,post].responses.200.content['application/json']
+    severity: error
+    then:
+      field: example
+      function: truthy
+
+  # Замер 16.09: servers = [{"url":"/"}], из-за чего Try it у клиентских инструментов не собирается.
+  servers-absolute-url:
+    description: The server URL must be absolute, so generated clients and Try it actually work.
+    given: $.servers[*].url
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  # Условие can_view_participants и replies.comments нигде не названо, поэтому покупатель получает
+  # необъяснённый 404. Описание пути обязано его называть.
+  operation-description-required:
+    description: Every operation needs a description, not only a summary.
+    given: $.paths[*][get,post]
+    severity: warn
+    then:
+      field: description
+      function: truthy
+
+  # Конверт ошибки у нас единый и это сильная сторона — правило не даёт её потерять при правках.
+  error-response-uses-envelope:
+    description: Non-2xx responses must reference the shared Error schema.
+    given: $.paths[*][get,post].responses[?(@property.match(/^[45]/))].content['application/json'].schema
+    severity: warn
+    then:
+      field: $ref
+      function: truthy
+
+  # severity: info — замер 16.09 07:55 UTC по живой спеке: тегов нет ни у одной из 20 операций.
+  # Теги группируют ручки в сгенерированной документации и в клиентских SDK; без них всё валится
+  # в один безымянный раздел. Это не ошибка контракта, поэтому info, а не warn.
+  operation-has-tags:
+    description: Operations should be tagged, so generated docs and SDKs group them.
+    given: $.paths[*][get,post]
+    severity: info
+    then:
+      field: tags
+      function: truthy
+
+  # severity: info — тот же замер: 39 параметров из 48 без примера. Пример параметра это то, что
+  # подставляется в «Try it» и в сгенерированный клиент, поэтому его отсутствие стоит называть,
+  # но контракт он не ломает.
+  parameter-has-example:
+    description: Parameters should carry an example, so Try it and generated clients prefill.
+    given: $.paths[*][get,post].parameters[*]
+    severity: info
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+            - required: ["example"]
+            - properties:
+                schema:
+                  type: object
+                  required: ["example"]
+              required: ["schema"]

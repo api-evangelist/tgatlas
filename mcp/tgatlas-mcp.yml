@@ -1,0 +1,53 @@
+generated: '2026-09-16'
+method: searched
+source: >-
+  https://github.com/starnikovoleg/channelindex-mcp (README + repo metadata),
+  https://registry.npmjs.org/channelindex-mcp
+provider: tgAtlas
+api: tgAtlas Telegram Channel Data API
+name: channelindex-mcp
+description: >-
+  First-party MCP server that wraps the tgAtlas Telegram REST API for agents.
+  Returns channel profiles (subscribers, description, creation date,
+  verification/scam flags, posting cadence), Telegram's own similar-channel
+  graph, and global public-channel search. Output is Markdown by default,
+  JSON on request. Tools call the REST endpoints directly (no remote MCP proxy),
+  so initialize and tools/list are free and only lookups are billed by RapidAPI.
+deployment:
+  mode: local-stdio
+  endpoint: null
+  install: "npx -y channelindex-mcp"
+  package: https://github.com/starnikovoleg/channelindex-mcp
+  auth: api-key
+  verified: searched
+  note: >-
+    LOCAL/stdio only — there is NO hosted/remote MCP endpoint an agent can POST
+    to; a human must install and run it first. The npm package
+    channelindex-mcp@0.1.0 was PUBLISHED 2026-09-05 then UNPUBLISHED the same day
+    (registry dist-tags now empty), so `npx -y channelindex-mcp` currently
+    resolves nothing and installation is effectively via the GitHub repo
+    (MIT-licensed, last pushed 2026-09-05). Auth is a RapidAPI key supplied as
+    the TELEGRAM_API_KEY (or RAPIDAPI_KEY) environment variable.
+license: MIT
+repository: https://github.com/starnikovoleg/channelindex-mcp
+environment:
+  - name: TELEGRAM_API_KEY
+    required: true
+    note: RapidAPI key. RAPIDAPI_KEY also accepted.
+  - name: TELEGRAM_API_HOST
+    required: false
+    default: telegram155.p.rapidapi.com
+tools:
+  - name: telegram_channel
+    description: >-
+      A channel's profile: title, description, exact subscriber count, creation
+      date, verification and scam flags, and posting cadence. Costs three REST
+      calls with cadence on, two with cadence:false.
+  - name: telegram_similar_channels
+    description: >-
+      The channels Telegram recommends alongside a given one (its own topical
+      graph). Optional enrich:true fetches exact subscriber counts per result
+      (one call each, capped at 12).
+  - name: telegram_search_channels
+    description: Telegram's global search over public channels and groups.
+scope: Public channel metadata only. Message contents, member lists and private groups are out of scope.

@@ -1,0 +1,30 @@
+generated: '2026-09-16'
+method: searched
+source: https://channelindex.starnikovoleg.workers.dev/changelog
+provider: tgAtlas
+api: tgAtlas Telegram Channel Data API
+description: Dated changelog captured from the provider's published changelog page.
+scheme: date
+current_version: v1
+policy: >-
+  Breaking changes to the API are announced on the changelog before they ship.
+  The specification at /openapi.json is the contract.
+entries:
+  - date: '2026-09-16'
+    breaking: false
+    additions: true
+    highlights:
+      - Domain vocabulary published at /vocabulary.yaml.
+      - OpenAPI overlay published at /overlay.yaml (adds the two auth headers + measured response shapes).
+      - Machine-readable onboarding descriptor published at /.well-known/api-onboarding.
+      - Free plan lookups moved onto the monthly budget (2,500/month, no separate daily cap).
+      - Cookbook published at /cookbook (four feed-endpoint recipes, outputs from live API).
+      - OpenAPI specification published at /openapi.json; /quickstart added with full request/response examples.
+      - Error envelope and all seven codes documented on /docs.
+      - Terms, privacy policy and vulnerability-disclosure policy published, with /.well-known/security.txt.
+  - date: '2026-09-15'
+    breaking: false
+    additions: true
+    highlights:
+      - Machine-readable descriptors published — apis.json and llms.txt.
+      - Plan prices and quotas on /pricing brought in line with the live RapidAPI listing.

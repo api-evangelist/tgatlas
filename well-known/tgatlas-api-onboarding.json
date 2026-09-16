@@ -1,0 +1,149 @@
+{
+  "aod": "0.1",
+  "provider": {
+    "name": "tgAtlas",
+    "url": "https://channelindex.starnikovoleg.workers.dev/",
+    "portalUrl": "https://channelindex.starnikovoleg.workers.dev/docs",
+    "apisJsonUrl": "https://channelindex.starnikovoleg.workers.dev/apis.json"
+  },
+  "maturity": "self-serve",
+  "account": {
+    "required": true,
+    "signupUrl": "https://rapidapi.com/starnikovoleg/api/telegram155",
+    "agentPolicy": "allowed",
+    "termsOfService": {
+      "url": "https://channelindex.starnikovoleg.workers.dev/terms",
+      "acceptance": "console-only"
+    },
+    "prerequisites": [
+      "A RapidAPI account. No phone number, no Telegram api_id, no MTProto session."
+    ],
+    "plans": [
+      {
+        "name": "Free",
+        "requiredFor": "Everything in the spec: channel facts, feed history with per-post views and forwards, similar-channel recommendations, public directory search, stories, replies and discussion threads. 2,500 calls a month, no card.",
+        "url": "https://channelindex.starnikovoleg.workers.dev/pricing"
+      },
+      {
+        "name": "Pro",
+        "requiredFor": "80,000 calls a month at $14.99 — the volume at which you are watching a few thousand channels daily.",
+        "url": "https://channelindex.starnikovoleg.workers.dev/pricing"
+      },
+      {
+        "name": "Ultra",
+        "requiredFor": "250,000 calls a month at $29.99.",
+        "url": "https://channelindex.starnikovoleg.workers.dev/pricing"
+      },
+      {
+        "name": "Mega",
+        "requiredFor": "700,000 calls a month at $79.99.",
+        "url": "https://channelindex.starnikovoleg.workers.dev/pricing"
+      }
+    ]
+  },
+  "registration": {
+    "applicationNoun": "API key",
+    "owner": "user",
+    "mechanisms": [
+      {
+        "type": "console-only",
+        "description": "Subscribe to the listing on RapidAPI; the key is issued instantly and billing runs there.",
+        "baseUrl": "https://telegram155.p.rapidapi.com",
+        "docsUrls": [
+          "https://channelindex.starnikovoleg.workers.dev/docs",
+          "https://channelindex.starnikovoleg.workers.dev/quickstart",
+          "https://channelindex.starnikovoleg.workers.dev/cookbook"
+        ],
+        "auth": "api-key"
+      }
+    ]
+  },
+  "authentication": {
+    "methods": [
+      {
+        "id": "rapidapi-key",
+        "type": "header-env",
+        "in": "header",
+        "name": "X-RapidAPI-Key",
+        "also": [
+          {
+            "in": "header",
+            "name": "X-RapidAPI-Host",
+            "value": "telegram155.p.rapidapi.com"
+          }
+        ],
+        "bootstrap": "Two headers and you are reading. No token exchange, no refresh."
+      }
+    ]
+  },
+  "credentials": [
+    {
+      "type": "api-key",
+      "fields": {
+        "api_key": "X-RapidAPI-Key",
+        "host": "X-RapidAPI-Host"
+      },
+      "ttl": "none",
+      "oneTimeDisplay": false,
+      "rotation": "Rotate or revoke the key in the RapidAPI dashboard."
+    }
+  ],
+  "scopes": {
+    "model": "product-tiers",
+    "notes": "Tiers meter call volume, not capability: every route in the spec is available on the free plan."
+  },
+  "flow": {
+    "args": [
+      {
+        "name": "username",
+        "required": true,
+        "description": "A public Telegram channel handle, without the @.",
+        "example": "telegram"
+      }
+    ],
+    "steps": [
+      {
+        "id": "resolve",
+        "description": "Turn a public handle into the numeric peer id the other routes take.",
+        "auth": "rapidapi-key",
+        "request": {
+          "method": "GET",
+          "url": "https://telegram155.p.rapidapi.com/v1/usernames/{args.username}"
+        }
+      },
+      {
+        "id": "facts",
+        "description": "Channel size and description.",
+        "auth": "rapidapi-key",
+        "request": {
+          "method": "GET",
+          "url": "https://telegram155.p.rapidapi.com/v1/channels/{steps.resolve.chats[0].id}"
+        }
+      },
+      {
+        "id": "feed",
+        "description": "Feed with per-post views and forwards, cursor-paginated.",
+        "auth": "rapidapi-key",
+        "request": {
+          "method": "GET",
+          "url": "https://telegram155.p.rapidapi.com/v1/peers/{steps.resolve.chats[0].id}/history?limit=20"
+        }
+      }
+    ],
+    "outputs": {
+      "members": "{steps.facts.full_chat.participants_count}",
+      "posts": "{steps.feed.messages}",
+      "engagement": "{steps.feed.messages[0].views} / {steps.facts.full_chat.participants_count}"
+    }
+  },
+  "health": {
+    "url": "https://telegram155.p.rapidapi.com/health",
+    "method": "GET",
+    "auth": "rapidapi-key"
+  },
+  "economics": {
+    "freeTier": "2,500 calls a month with no card. On the same hub, competing Telegram listings open their free tiers at 10, 50 and 100 calls a month, and the closest paid plan to ours sells 2,500 for $9.99 (read from their own pricing pages on 2026-09-16).",
+    "pricingUrl": "https://channelindex.starnikovoleg.workers.dev/pricing",
+    "rateLimitsUrl": "https://channelindex.starnikovoleg.workers.dev/rate-limits.yaml"
+  }
+}

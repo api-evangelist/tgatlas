@@ -1,0 +1,81 @@
+generated: '2026-09-16'
+method: derived
+source: openapi/tgatlas-openapi.json (components.schemas $ref graph + id-reference fields)
+provider: tgAtlas
+api: tgAtlas Telegram Channel Data API
+description: >-
+  Entity-relationship graph derived from the OpenAPI schema $ref links and
+  id-reference fields. The domain mirrors Telegram's own object model: a Peer is
+  the polymorphic key (user / chat / channel), Chat carries channel and
+  supergroup profiles, and Message/Story/Photo hang off a peer.
+entities:
+  - name: Peer
+    description: Polymorphic reference to a user, chat or channel.
+    key_fields: [user_id, chat_id, channel_id]
+  - name: Chat
+    description: A channel or supergroup profile (title, description, member count, flags).
+    key_fields: [id]
+  - name: ChatFull
+    description: Extended channel detail (linked discussion chat, pinned message, participant view flags).
+    key_fields: [id, linked_chat_id, pinned_msg_id]
+  - name: User
+    description: A Telegram user profile.
+    key_fields: [id]
+  - name: UserFull
+    description: Extended user detail (personal channel, pinned message).
+    key_fields: [id, personal_channel_id, pinned_msg_id]
+  - name: Message
+    description: A channel post or message with per-post views and forwards.
+    key_fields: [id, peer_id, from_id, grouped_id]
+  - name: Story
+    description: An active or archived story for a peer (via PeerStories / StoriesByID).
+  - name: Photo
+    description: Media/profile photo referenced by a chat, user, message or story.
+    key_fields: [photo_id]
+  - name: UsernameAlias
+    description: A public @handle owned by a chat or user (a peer may own several).
+relationships:
+  - from: Chat
+    to: Photo
+    type: has_one
+    via: photo
+  - from: Chat
+    to: UsernameAlias
+    type: has_many
+    via: usernames
+  - from: ChatFull
+    to: Chat
+    type: belongs_to
+    via: linked_chat_id
+  - from: Message
+    to: Peer
+    type: belongs_to
+    via: peer_id
+  - from: User
+    to: Photo
+    type: has_one
+    via: photo
+  - from: User
+    to: UsernameAlias
+    type: has_many
+    via: usernames
+  - from: UserFull
+    to: Chat
+    type: has_one
+    via: personal_channel_id
+  - from: PeerStories
+    to: Peer
+    type: belongs_to
+    via: peer
+  - from: DiscussionMessage
+    to: Message
+    type: has_many
+    via: messages
+  - from: MessagesEnvelope
+    to: Message
+    type: has_many
+    via: messages
+notes: >-
+  All ids are int64 Telegram peer/message ids. An unknown peer id must be seeded
+  through a resolve route (409 RESOURCE_UNAVAILABLE otherwise); see
+  errors/tgatlas-problem-types.yml.

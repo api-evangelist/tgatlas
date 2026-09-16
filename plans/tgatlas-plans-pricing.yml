@@ -1,0 +1,116 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+name: tgAtlas plans and pricing
+description: 'Published plans for the tgAtlas Telegram API. Every route in the specification is available on every plan, including the free one: plans meter volume, not capability.'
+provider: tgAtlas
+url: https://channelindex.starnikovoleg.workers.dev/plans.yaml
+humanUrl: https://channelindex.starnikovoleg.workers.dev/pricing
+signupUrl: https://rapidapi.com/starnikovoleg/api/telegram155
+created: '2026-09-16'
+modified: '2026-09-16'
+method: published
+tags:
+  - Telegram
+  - Channels
+  - Social Media
+plans:
+  - id: free
+    name: Free
+    type: free
+    description: 'Enough to wire it up and watch a handful of channels daily.'
+    price: 0
+    currency: USD
+    timeFrame: monthly
+    url: https://channelindex.starnikovoleg.workers.dev/pricing
+    entries:
+      - label: Requests
+        name: requests
+        type: quota
+        description: 'Any call to any route counts as one request.'
+        metric: requests
+        limit: 2500
+        timeFrame: monthly
+        unit: request
+      - label: Lookups
+        name: lookups
+        type: quota
+        description: 'Discovery calls: username resolution, similar-channel recommendations, directory search and message search. Reading a channel or its history spends none.'
+        metric: lookups
+        limit: 2500
+        timeFrame: monthly
+        unit: lookup
+  - id: pro
+    name: Pro
+    type: paid
+    description: 'A working monitor over a few thousand channels.'
+    price: 14.99
+    currency: USD
+    timeFrame: monthly
+    url: https://channelindex.starnikovoleg.workers.dev/pricing
+    entries:
+      - label: Requests
+        name: requests
+        type: quota
+        description: 'Any call to any route counts as one request.'
+        metric: requests
+        limit: 80000
+        timeFrame: monthly
+        unit: request
+      - label: Lookups
+        name: lookups
+        type: quota
+        description: 'Discovery calls: username resolution, similar-channel recommendations, directory search and message search. Reading a channel or its history spends none.'
+        metric: lookups
+        limit: 100
+        timeFrame: daily
+        unit: lookup
+  - id: ultra
+    name: Ultra
+    type: paid
+    description: 'Daily tracking at directory scale.'
+    price: 29.99
+    currency: USD
+    timeFrame: monthly
+    url: https://channelindex.starnikovoleg.workers.dev/pricing
+    entries:
+      - label: Requests
+        name: requests
+        type: quota
+        description: 'Any call to any route counts as one request.'
+        metric: requests
+        limit: 250000
+        timeFrame: monthly
+        unit: request
+      - label: Lookups
+        name: lookups
+        type: quota
+        description: 'Discovery calls: username resolution, similar-channel recommendations, directory search and message search. Reading a channel or its history spends none.'
+        metric: lookups
+        limit: 350
+        timeFrame: daily
+        unit: lookup
+  - id: mega
+    name: Mega
+    type: paid
+    description: 'Production monitoring and archival.'
+    price: 79.99
+    currency: USD
+    timeFrame: monthly
+    url: https://channelindex.starnikovoleg.workers.dev/pricing
+    entries:
+      - label: Requests
+        name: requests
+        type: quota
+        description: 'Any call to any route counts as one request.'
+        metric: requests
+        limit: 700000
+        timeFrame: monthly
+        unit: request
+      - label: Lookups
+        name: lookups
+        type: quota
+        description: 'Discovery calls: username resolution, similar-channel recommendations, directory search and message search. Reading a channel or its history spends none.'
+        metric: lookups
+        limit: 1200
+        timeFrame: daily
+        unit: lookup

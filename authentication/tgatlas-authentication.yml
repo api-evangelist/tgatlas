@@ -1,0 +1,47 @@
+generated: '2026-09-16'
+method: searched
+source: >-
+  https://channelindex.starnikovoleg.workers.dev/overlay.yaml (provider-published
+  Overlay declaring the two gateway headers) + https://channelindex.starnikovoleg.workers.dev/docs
+provider: tgAtlas
+api: tgAtlas Telegram Channel Data API
+description: >-
+  Authentication is delegated entirely to the RapidAPI marketplace gateway. The
+  base OpenAPI document leaves securitySchemes empty on purpose (the gateway
+  injects and validates credentials), and the provider's published overlay
+  declares the two headers a generated client must send. There is no OAuth, no
+  OpenID Connect and no per-request signing; a single subscriber key issued by
+  RapidAPI (free tier, no card) authenticates every one of the 19 GET routes.
+summary:
+  styles:
+    - apiKey
+  oauth2: false
+  openid_connect: false
+  mutual_tls: false
+  scope_model: none
+schemes:
+  - id: RapidAPIKey
+    type: apiKey
+    in: header
+    name: X-RapidAPI-Key
+    required: true
+    description: >-
+      Subscriber key from RapidAPI. The free plan issues one without a card.
+      Also accepted as x-rapidapi-key.
+  - id: RapidAPIHost
+    type: apiKey
+    in: header
+    name: X-RapidAPI-Host
+    required: true
+    value: telegram155.p.rapidapi.com
+    description: >-
+      Host the key is scoped to. Both headers are required together on every
+      request.
+applied_to: all 19 operations (gateway-enforced; not encoded per-operation in the base spec)
+signup: https://rapidapi.com/starnikovoleg/api/telegram155
+notes: >-
+  Because credentials are gateway headers rather than a spec-declared security
+  scheme, the base openapi.json cannot be used to generate a working client
+  as-is; the provider's overlay/tgatlas-overlay.yaml supplies the missing
+  securitySchemes and a security requirement so generated clients authenticate
+  without hand edits.

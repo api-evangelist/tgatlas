@@ -1,0 +1,57 @@
+generated: '2026-09-16'
+method: generated
+source: openapi/tgatlas-openapi.json (classification of every operation)
+provider: tgAtlas
+api: tgAtlas Telegram Channel Data API
+description: >-
+  Recommended x-agentic-access contract. Every one of the 19 operations is a
+  read-only GET over public Telegram data, so the entire surface is low
+  consequence and safe for autonomous agent use under a subscriber key. There is
+  no write, no mutation and no destructive action to escalate. The only cost
+  dimension is quota: four discovery routes spend the metered "lookups" counter.
+defaults:
+  action_class: read
+  consequence: low
+  reversibility: na
+  token: api-key
+  escalation: none
+  human_in_the_loop: not-required
+operations:
+  - group: read-cheap
+    consequence: low
+    note: Spends one request; no lookup counter. Safe to call in volume.
+    operationIds:
+      - health
+      - getChannels
+      - getFullChannel
+      - getChannelMessages
+      - getChannelParticipants
+      - getHistory
+      - getDiscussionMessage
+      - getReplies
+      - getPeerStories
+      - getStoriesByID
+      - getFullUser
+      - getUserPhotos
+      - downloadFile
+      - getOpenAPIDocument
+  - group: read-metered-lookup
+    consequence: low
+    note: >-
+      Spends the discovery "lookups" counter in addition to a request. An agent
+      running large sweeps should prefer the cheap read routes and reserve these
+      for genuine discovery.
+    operationIds:
+      - resolveUsername
+      - getChannelRecommendations
+      - searchContacts
+      - searchMessages
+  - group: read-metered-phone
+    consequence: low
+    note: resolvePhone draws down a separate phone-resolution counter.
+    operationIds:
+      - resolvePhone
+guardrails:
+  - Respect the x-ratelimit-*-remaining headers; back off on 429 until reset.
+  - Seed unknown peer ids via a resolve route before reading (else 409 RESOURCE_UNAVAILABLE).
+  - Scope is public metadata only; no private groups or message contents are returned.

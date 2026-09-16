@@ -1,0 +1,979 @@
+{
+ "info": {
+  "name": "tgAtlas — Telegram Channel Data API",
+  "description": "19 GET requests against telegram155.p.rapidapi.com, every one with both RapidAPI headers already in place. Set the collection variable RAPIDAPI_KEY to your key and the first request answers: the free plan issues one without a card and allows 2,500 calls a month. Full reference: https://channelindex.starnikovoleg.workers.dev/docs. Generated from the published specification https://channelindex.starnikovoleg.workers.dev/openapi.json on 2026-09-16.",
+  "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+ },
+ "variable": [
+  {
+   "key": "baseUrl",
+   "value": "https://telegram155.p.rapidapi.com",
+   "type": "string"
+  },
+  {
+   "key": "RAPIDAPI_HOST",
+   "value": "telegram155.p.rapidapi.com",
+   "type": "string"
+  },
+  {
+   "key": "RAPIDAPI_KEY",
+   "value": "",
+   "type": "string",
+   "description": "Subscriber key from RapidAPI. The free plan issues one without a card: https://rapidapi.com/starnikovoleg/api/telegram155"
+  }
+ ],
+ "item": [
+  {
+   "name": "Channels",
+   "description": "Channel and supergroup profiles, batch lookups, recommendations and members.",
+   "item": [
+    {
+     "name": "GET /v1/channels/{peer_id}",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/channels/:peer_id",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "channels",
+        ":peer_id"
+       ],
+       "variable": [
+        {
+         "key": "peer_id",
+         "value": "1006503122",
+         "description": "Numeric Telegram peer id (channel or user). Obtain from `/v1/usernames/{username}`, `/v1/phones/{phone}`, `/v1/contacts/search`, or any prior response's `peer.user_id` / `peer.channel_id` field."
+        }
+       ]
+      },
+      "description": "Full channel info: members, description, linked discussion group, boosts\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    },
+    {
+     "name": "GET /v1/channels",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/channels?ids=1006503122,1005640892",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "channels"
+       ],
+       "query": [
+        {
+         "key": "ids",
+         "value": "1006503122,1005640892",
+         "description": "Comma-separated list of channel peer ids (e.g. `1006503122,1005640892`). Maximum 100.",
+         "disabled": false
+        }
+       ]
+      },
+      "description": "Batch fetch channels by id\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    },
+    {
+     "name": "GET /v1/channels/recommendations",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/channels/recommendations",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "channels",
+        "recommendations"
+       ],
+       "query": [
+        {
+         "key": "peer_id",
+         "value": "1006503122",
+         "description": "Channel peer id to seed the recommendation. Omit (or set to 0) for generic recommendations.",
+         "disabled": true
+        }
+       ]
+      },
+      "description": "Channels Telegram recommends alongside this one\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    },
+    {
+     "name": "GET /v1/channels/{peer_id}/participants",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/channels/:peer_id/participants",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "channels",
+        ":peer_id",
+        "participants"
+       ],
+       "query": [
+        {
+         "key": "filter",
+         "value": "",
+         "description": "One of `recent` (default), `admins`, `bots`, `kicked`, `banned`, `search`. `kicked`/`banned`/`search` use `q`.",
+         "disabled": true
+        },
+        {
+         "key": "q",
+         "value": "",
+         "description": "Search query, used by the `kicked`/`banned`/`search` filters.",
+         "disabled": true
+        },
+        {
+         "key": "limit",
+         "value": "20",
+         "description": "Maximum items to return. Defaults to 20 when omitted; values above 100 are clamped to 100.",
+         "disabled": true
+        },
+        {
+         "key": "offset",
+         "value": "",
+         "description": "Number of participants to skip.",
+         "disabled": true
+        }
+       ],
+       "variable": [
+        {
+         "key": "peer_id",
+         "value": "1006503122",
+         "description": "Numeric Telegram peer id (channel or user). Obtain from `/v1/usernames/{username}`, `/v1/phones/{phone}`, `/v1/contacts/search`, or any prior response's `peer.user_id` / `peer.channel_id` field."
+        }
+       ]
+      },
+      "description": "Channel participants, where Telegram exposes them\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    },
+    {
+     "name": "GET /v1/channels/{peer_id}/messages",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/channels/:peer_id/messages?ids=519,518",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "channels",
+        ":peer_id",
+        "messages"
+       ],
+       "query": [
+        {
+         "key": "ids",
+         "value": "519,518",
+         "description": "Comma-separated list of message ids (e.g. `519,518,517`). Maximum 100.",
+         "disabled": false
+        }
+       ],
+       "variable": [
+        {
+         "key": "peer_id",
+         "value": "1006503122",
+         "description": "Numeric Telegram peer id (channel or user). Obtain from `/v1/usernames/{username}`, `/v1/phones/{phone}`, `/v1/contacts/search`, or any prior response's `peer.user_id` / `peer.channel_id` field."
+        }
+       ]
+      },
+      "description": "Specific channel messages by id\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    }
+   ]
+  },
+  {
+   "name": "Messages",
+   "description": "Post history, discussion threads and directory-backed search.",
+   "item": [
+    {
+     "name": "GET /v1/messages/search",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/messages/search?q=telegram",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "messages",
+        "search"
+       ],
+       "query": [
+        {
+         "key": "q",
+         "value": "telegram",
+         "description": "Search query (forwarded to the public-directory search). Minimum 4 characters as sent; pad a shorter term with spaces (`gta%20`).",
+         "disabled": false
+        },
+        {
+         "key": "limit",
+         "value": "20",
+         "description": "Maximum items to return. Defaults to 20 when omitted; values above 100 are clamped to 100.",
+         "disabled": true
+        }
+       ]
+      },
+      "description": "Directory search under its earlier path, kept working for callers written against it\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    },
+    {
+     "name": "GET /v1/peers/{peer_id}/history",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/peers/:peer_id/history",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "peers",
+        ":peer_id",
+        "history"
+       ],
+       "query": [
+        {
+         "key": "limit",
+         "value": "20",
+         "description": "Maximum items to return. Defaults to 20 when omitted; values above 100 are clamped to 100.",
+         "disabled": true
+        },
+        {
+         "key": "cursor",
+         "value": "",
+         "description": "Opaque pagination cursor obtained from `next_page` or `prev_page` in a previous response. Overrides `offset_id` and `limit` when supplied. Fails with 400 if tampered with.",
+         "disabled": true
+        },
+        {
+         "key": "offset_id",
+         "value": "",
+         "description": "Return messages with `id < offset_id`. Ignored when `cursor` is supplied.",
+         "disabled": true
+        },
+        {
+         "key": "offset_date",
+         "value": "",
+         "description": "Return messages strictly older than this Unix timestamp.",
+         "disabled": true
+        },
+        {
+         "key": "add_offset",
+         "value": "",
+         "description": "Items to skip relative to `offset_id`. Negative values shift toward newer messages.",
+         "disabled": true
+        },
+        {
+         "key": "max_id",
+         "value": "",
+         "description": "Return messages with `id < max_id`.",
+         "disabled": true
+        },
+        {
+         "key": "min_id",
+         "value": "",
+         "description": "Return messages with `id > min_id`.",
+         "disabled": true
+        },
+        {
+         "key": "hash",
+         "value": "",
+         "description": "Cache-busting hash; leave 0 unless you are reusing a prior result.",
+         "disabled": true
+        }
+       ],
+       "variable": [
+        {
+         "key": "peer_id",
+         "value": "1006503122",
+         "description": "Numeric Telegram peer id (channel or user). Obtain from `/v1/usernames/{username}`, `/v1/phones/{phone}`, `/v1/contacts/search`, or any prior response's `peer.user_id` / `peer.channel_id` field."
+        }
+       ]
+      },
+      "description": "Message history with views and forwards, paginated\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    },
+    {
+     "name": "GET /v1/peers/{peer_id}/messages/{msg_id}/replies",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/peers/:peer_id/messages/:msg_id/replies",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "peers",
+        ":peer_id",
+        "messages",
+        ":msg_id",
+        "replies"
+       ],
+       "query": [
+        {
+         "key": "limit",
+         "value": "20",
+         "description": "Maximum items to return. Defaults to 20 when omitted; values above 100 are clamped to 100.",
+         "disabled": true
+        },
+        {
+         "key": "cursor",
+         "value": "",
+         "description": "Opaque pagination cursor obtained from `next_page` or `prev_page` in a previous response. Overrides `offset_id` and `limit` when supplied. Fails with 400 if tampered with.",
+         "disabled": true
+        },
+        {
+         "key": "offset_id",
+         "value": "",
+         "description": "See /history.",
+         "disabled": true
+        },
+        {
+         "key": "add_offset",
+         "value": "",
+         "description": "See /history.",
+         "disabled": true
+        },
+        {
+         "key": "max_id",
+         "value": "",
+         "description": "See /history.",
+         "disabled": true
+        },
+        {
+         "key": "min_id",
+         "value": "",
+         "description": "See /history.",
+         "disabled": true
+        },
+        {
+         "key": "hash",
+         "value": "",
+         "description": "See /history.",
+         "disabled": true
+        }
+       ],
+       "variable": [
+        {
+         "key": "peer_id",
+         "value": "1006503122",
+         "description": "Numeric Telegram peer id (channel or user). Obtain from `/v1/usernames/{username}`, `/v1/phones/{phone}`, `/v1/contacts/search`, or any prior response's `peer.user_id` / `peer.channel_id` field."
+        },
+        {
+         "key": "msg_id",
+         "value": "519",
+         "description": "Numeric message id within the given peer. Obtain from a prior `/v1/peers/{peer_id}/history` response."
+        }
+       ]
+      },
+      "description": "The reply thread under a post\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    },
+    {
+     "name": "GET /v1/peers/{peer_id}/messages/{msg_id}/discussion",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/peers/:peer_id/messages/:msg_id/discussion",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "peers",
+        ":peer_id",
+        "messages",
+        ":msg_id",
+        "discussion"
+       ],
+       "variable": [
+        {
+         "key": "peer_id",
+         "value": "1006503122",
+         "description": "Numeric Telegram peer id (channel or user). Obtain from `/v1/usernames/{username}`, `/v1/phones/{phone}`, `/v1/contacts/search`, or any prior response's `peer.user_id` / `peer.channel_id` field."
+        },
+        {
+         "key": "msg_id",
+         "value": "519",
+         "description": "Numeric message id within the given peer. Obtain from a prior `/v1/peers/{peer_id}/history` response."
+        }
+       ]
+      },
+      "description": "The post as it appears in the linked discussion group\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    }
+   ]
+  },
+  {
+   "name": "Stories",
+   "description": "Active and specific stories for a channel or user.",
+   "item": [
+    {
+     "name": "GET /v1/peers/{peer_id}/stories",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/peers/:peer_id/stories",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "peers",
+        ":peer_id",
+        "stories"
+       ],
+       "variable": [
+        {
+         "key": "peer_id",
+         "value": "1006503122",
+         "description": "Numeric Telegram peer id (channel or user). Obtain from `/v1/usernames/{username}`, `/v1/phones/{phone}`, `/v1/contacts/search`, or any prior response's `peer.user_id` / `peer.channel_id` field."
+        }
+       ]
+      },
+      "description": "Active stories\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    },
+    {
+     "name": "GET /v1/peers/{peer_id}/stories/{ids}",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/peers/:peer_id/stories/:ids",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "peers",
+        ":peer_id",
+        "stories",
+        ":ids"
+       ],
+       "variable": [
+        {
+         "key": "peer_id",
+         "value": "1006503122",
+         "description": "Numeric Telegram peer id (channel or user). Obtain from `/v1/usernames/{username}`, `/v1/phones/{phone}`, `/v1/contacts/search`, or any prior response's `peer.user_id` / `peer.channel_id` field."
+        },
+        {
+         "key": "ids",
+         "value": "42",
+         "description": "Comma-separated list of story ids (e.g. `42,41`). Maximum 100."
+        }
+       ]
+      },
+      "description": "Specific stories by id\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    }
+   ]
+  },
+  {
+   "name": "Identity",
+   "description": "Turning a @username, phone number or id into a peer, and user profiles.",
+   "item": [
+    {
+     "name": "GET /v1/usernames/{username}",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/usernames/:username",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "usernames",
+        ":username"
+       ],
+       "variable": [
+        {
+         "key": "username",
+         "value": "durov",
+         "description": "Public @username, with or without leading @. Case-insensitive."
+        }
+       ]
+      },
+      "description": "Resolve a public @username to a numeric peer id\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    },
+    {
+     "name": "GET /v1/contacts/search",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/contacts/search?q=durov",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "contacts",
+        "search"
+       ],
+       "query": [
+        {
+         "key": "q",
+         "value": "durov",
+         "description": "Search query — username substring, full name, or phone fragment. Minimum 4 characters as sent; pad a shorter term with spaces (`gta%20`). Telegram returns nothing for shorter queries.",
+         "disabled": false
+        },
+        {
+         "key": "limit",
+         "value": "20",
+         "description": "Maximum items to return. Defaults to 20 when omitted; values above 100 are clamped to 100.",
+         "disabled": true
+        }
+       ]
+      },
+      "description": "Search the public directory by keyword, four characters or more\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    },
+    {
+     "name": "GET /v1/users/{peer_id}",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/users/:peer_id",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "users",
+        ":peer_id"
+       ],
+       "variable": [
+        {
+         "key": "peer_id",
+         "value": "1006503122",
+         "description": "Numeric Telegram peer id (channel or user). Obtain from `/v1/usernames/{username}`, `/v1/phones/{phone}`, `/v1/contacts/search`, or any prior response's `peer.user_id` / `peer.channel_id` field."
+        }
+       ]
+      },
+      "description": "Full public user profile\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    },
+    {
+     "name": "GET /v1/users/{peer_id}/photos",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/users/:peer_id/photos",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "users",
+        ":peer_id",
+        "photos"
+       ],
+       "query": [
+        {
+         "key": "limit",
+         "value": "20",
+         "description": "Maximum items to return. Defaults to 20 when omitted; values above 100 are clamped to 100.",
+         "disabled": true
+        },
+        {
+         "key": "offset",
+         "value": "",
+         "description": "Number of photos to skip from the most recent.",
+         "disabled": true
+        },
+        {
+         "key": "max_id",
+         "value": "",
+         "description": "Return photos with id < max_id.",
+         "disabled": true
+        }
+       ],
+       "variable": [
+        {
+         "key": "peer_id",
+         "value": "1006503122",
+         "description": "Numeric Telegram peer id (channel or user). Obtain from `/v1/usernames/{username}`, `/v1/phones/{phone}`, `/v1/contacts/search`, or any prior response's `peer.user_id` / `peer.channel_id` field."
+        }
+       ]
+      },
+      "description": "A user’s profile photos\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    },
+    {
+     "name": "GET /v1/phones/{phone}",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/phones/:phone",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "phones",
+        ":phone"
+       ],
+       "variable": [
+        {
+         "key": "phone",
+         "value": "+12025550100",
+         "description": "Phone number in international format. URL-encode the leading `+` as `%2B`."
+        }
+       ]
+      },
+      "description": "Resolve a phone number to a Telegram account\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    }
+   ]
+  },
+  {
+   "name": "Files",
+   "description": "Downloading media referenced by a message, story or profile photo.",
+   "item": [
+    {
+     "name": "GET /v1/files/{file_id}",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/files/:file_id",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "files",
+        ":file_id"
+       ],
+       "query": [
+        {
+         "key": "peer_id",
+         "value": "",
+         "description": "Peer the file was seen in. Optional; used only to disambiguate a `file_id` that lost precision in your JSON parser.",
+         "disabled": true
+        },
+        {
+         "key": "msg_id",
+         "value": "",
+         "description": "Message the file was seen in. Optional; used with `peer_id` to disambiguate a `file_id` that lost precision in your JSON parser.",
+         "disabled": true
+        },
+        {
+         "key": "thumb_size",
+         "value": "",
+         "description": "Photo files only: requested thumbnail size code (e.g. `s`, `m`, `x`, `y`). Omit to receive the largest available size. Ignored for documents.",
+         "disabled": true
+        }
+       ],
+       "variable": [
+        {
+         "key": "file_id",
+         "value": "1234567890",
+         "description": "Numeric file id obtained from a prior response (e.g. `media.photo.id`, `media.document.id`). File ids exceed 2^53, so a JSON parser that reads numbers as doubles (`JSON.parse` in JavaScript, among others) will silently round them. Read id fields as strings or big integers — from the raw response body — or the id you send back will not be the one we returned. A rounded id is repaired automatically when it names exactly one file we have seen; when several files round to the same value the response is 409 and you should add `peer_id` and `msg_id`."
+        }
+       ]
+      },
+      "description": "Download a file or photo by id\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    }
+   ]
+  },
+  {
+   "name": "Service",
+   "description": "Liveness probe and the machine-readable contract.",
+   "item": [
+    {
+     "name": "GET /v1/openapi.json",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/v1/openapi.json",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "v1",
+        "openapi.json"
+       ]
+      },
+      "description": "The OpenAPI document the API serves about itself\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    },
+    {
+     "name": "GET /health",
+     "request": {
+      "method": "GET",
+      "header": [
+       {
+        "key": "X-RapidAPI-Key",
+        "value": "{{RAPIDAPI_KEY}}",
+        "type": "text"
+       },
+       {
+        "key": "X-RapidAPI-Host",
+        "value": "{{RAPIDAPI_HOST}}",
+        "type": "text"
+       }
+      ],
+      "url": {
+       "raw": "{{baseUrl}}/health",
+       "host": [
+        "{{baseUrl}}"
+       ],
+       "path": [
+        "health"
+       ]
+      },
+      "description": "Liveness probe, free and meant to be polled\n\nReference: https://channelindex.starnikovoleg.workers.dev/docs"
+     },
+     "response": []
+    }
+   ]
+  }
+ ]
+}
