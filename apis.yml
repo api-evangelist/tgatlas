@@ -13,6 +13,18 @@ modified: '2026-09-16'
 specificationVersion: '0.21'
 tags:
   - Telegram
+  - Public Channels
+  - Social-Media
+  - Social Monitoring
+  - Messaging
+  - Directory
+  - Search
+  - Analytics
+  - OSINT
+  - Market Research
+  - AI-agent context
+tags_raw:
+  - Telegram
   - public channels
   - social media
   - social monitoring
@@ -32,6 +44,18 @@ apis:
     baseURL: https://telegram155.p.rapidapi.com/v1
     image: https://channelindex.starnikovoleg.workers.dev/logo.svg
     tags:
+      - Telegram
+      - Public Channels
+      - Social-Media
+      - Social Monitoring
+      - Messaging
+      - Directory
+      - Search
+      - Analytics
+      - OSINT
+      - Market Research
+      - AI-agent context
+    tags_raw:
       - Telegram
       - public channels
       - social media
