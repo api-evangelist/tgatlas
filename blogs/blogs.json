@@ -1,0 +1,11 @@
+{
+  "repo": "tgatlas",
+  "feeds": [
+    {
+      "source": "https://channelindex.starnikovoleg.workers.dev/about",
+      "error": "HTTPError"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-09-19T20:17:39Z"
+}

@@ -9,7 +9,7 @@ description: >-
 image: https://channelindex.starnikovoleg.workers.dev/logo.svg
 url: https://raw.githubusercontent.com/api-evangelist/tgatlas/refs/heads/main/apis.yml
 created: '2026-09-16'
-modified: '2026-09-16'
+modified: '2026-09-20'
 specificationVersion: '0.21'
 tags:
   - Telegram
@@ -22,18 +22,6 @@ tags:
   - Analytics
   - OSINT
   - Market Research
-  - AI-agent context
-tags_raw:
-  - Telegram
-  - public channels
-  - social media
-  - social monitoring
-  - messaging
-  - directory
-  - search
-  - analytics
-  - OSINT
-  - market research
   - AI-agent context
 apis:
   - name: ChannelIndex Telegram Channel Data API
@@ -71,6 +59,7 @@ apis:
       - type: OpenAPI
         url: openapi/tgatlas-openapi.json
       - type: OpenAPI
+        name: OpenAPI (provider-hosted)
         url: https://channelindex.starnikovoleg.workers.dev/openapi.json
       - type: Overlay
         url: overlays/tgatlas-overlay.yaml
@@ -90,8 +79,6 @@ apis:
         url: plans/tgatlas-plans-pricing.yml
       - type: Documentation
         url: https://channelindex.starnikovoleg.workers.dev/docs
-      - type: Pricing
-        url: https://channelindex.starnikovoleg.workers.dev/pricing
       - type: SignUp
         url: https://rapidapi.com/starnikovoleg/api/telegram155
 maintainers:
@@ -127,8 +114,6 @@ common:
     url: conformance/tgatlas-conformance.yml
   - type: Lifecycle
     url: lifecycle/tgatlas-lifecycle.yml
-  - type: StatusPage
-    url: https://channelindex.starnikovoleg.workers.dev/status
   - type: Deprecation
     url: lifecycle/tgatlas-lifecycle.yml
   - type: ChangeLog
@@ -159,20 +144,10 @@ common:
     url: https://channelindex.starnikovoleg.workers.dev/docs
   - type: APIReference
     url: https://channelindex.starnikovoleg.workers.dev/docs
-  - type: GettingStarted
-    url: https://channelindex.starnikovoleg.workers.dev/quickstart
   - type: Pricing
-    url: https://channelindex.starnikovoleg.workers.dev/pricing
+    url: https://rapidapi.com/starnikovoleg/api/telegram155
   - type: SignUp
     url: https://rapidapi.com/starnikovoleg/api/telegram155
-  - type: TermsOfService
-    url: https://channelindex.starnikovoleg.workers.dev/terms
-  - type: PrivacyPolicy
-    url: https://channelindex.starnikovoleg.workers.dev/privacy
-  - type: Support
-    url: https://channelindex.starnikovoleg.workers.dev/about
-  - type: Blog
-    url: https://channelindex.starnikovoleg.workers.dev/blog
   - type: GitHubOrganization
     url: https://github.com/starnikovoleg
   - type: Website
@@ -183,7 +158,8 @@ x-generated:
   confidence: 90
   at: '2026-09-16T09:06:47.049Z'
 x-enrichment:
-  date: '2026-09-16'
+  date: '2026-09-20'
   status: enriched
-  artifacts_added: 29
+  artifacts_added: 1
   pass: local-v3
+aid: tgatlas

@@ -1,0 +1,31 @@
+generated: '2026-09-20'
+method: searched
+probe: true
+provider: tgAtlas
+description: >-
+  Horizontal regulatory-posture harvest for tgAtlas (AI, cyber, accessibility,
+  online safety, privacy, product security). HARVEST ONLY — this records the
+  evidence the provider actually publishes, never an inference that a regime
+  applies. No horizontal-regulatory documents were found: the only published
+  legal/compliance surface referenced by prior artifacts is a security.txt
+  (Contact + Policy), already captured under security/ and well-known/. The
+  provider's self-hosted surface (channelindex.starnikovoleg.workers.dev) was
+  returning Cloudflare error 1042 / HTTP 404 on every path at probe time, so the
+  conventional legal/accessibility/transparency paths could not be reached live;
+  none were referenced in any already-harvested artifact either. An empty
+  signals map is the correct, expected measurement for a small independent
+  read-only data API.
+signals: {}
+evidence:
+  - url: https://channelindex.starnikovoleg.workers.dev/.well-known/security.txt
+    status: 404
+    note: >-
+      Served HTTP 200 on 2026-09-16 (saved to well-known/tgatlas-security.txt);
+      host now 404s on every path (Cloudflare error 1042).
+  - url: https://channelindex.starnikovoleg.workers.dev/legal/subprocessors
+    status: 404
+  - url: https://channelindex.starnikovoleg.workers.dev/accessibility
+    status: 404
+  - url: https://channelindex.starnikovoleg.workers.dev/transparency
+    status: 404
+checked: '2026-09-20'
