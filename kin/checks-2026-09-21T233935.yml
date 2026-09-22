@@ -2,8 +2,8 @@
 kin_checks:
   slug: tgatlas
   schema_version: 0.22.0
-  scored_at: '2026-09-19'
-  run_ts: 2026-09-19T193153
+  scored_at: '2026-09-21'
+  run_ts: 2026-09-21T233935
   note: Actionable checks (missed + partial) in `checks`, plus the ids that did not
     apply in `na`. Everything else in rubric/scoring-0.22.0.yml was earned; counts
     below let you verify that.
@@ -57,7 +57,6 @@ kin_checks:
     status: missed
   - id: status_page_present
     status: missed
-    detail: pointer liveness 0.0
   - id: webhooks_advertised
     status: missed
   - id: roadmap_present
@@ -75,7 +74,6 @@ kin_checks:
     detail: pointer liveness 0.0
   - id: getting_started_present
     status: missed
-    detail: pointer liveness 0.0
   - id: sdk_count_1
     status: missed
   - id: sdk_count_3
@@ -86,19 +84,15 @@ kin_checks:
     status: missed
   - id: support_channel
     status: missed
-    detail: pointer liveness 0.0
   - id: blog_present
     status: missed
-    detail: pointer liveness 0.0
   - id: pricing_link
     status: missed
     detail: pointer liveness 0.0
   - id: terms_of_service
     status: missed
-    detail: pointer liveness 0.0
   - id: privacy_policy
     status: missed
-    detail: pointer liveness 0.0
   - id: compliance_published
     status: missed
   - id: trust_center
@@ -107,10 +101,8 @@ kin_checks:
     status: missed
   - id: reg_terms_of_service
     status: missed
-    detail: pointer liveness 0.0
   - id: reg_privacy_policy
     status: missed
-    detail: pointer liveness 0.0
   - id: reg_compliance_published
     status: missed
   - id: upsert_outcome_discriminator
