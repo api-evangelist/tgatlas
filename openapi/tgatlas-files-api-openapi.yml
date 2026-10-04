@@ -1,0 +1,147 @@
+openapi: 3.2.0
+info:
+  title: Tgatlas Files API
+  version: 1.0.0
+  contact:
+    name: tgAtlas
+    url: https://channelindex.starnikovoleg.workers.dev
+    email: starnikovoleg@gmail.com
+  x-rapidapi-url: https://rapidapi.com/starnikovoleg/api/telegram155
+  description: 'Operations tagged Files across 2 of this provider''s published API definitions: tgatlas-openapi.json, tgatlas-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://telegram155.p.rapidapi.com
+  description: RapidAPI gateway
+tags:
+- name: Files
+  description: Downloading media referenced by a message, story or profile photo.
+paths:
+  /v1/files/{file_id}:
+    get:
+      description: Streams the bytes of a file referenced by `file_id`. The id is obtained from a prior message, channel, or user response (look for `media.photo.id` or `media.document.id` in `/v1/peers/{peer_id}/history`, or `photo.id` on a user / channel profile). For photo files, an explicit `thumb_size` may be requested; if omitted, the largest available size is returned.
+      operationId: downloadFile
+      parameters:
+      - description: Numeric file id obtained from a prior response (e.g. `media.photo.id`, `media.document.id`). File ids exceed 2^53, so a JSON parser that reads numbers as doubles (`JSON.parse` in JavaScript, among others) will silently round them. Read id fields as strings or big integers — from the raw response body — or the id you send back will not be the one we returned. A rounded id is repaired automatically when it names exactly one file we have seen; when several files round to the same value the response is 409 and you should add `peer_id` and `msg_id`.
+        example: 1234567890
+        in: path
+        name: file_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Peer the file was seen in. Optional; used only to disambiguate a `file_id` that lost precision in your JSON parser.
+        in: query
+        name: peer_id
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: Message the file was seen in. Optional; used with `peer_id` to disambiguate a `file_id` that lost precision in your JSON parser.
+        in: query
+        name: msg_id
+        required: false
+        schema:
+          type: integer
+      - description: 'Photo files only: requested thumbnail size code (e.g. `s`, `m`, `x`, `y`). Omit to receive the largest available size. Ignored for documents.'
+        in: query
+        name: thumb_size
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: File bytes streamed as a binary response. `Content-Type` reflects the file's media type when known, otherwise `application/octet-stream`.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ResourceUnavailable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+      summary: Download a file by id
+      tags:
+      - Files
+    servers:
+    - url: https://telegram155.p.rapidapi.com
+      description: RapidAPI gateway
+components:
+  responses:
+    UpstreamTimeout:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Request timed out.
+    ServiceUnavailable:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Service temporarily unavailable.
+    ResourceUnavailable:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: 'The peer id could not be found, so no access hash exists for it. Not transient: seed the id via GET /v1/usernames/{username}, GET /v1/phones/{phone}, or by encountering it in a chat, then retry. Raw MTProto ids only: a Bot-API id like -1001234567890 must be sent as 1234567890 (strip the leading -100), and -123456789 as 123456789. When the request carries such an id, the hint names the exact id to retry with.'
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not found
+            code: NOT_FOUND
+      description: Not found.
+    RateLimited:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Rate limit exceeded.
+    BadRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid request — bad path or query parameter.
+  schemas:
+    Error:
+      description: Error envelope returned by all non-2xx responses.
+      properties:
+        code:
+          description: Stable machine-readable error identifier.
+          enum:
+          - INVALID_REQUEST
+          - NOT_FOUND
+          - RESOURCE_UNAVAILABLE
+          - RATE_LIMITED
+          - SERVICE_UNAVAILABLE
+          - TIMEOUT
+          - INTERNAL_ERROR
+          example: SERVICE_UNAVAILABLE
+          type: string
+        error:
+          description: Short human-readable error message.
+          example: service temporarily unavailable
+          type: string
+        hint:
+          description: Optional recovery hint suggesting a concrete next call. Set on RESOURCE_UNAVAILABLE (how to seed an unknown peer id) and SERVICE_UNAVAILABLE.
+          example: retry shortly, or call /v1/usernames/{username} or /v1/peers/{peer_id}/history first.
+          type: string
+      required:
+      - error
+      - code
+      type: object
+x-refined-from:
+- tgatlas-openapi.json
+- tgatlas-openapi.json

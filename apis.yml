@@ -24,63 +24,174 @@ tags:
   - Market Research
   - AI-agent context
 apis:
-  - name: ChannelIndex Telegram Channel Data API
-    description: >-
-      Read-only REST API over public Telegram data with 19 GET endpoints behind the RapidAPI gateway. Public OpenAPI 3.1
-      contract; key-based auth via RapidAPI headers; free tier available.
-    humanURL: https://channelindex.starnikovoleg.workers.dev/docs
-    baseURL: https://telegram155.p.rapidapi.com/v1
-    image: https://channelindex.starnikovoleg.workers.dev/logo.svg
-    tags:
-      - Telegram
-      - Public Channels
-      - Social-Media
-      - Social Monitoring
-      - Messaging
-      - Directory
-      - Search
-      - Analytics
-      - OSINT
-      - Market Research
-      - AI-agent context
-    tags_raw:
-      - Telegram
-      - public channels
-      - social media
-      - social monitoring
-      - messaging
-      - directory
-      - search
-      - analytics
-      - OSINT
-      - market research
-      - AI-agent context
-    properties:
-      - type: OpenAPI
-        url: openapi/tgatlas-openapi.json
-      - type: OpenAPI
-        name: OpenAPI (provider-hosted)
-        url: https://channelindex.starnikovoleg.workers.dev/openapi.json
-      - type: Overlay
-        url: overlays/tgatlas-overlay.yaml
-      - type: Vocabulary
-        url: vocabulary/tgatlas-vocabulary.yaml
-      - type: Authentication
-        url: authentication/tgatlas-authentication.yml
-      - type: ErrorCatalog
-        url: errors/tgatlas-problem-types.yml
-      - type: Conventions
-        url: conventions/tgatlas-conventions.yml
-      - type: DataModel
-        url: data-model/tgatlas-data-model.yml
-      - type: RateLimits
-        url: rate-limits/tgatlas-rate-limits.yml
-      - type: Plans
-        url: plans/tgatlas-plans-pricing.yml
-      - type: Documentation
-        url: https://channelindex.starnikovoleg.workers.dev/docs
-      - type: SignUp
-        url: https://rapidapi.com/starnikovoleg/api/telegram155
+- aid: tgatlas:tgatlas-channels-api
+  name: ChannelIndex (tgAtlas) Channels API
+  description: Channel and supergroup profiles, batch lookups, recommendations and members.
+  humanURL: https://channelindex.starnikovoleg.workers.dev/docs
+  baseURL: https://telegram155.p.rapidapi.com/v1
+  tags:
+  - Channels
+  properties:
+  - type: OpenAPI
+    url: openapi/tgatlas-channels-api-openapi.yml
+  - type: Vocabulary
+    url: vocabulary/tgatlas-vocabulary.yaml
+  - type: Authentication
+    url: authentication/tgatlas-authentication.yml
+  - type: ErrorCatalog
+    url: errors/tgatlas-problem-types.yml
+  - type: Conventions
+    url: conventions/tgatlas-conventions.yml
+  - type: DataModel
+    url: data-model/tgatlas-data-model.yml
+  - type: RateLimits
+    url: rate-limits/tgatlas-rate-limits.yml
+  - type: Plans
+    url: plans/tgatlas-plans-pricing.yml
+  - type: Documentation
+    url: https://channelindex.starnikovoleg.workers.dev/docs
+  - type: SignUp
+    url: https://rapidapi.com/starnikovoleg/api/telegram155
+- aid: tgatlas:tgatlas-files-api
+  name: ChannelIndex (tgAtlas) Files API
+  description: Downloading media referenced by a message, story or profile photo.
+  humanURL: https://channelindex.starnikovoleg.workers.dev/docs
+  baseURL: https://telegram155.p.rapidapi.com/v1
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/tgatlas-files-api-openapi.yml
+  - type: Vocabulary
+    url: vocabulary/tgatlas-vocabulary.yaml
+  - type: Authentication
+    url: authentication/tgatlas-authentication.yml
+  - type: ErrorCatalog
+    url: errors/tgatlas-problem-types.yml
+  - type: Conventions
+    url: conventions/tgatlas-conventions.yml
+  - type: DataModel
+    url: data-model/tgatlas-data-model.yml
+  - type: RateLimits
+    url: rate-limits/tgatlas-rate-limits.yml
+  - type: Plans
+    url: plans/tgatlas-plans-pricing.yml
+  - type: Documentation
+    url: https://channelindex.starnikovoleg.workers.dev/docs
+  - type: SignUp
+    url: https://rapidapi.com/starnikovoleg/api/telegram155
+- aid: tgatlas:tgatlas-identity-api
+  name: ChannelIndex (tgAtlas) Identity API
+  description: Turning a @username, phone number or id into a peer, and user profiles.
+  humanURL: https://channelindex.starnikovoleg.workers.dev/docs
+  baseURL: https://telegram155.p.rapidapi.com/v1
+  tags:
+  - Identity
+  properties:
+  - type: OpenAPI
+    url: openapi/tgatlas-identity-api-openapi.yml
+  - type: Vocabulary
+    url: vocabulary/tgatlas-vocabulary.yaml
+  - type: Authentication
+    url: authentication/tgatlas-authentication.yml
+  - type: ErrorCatalog
+    url: errors/tgatlas-problem-types.yml
+  - type: Conventions
+    url: conventions/tgatlas-conventions.yml
+  - type: DataModel
+    url: data-model/tgatlas-data-model.yml
+  - type: RateLimits
+    url: rate-limits/tgatlas-rate-limits.yml
+  - type: Plans
+    url: plans/tgatlas-plans-pricing.yml
+  - type: Documentation
+    url: https://channelindex.starnikovoleg.workers.dev/docs
+  - type: SignUp
+    url: https://rapidapi.com/starnikovoleg/api/telegram155
+- aid: tgatlas:tgatlas-messages-api
+  name: ChannelIndex (tgAtlas) Messages API
+  description: Post history, discussion threads and directory-backed search.
+  humanURL: https://channelindex.starnikovoleg.workers.dev/docs
+  baseURL: https://telegram155.p.rapidapi.com/v1
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/tgatlas-messages-api-openapi.yml
+  - type: Vocabulary
+    url: vocabulary/tgatlas-vocabulary.yaml
+  - type: Authentication
+    url: authentication/tgatlas-authentication.yml
+  - type: ErrorCatalog
+    url: errors/tgatlas-problem-types.yml
+  - type: Conventions
+    url: conventions/tgatlas-conventions.yml
+  - type: DataModel
+    url: data-model/tgatlas-data-model.yml
+  - type: RateLimits
+    url: rate-limits/tgatlas-rate-limits.yml
+  - type: Plans
+    url: plans/tgatlas-plans-pricing.yml
+  - type: Documentation
+    url: https://channelindex.starnikovoleg.workers.dev/docs
+  - type: SignUp
+    url: https://rapidapi.com/starnikovoleg/api/telegram155
+- aid: tgatlas:tgatlas-service-api
+  name: ChannelIndex (tgAtlas) Service API
+  description: Liveness probe and the machine-readable contract.
+  humanURL: https://channelindex.starnikovoleg.workers.dev/docs
+  baseURL: https://telegram155.p.rapidapi.com/v1
+  tags:
+  - Service
+  properties:
+  - type: OpenAPI
+    url: openapi/tgatlas-service-api-openapi.yml
+  - type: Vocabulary
+    url: vocabulary/tgatlas-vocabulary.yaml
+  - type: Authentication
+    url: authentication/tgatlas-authentication.yml
+  - type: ErrorCatalog
+    url: errors/tgatlas-problem-types.yml
+  - type: Conventions
+    url: conventions/tgatlas-conventions.yml
+  - type: DataModel
+    url: data-model/tgatlas-data-model.yml
+  - type: RateLimits
+    url: rate-limits/tgatlas-rate-limits.yml
+  - type: Plans
+    url: plans/tgatlas-plans-pricing.yml
+  - type: Documentation
+    url: https://channelindex.starnikovoleg.workers.dev/docs
+  - type: SignUp
+    url: https://rapidapi.com/starnikovoleg/api/telegram155
+- aid: tgatlas:tgatlas-stories-api
+  name: ChannelIndex (tgAtlas) Stories API
+  description: Active and specific stories for a channel or user.
+  humanURL: https://channelindex.starnikovoleg.workers.dev/docs
+  baseURL: https://telegram155.p.rapidapi.com/v1
+  tags:
+  - Stories
+  properties:
+  - type: OpenAPI
+    url: openapi/tgatlas-stories-api-openapi.yml
+  - type: Vocabulary
+    url: vocabulary/tgatlas-vocabulary.yaml
+  - type: Authentication
+    url: authentication/tgatlas-authentication.yml
+  - type: ErrorCatalog
+    url: errors/tgatlas-problem-types.yml
+  - type: Conventions
+    url: conventions/tgatlas-conventions.yml
+  - type: DataModel
+    url: data-model/tgatlas-data-model.yml
+  - type: RateLimits
+    url: rate-limits/tgatlas-rate-limits.yml
+  - type: Plans
+    url: plans/tgatlas-plans-pricing.yml
+  - type: Documentation
+    url: https://channelindex.starnikovoleg.workers.dev/docs
+  - type: SignUp
+    url: https://rapidapi.com/starnikovoleg/api/telegram155
 maintainers:
   - FN: starnikovoleg
     email: starnikovoleg@gmail.com

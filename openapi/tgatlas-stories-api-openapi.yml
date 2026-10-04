@@ -1,0 +1,600 @@
+openapi: 3.2.0
+info:
+  title: Tgatlas Stories API
+  version: 1.0.0
+  contact:
+    name: tgAtlas
+    url: https://channelindex.starnikovoleg.workers.dev
+    email: starnikovoleg@gmail.com
+  x-rapidapi-url: https://rapidapi.com/starnikovoleg/api/telegram155
+  description: 'Operations tagged Stories across 2 of this provider''s published API definitions: tgatlas-openapi.json, tgatlas-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://telegram155.p.rapidapi.com
+  description: RapidAPI gateway
+tags:
+- name: Stories
+  description: Active and specific stories for a channel or user.
+paths:
+  /v1/peers/{peer_id}/stories:
+    get:
+      description: Active stories of a public channel or user. Answers `200` with a `stories` object for the peer; when nothing is live at that moment its inner `stories` field is `null` rather than an array, so read it as "no active stories" and not as an error (measured 16 September 2026 on channel id 1006503122). Story ids from this list stay resolvable afterwards through `GET /v1/peers/{peer_id}/stories/{ids}`. Resolve a `@username` with `/v1/usernames/{username}` first to get the numeric `peer_id`.
+      operationId: getPeerStories
+      parameters:
+      - $ref: '#/components/parameters/PeerIDPath'
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                chats:
+                - admin_rights:
+                    add_admins: false
+                    anonymous: false
+                    ban_users: false
+                    change_info: false
+                    delete_messages: false
+                    delete_stories: false
+                    edit_messages: false
+                    edit_stories: false
+                    flags: 0
+                    invite_users: false
+                    manage_call: false
+                    manage_direct_messages: false
+                    manage_ranks: false
+                    manage_topics: false
+                    other: false
+                    pin_messages: false
+                    post_messages: false
+                    post_stories: false
+                  autotranslation: true
+                  banned_rights:
+                    change_info: false
+                    edit_rank: false
+                    embed_links: false
+                    flags: 0
+                    invite_users: false
+                    manage_topics: false
+                    pin_messages: false
+                    send_audios: false
+                    send_docs: false
+                    send_games: false
+                    send_gifs: false
+                    send_inline: false
+                    send_media: false
+                    send_messages: false
+                    send_photos: false
+                    send_plain: false
+                    send_polls: false
+                    send_roundvideos: false
+                    send_stickers: false
+                    send_videos: false
+                    send_voices: false
+                    until_date: 0
+                    view_messages: false
+                  bot_verification_icon: 0
+                  broadcast: true
+                  broadcast_messages_allowed: true
+                  call_active: false
+                  call_not_empty: false
+                  color:
+                    background_emoji_id: 5424912684078348000
+                    color: 12
+                    flags: 3
+                  creator: false
+                  date: 1446056458
+                  default_banned_rights:
+                    change_info: false
+                    edit_rank: false
+                    embed_links: false
+                    flags: 0
+                    invite_users: false
+                    manage_topics: false
+                    pin_messages: false
+                    send_audios: false
+                    send_docs: false
+                    send_games: false
+                    send_gifs: false
+                    send_inline: false
+                    send_media: false
+                    send_messages: false
+                    send_photos: false
+                    send_plain: false
+                    send_polls: false
+                    send_roundvideos: false
+                    send_stickers: false
+                    send_videos: false
+                    send_voices: false
+                    until_date: 0
+                    view_messages: false
+                  emoji_status:
+                    center_color: 3553080
+                    collectible_id: 5821047735515611000
+                    document_id: 5228932931224887000
+                    edge_color: 921359
+                    flags: 0
+                    pattern_color: 7104616
+                    pattern_document_id: 5440687192718467000
+                    slug: PartySparkler-5277
+                    text_color: 9211793
+                    title: 'Party Sparkler #5277'
+                    until: 0
+                  fake: false
+                  flags: 8356
+                  flags2: 362381
+                  forum: false
+                  forum_tabs: false
+                  gigagroup: false
+                  has_geo: false
+                  has_link: false
+                  id: 1006503122
+                  join_request: false
+                  join_to_send: false
+                  left: true
+                  level: 100
+                  linked_monoforum_id: 1071006503122
+                  megagroup: false
+                  min: false
+                  monoforum: false
+                  noforwards: false
+                  participants_count: 0
+                  photo:
+                    dcid: 2
+                    flags: 2
+                    has_video: false
+                    photo_id: 5393326112060334000
+                    stripped_thumb: AQgIuMSuqKA8hDA7hg7enAooooA/
+                  profile_color:
+                    background_emoji_id: 5424912684078348000
+                    color: 15
+                    flags: 3
+                  restricted: false
+                  restriction_reason: null
+                  scam: false
+                  send_paid_messages_stars: 0
+                  signature_profiles: false
+                  signatures: false
+                  slowmode_enabled: false
+                  stories_hidden: false
+                  stories_hidden_min: true
+                  stories_max_id:
+                    flags: 0
+                    live: false
+                    max_id: 0
+                  stories_unavailable: true
+                  subscription_until_date: 0
+                  title: Pavel Durov
+                  username: ''
+                  usernames:
+                  - active: true
+                    editable: true
+                    flags: 3
+                    username: durov
+                  verified: true
+                stories:
+                  flags: 0
+                  max_read_id: 0
+                  peer:
+                    channel_id: 1006503122
+                  stories: null
+                users: null
+              schema:
+                $ref: '#/components/schemas/PeerStories'
+          description: Active stories.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ResourceUnavailable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+      summary: Get a peer's active stories
+      tags:
+      - Stories
+    servers:
+    - url: https://telegram155.p.rapidapi.com
+      description: RapidAPI gateway
+  /v1/peers/{peer_id}/stories/{ids}:
+    get:
+      description: 'Specific stories of a peer by id. `ids` is a comma-separated list of story ids (for example `1,2,3`), and the answer carries `count` plus the matching story objects with caption, entities, date and media. Ids are permanent: a request for `1,2,3` on channel id 1006503122 returned `count: 3` including a story posted 3 December 2023, so archived stories remain readable long after the 24-hour window in which they are "active" (measured 16 September 2026). An id nobody posted answers `200` with `count: 0` and `stories: null`; a list that cannot be parsed answers `400 INVALID_REQUEST`. Story media file references are downloadable via `GET /v1/files/{file_id}`. Resolve a `@username` with `/v1/usernames/{username}` first to get the numeric `peer_id`.'
+      operationId: getStoriesByID
+      parameters:
+      - $ref: '#/components/parameters/PeerIDPath'
+      - description: Comma-separated list of story ids (e.g. `42,41`). Maximum 100.
+        example: '42'
+        in: path
+        name: ids
+        required: true
+        schema:
+          pattern: ^\d+(,\d+)*$
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                _note: Shape derived from gotd StoriesStories; small hand-built example, not captured live.
+                _synthetic: true
+                chats: []
+                stories:
+                - date: 1748962479
+                  expire_date: 1749048879
+                  id: 42
+                  media:
+                    photo_id: 5393326112060334000
+                users: []
+              schema:
+                $ref: '#/components/schemas/StoriesByID'
+          description: Requested stories.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ResourceUnavailable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+      summary: Fetch specific stories by id
+      tags:
+      - Stories
+    servers:
+    - url: https://telegram155.p.rapidapi.com
+      description: RapidAPI gateway
+components:
+  schemas:
+    UsernameAlias:
+      additionalProperties: true
+      description: One public username alias bound to a user or chat.
+      properties:
+        active:
+          description: True if the alias is currently active.
+          type: boolean
+        editable:
+          description: True if the alias can be edited (only true for the primary one).
+          type: boolean
+        flags:
+          description: Bitfield of optional Telegram fields.
+          type: integer
+        username:
+          description: The alias text (no leading @).
+          type: string
+      type: object
+    PeerStories:
+      additionalProperties: true
+      description: Currently active stories for a peer.
+      properties:
+        stories:
+          additionalProperties: true
+          description: 'PeerStories envelope: `peer` reference plus `stories[]`.'
+          properties:
+            peer:
+              $ref: '#/components/schemas/Peer'
+            stories:
+              items:
+                additionalProperties: true
+                type: object
+              type:
+              - array
+              - 'null'
+          type: object
+      type: object
+    Peer:
+      additionalProperties: true
+      description: Telegram peer reference. Exactly one of `user_id`, `chat_id`, or `channel_id` is set, identifying the peer type.
+      properties:
+        channel_id:
+          description: Set when this peer is a channel or supergroup.
+          format: int64
+          type: integer
+        chat_id:
+          description: Set when this peer is a legacy basic group chat.
+          format: int64
+          type: integer
+        user_id:
+          description: Set when this peer is a user (1:1 chat partner or contact).
+          format: int64
+          type: integer
+      type: object
+    StoriesByID:
+      additionalProperties: true
+      description: Specific stories fetched by id for a peer. Story media file references are downloadable via GET /v1/files/{file_id}.
+      properties:
+        chats:
+          items:
+            $ref: '#/components/schemas/Chat'
+          type: array
+        stories:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+        users:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      type: object
+    User:
+      additionalProperties: true
+      description: Telegram user record. Appears in `users[]` arrays of nearly every response.
+      properties:
+        bot:
+          description: True if this account is a bot.
+          type: boolean
+        close_friend:
+          description: Close-friend flag.
+          type: boolean
+        contact:
+          description: Contact-relationship flag.
+          type: boolean
+        deleted:
+          description: True if the account has been deleted.
+          type: boolean
+        fake:
+          description: True if Telegram has flagged this account as fake.
+          type: boolean
+        first_name:
+          description: First name (may be empty for deleted accounts).
+          type: string
+        id:
+          description: User peer id. Pass this as `peer_id` to `/v1/users/{peer_id}`.
+          format: int64
+          type: integer
+        lang_code:
+          description: BCP-47-ish locale code reported by the client (e.g. "en", "ru").
+          type: string
+        last_name:
+          description: Last name (may be empty).
+          type: string
+        mutual_contact:
+          description: True if the contact relationship is mutual.
+          type: boolean
+        phone:
+          description: Phone number in international format. Empty unless the caller has visibility.
+          type: string
+        photo:
+          description: Profile photo metadata. Null if no photo is set.
+          oneOf:
+          - $ref: '#/components/schemas/Photo'
+          - type: 'null'
+        premium:
+          description: True if this account has Telegram Premium.
+          type: boolean
+        restricted:
+          description: True if this user is restricted (see `restriction_reason`).
+          type: boolean
+        restriction_reason:
+          description: Reasons for any restriction. Null when not restricted.
+          items:
+            additionalProperties: true
+            type: object
+          type:
+          - array
+          - 'null'
+        scam:
+          description: True if Telegram has flagged this account as a scam.
+          type: boolean
+        status:
+          additionalProperties: true
+          description: Online status object (varies by privacy settings).
+          type:
+          - object
+          - 'null'
+        username:
+          description: Primary public @username (empty if the user has none).
+          type: string
+        usernames:
+          description: All public usernames bound to this user (some accounts collect multiple).
+          items:
+            $ref: '#/components/schemas/UsernameAlias'
+          type:
+          - array
+          - 'null'
+        verified:
+          description: True if Telegram has verified this user.
+          type: boolean
+      type: object
+    Photo:
+      additionalProperties: true
+      description: Photo metadata. The image bytes are not returned; clients fetch them out-of-band.
+      properties:
+        dcid:
+          description: Telegram data-center id where the photo lives.
+          type: integer
+        flags:
+          description: Bitfield flags.
+          type: integer
+        has_video:
+          description: True if the photo has a video preview.
+          type: boolean
+        photo_id:
+          description: Photo id.
+          format: int64
+          type: integer
+        stripped_thumb:
+          description: Base64-ish stripped JPEG thumbnail; can be expanded client-side.
+          type: string
+      type: object
+    Chat:
+      additionalProperties: true
+      description: Telegram chat record. Covers legacy groups, channels, and supergroups; the boolean flags `broadcast`, `megagroup`, and `gigagroup` disambiguate the variant.
+      properties:
+        autotranslation:
+          description: True if auto-translation is enabled.
+          type: boolean
+        broadcast:
+          description: True if this is a broadcast channel.
+          type: boolean
+        date:
+          description: Unix timestamp the chat was created.
+          type: integer
+        fake:
+          description: True if Telegram has flagged this chat as fake.
+          type: boolean
+        forum:
+          description: True if this is a forum (channel with topics).
+          type: boolean
+        gigagroup:
+          description: True if this is a gigagroup (broadcast-only supergroup).
+          type: boolean
+        id:
+          description: Chat peer id. Pass this as `peer_id` to channel/peer endpoints.
+          format: int64
+          type: integer
+        join_request:
+          description: True if join requires admin approval.
+          type: boolean
+        join_to_send:
+          description: True if posting requires joining.
+          type: boolean
+        left:
+          description: True if the viewer has left this chat.
+          type: boolean
+        level:
+          description: Boost level.
+          type: integer
+        linked_monoforum_id:
+          description: Linked monoforum id (if any).
+          format: int64
+          type: integer
+        megagroup:
+          description: True if this is a supergroup.
+          type: boolean
+        min:
+          description: True if the record is a stripped (min) representation.
+          type: boolean
+        noforwards:
+          description: True if content protection (no forwards) is enabled.
+          type: boolean
+        participants_count:
+          description: Approximate participant count (may be 0 if not exposed).
+          type: integer
+        photo:
+          description: Chat photo metadata.
+          oneOf:
+          - $ref: '#/components/schemas/Photo'
+          - type: 'null'
+        restricted:
+          description: True if this chat is restricted (see `restriction_reason`).
+          type: boolean
+        restriction_reason:
+          description: Reasons for any restriction.
+          items:
+            additionalProperties: true
+            type: object
+          type:
+          - array
+          - 'null'
+        scam:
+          description: True if Telegram has flagged this chat as a scam.
+          type: boolean
+        signatures:
+          description: True if posts show their author.
+          type: boolean
+        slowmode_enabled:
+          description: True if slow mode is on.
+          type: boolean
+        title:
+          description: Public display title of the chat.
+          type: string
+        username:
+          description: Primary public @username (empty if private).
+          type: string
+        usernames:
+          description: All public usernames bound to this chat.
+          items:
+            $ref: '#/components/schemas/UsernameAlias'
+          type:
+          - array
+          - 'null'
+        verified:
+          description: True if Telegram has verified this chat.
+          type: boolean
+      type: object
+    Error:
+      description: Error envelope returned by all non-2xx responses.
+      properties:
+        code:
+          description: Stable machine-readable error identifier.
+          enum:
+          - INVALID_REQUEST
+          - NOT_FOUND
+          - RESOURCE_UNAVAILABLE
+          - RATE_LIMITED
+          - SERVICE_UNAVAILABLE
+          - TIMEOUT
+          - INTERNAL_ERROR
+          example: SERVICE_UNAVAILABLE
+          type: string
+        error:
+          description: Short human-readable error message.
+          example: service temporarily unavailable
+          type: string
+        hint:
+          description: Optional recovery hint suggesting a concrete next call. Set on RESOURCE_UNAVAILABLE (how to seed an unknown peer id) and SERVICE_UNAVAILABLE.
+          example: retry shortly, or call /v1/usernames/{username} or /v1/peers/{peer_id}/history first.
+          type: string
+      required:
+      - error
+      - code
+      type: object
+  responses:
+    UpstreamTimeout:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Request timed out.
+    ServiceUnavailable:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Service temporarily unavailable.
+    ResourceUnavailable:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: 'The peer id could not be found, so no access hash exists for it. Not transient: seed the id via GET /v1/usernames/{username}, GET /v1/phones/{phone}, or by encountering it in a chat, then retry. Raw MTProto ids only: a Bot-API id like -1001234567890 must be sent as 1234567890 (strip the leading -100), and -123456789 as 123456789. When the request carries such an id, the hint names the exact id to retry with.'
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not found
+            code: NOT_FOUND
+      description: Not found.
+    RateLimited:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Rate limit exceeded.
+    BadRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid request — bad path or query parameter.
+  parameters:
+    PeerIDPath:
+      description: Numeric Telegram peer id (channel or user). Obtain from `/v1/usernames/{username}`, `/v1/phones/{phone}`, `/v1/contacts/search`, or any prior response's `peer.user_id` / `peer.channel_id` field.
+      example: 1006503122
+      in: path
+      name: peer_id
+      required: true
+      schema:
+        format: int64
+        type: integer
+x-refined-from:
+- tgatlas-openapi.json
+- tgatlas-openapi.json

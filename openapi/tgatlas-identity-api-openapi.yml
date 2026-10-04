@@ -1,0 +1,1437 @@
+openapi: 3.2.0
+info:
+  title: Tgatlas Identity API
+  version: 1.0.0
+  contact:
+    name: tgAtlas
+    url: https://channelindex.starnikovoleg.workers.dev
+    email: starnikovoleg@gmail.com
+  x-rapidapi-url: https://rapidapi.com/starnikovoleg/api/telegram155
+  description: 'Operations tagged Identity across 2 of this provider''s published API definitions: tgatlas-openapi.json, tgatlas-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://telegram155.p.rapidapi.com
+  description: RapidAPI gateway
+tags:
+- name: Identity
+  description: Turning a @username, phone number or id into a peer, and user profiles.
+paths:
+  /v1/contacts/search:
+    get:
+      description: 'Returns matching peers from the public directory.
+
+
+        `q` must be at least 4 characters: Telegram''s directory search ignores shorter queries and answers with an empty result rather than an error, so this API rejects them up front (400 `INVALID_REQUEST`, `query too short`) instead of returning an empty page you would have to interpret.
+
+
+        A shorter term still works if you pad it to four characters with spaces: `?q=gta%20` searches for `gta` and returns GTA-prefixed peers. Telegram measures the query as sent but trims it before matching, and `q` is forwarded to it byte-for-byte.'
+      operationId: searchContacts
+      parameters:
+      - description: Search query — username substring, full name, or phone fragment. Minimum 4 characters as sent; pad a shorter term with spaces (`gta%20`). Telegram returns nothing for shorter queries.
+        example: durov
+        in: query
+        name: q
+        required: true
+        schema:
+          minLength: 4
+          type: string
+      - $ref: '#/components/parameters/LimitQuery'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactsSearch'
+              example:
+                chats:
+                - admin_rights:
+                    add_admins: false
+                    anonymous: false
+                    ban_users: false
+                    change_info: false
+                    delete_messages: false
+                    delete_stories: false
+                    edit_messages: false
+                    edit_stories: false
+                    flags: 0
+                    invite_users: false
+                    manage_call: false
+                    manage_direct_messages: false
+                    manage_ranks: false
+                    manage_topics: false
+                    other: false
+                    pin_messages: false
+                    post_messages: false
+                    post_stories: false
+                  autotranslation: false
+                  banned_rights:
+                    change_info: false
+                    edit_rank: false
+                    embed_links: false
+                    flags: 0
+                    invite_users: false
+                    manage_topics: false
+                    pin_messages: false
+                    send_audios: false
+                    send_docs: false
+                    send_games: false
+                    send_gifs: false
+                    send_inline: false
+                    send_media: false
+                    send_messages: false
+                    send_photos: false
+                    send_plain: false
+                    send_polls: false
+                    send_roundvideos: false
+                    send_stickers: false
+                    send_videos: false
+                    send_voices: false
+                    until_date: 0
+                    view_messages: false
+                  bot_verification_icon: 0
+                  broadcast: true
+                  broadcast_messages_allowed: true
+                  call_active: false
+                  call_not_empty: false
+                  color: null
+                  creator: false
+                  date: 1677009269
+                  default_banned_rights:
+                    change_info: false
+                    edit_rank: false
+                    embed_links: false
+                    flags: 0
+                    invite_users: false
+                    manage_topics: false
+                    pin_messages: false
+                    send_audios: false
+                    send_docs: false
+                    send_games: false
+                    send_gifs: false
+                    send_inline: false
+                    send_media: false
+                    send_messages: false
+                    send_photos: false
+                    send_plain: false
+                    send_polls: false
+                    send_roundvideos: false
+                    send_stickers: false
+                    send_videos: false
+                    send_voices: false
+                    until_date: 0
+                    view_messages: false
+                  emoji_status: null
+                  fake: false
+                  flags: 1187876
+                  flags2: 327693
+                  forum: false
+                  forum_tabs: false
+                  gigagroup: false
+                  has_geo: false
+                  has_link: true
+                  id: 1892497462
+                  join_request: false
+                  join_to_send: false
+                  left: true
+                  level: 0
+                  linked_monoforum_id: 1071892497462
+                  megagroup: false
+                  min: false
+                  monoforum: false
+                  noforwards: false
+                  participants_count: 130848
+                  photo:
+                    dcid: 1
+                    flags: 2
+                    has_video: false
+                    photo_id: 5116105648352464000
+                    stripped_thumb: AQgIoHy/IGMbh19c0UUUkgM=
+                  profile_color: null
+                  restricted: false
+                  restriction_reason: null
+                  scam: false
+                  send_paid_messages_stars: 0
+                  signature_profiles: false
+                  signatures: false
+                  slowmode_enabled: false
+                  stories_hidden: false
+                  stories_hidden_min: true
+                  stories_max_id:
+                    flags: 0
+                    live: false
+                    max_id: 0
+                  stories_unavailable: true
+                  subscription_until_date: 0
+                  title: '@crypto'
+                  username: ''
+                  usernames:
+                  - active: true
+                    editable: false
+                    flags: 2
+                    username: crypto
+                  verified: false
+                my_results: null
+                results:
+                - channel_id: 1892497462
+                users:
+                - apply_min_photo: true
+                  attach_menu_enabled: false
+                  bot: true
+                  bot_active_users: 56196
+                  bot_attach_menu: false
+                  bot_business: false
+                  bot_can_edit: false
+                  bot_can_manage_bots: false
+                  bot_chat_history: false
+                  bot_forum_can_manage_topics: false
+                  bot_forum_view: false
+                  bot_has_main_app: false
+                  bot_info_version: 29
+                  bot_inline_geo: false
+                  bot_inline_placeholder: ''
+                  bot_nochats: false
+                  bot_verification_icon: 0
+                  close_friend: false
+                  color: null
+                  contact: false
+                  contact_require_premium: false
+                  deleted: false
+                  emoji_status: null
+                  fake: false
+                  first_name: °°°° 𝐍𝐄𝐖 𝐕𝐈𝐃𝐄𝐎 𝐇𝐃 °°°°
+                  flags: 33570859
+                  flags2: 4112
+                  id: 8987056927
+                  lang_code: ''
+                  last_name: ''
+                  min: false
+                  mutual_contact: false
+                  phone: ''
+                  photo:
+                    dcid: 5
+                    flags: 2
+                    has_video: false
+                    personal: false
+                    photo_id: 6147949928941033000
+                    stripped_thumb: AQgIzR5P2U5I8z05zRRRTbA/
+                  premium: false
+                  profile_color: null
+                  restricted: false
+                  restriction_reason: null
+                  scam: false
+                  self: false
+                  send_paid_messages_stars: 0
+                  status: null
+                  stories_hidden: false
+                  stories_max_id:
+                    flags: 0
+                    live: false
+                    max_id: 0
+                  stories_unavailable: true
+                  support: false
+                  username: Moviesiubbot
+                  usernames: null
+                  verified: false
+          description: Matching peers.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ResourceUnavailable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+      summary: Search Telegram contacts and the public directory
+      tags:
+      - Identity
+    servers:
+    - url: https://telegram155.p.rapidapi.com
+      description: RapidAPI gateway
+  /v1/phones/{phone}:
+    get:
+      description: Returns the peer reference for a phone number in international format. Fails with 404 if no public profile is associated with the number.
+      operationId: resolvePhone
+      parameters:
+      - description: Phone number in international format. URL-encode the leading `+` as `%2B`.
+        example: '+12025550100'
+        in: path
+        name: phone
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                chats: null
+                peer:
+                  user_id: 5445071716
+                users:
+                - apply_min_photo: true
+                  attach_menu_enabled: false
+                  bot: false
+                  bot_active_users: 0
+                  bot_attach_menu: false
+                  bot_business: false
+                  bot_can_edit: false
+                  bot_can_manage_bots: false
+                  bot_chat_history: false
+                  bot_forum_can_manage_topics: false
+                  bot_forum_view: false
+                  bot_has_main_app: false
+                  bot_info_version: 0
+                  bot_inline_geo: false
+                  bot_inline_placeholder: ''
+                  bot_nochats: false
+                  bot_verification_icon: 0
+                  close_friend: false
+                  color: null
+                  contact: false
+                  contact_require_premium: false
+                  deleted: false
+                  emoji_status: null
+                  fake: false
+                  first_name: Maqsud
+                  flags: 33554471
+                  flags2: 16
+                  id: 5445071716
+                  lang_code: ''
+                  last_name: Eshqobilov
+                  min: false
+                  mutual_contact: false
+                  phone: ''
+                  photo:
+                    dcid: 2
+                    flags: 2
+                    has_video: false
+                    personal: false
+                    photo_id: 5357454729887742000
+                    stripped_thumb: AQgIIpYYbePzSxcjnAooopDP
+                  premium: false
+                  profile_color: null
+                  restricted: false
+                  restriction_reason: null
+                  scam: false
+                  self: false
+                  send_paid_messages_stars: 0
+                  status: null
+                  stories_hidden: false
+                  stories_max_id:
+                    flags: 0
+                    live: false
+                    max_id: 0
+                  stories_unavailable: true
+                  support: false
+                  username: ''
+                  usernames: null
+                  verified: false
+              schema:
+                $ref: '#/components/schemas/ResolvedPeer'
+          description: Peer reference.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ResourceUnavailable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+      summary: Resolve a Telegram phone number
+      tags:
+      - Identity
+    servers:
+    - url: https://telegram155.p.rapidapi.com
+      description: RapidAPI gateway
+  /v1/usernames/{username}:
+    get:
+      description: Returns the peer reference for a public username. Fails with 404 if the username is not registered.
+      operationId: resolveUsername
+      parameters:
+      - description: Public @username, with or without leading @. Case-insensitive.
+        example: durov
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                chats:
+                - admin_rights:
+                    add_admins: false
+                    anonymous: false
+                    ban_users: false
+                    change_info: false
+                    delete_messages: false
+                    delete_stories: false
+                    edit_messages: false
+                    edit_stories: false
+                    flags: 0
+                    invite_users: false
+                    manage_call: false
+                    manage_direct_messages: false
+                    manage_ranks: false
+                    manage_topics: false
+                    other: false
+                    pin_messages: false
+                    post_messages: false
+                    post_stories: false
+                  autotranslation: true
+                  banned_rights:
+                    change_info: false
+                    edit_rank: false
+                    embed_links: false
+                    flags: 0
+                    invite_users: false
+                    manage_topics: false
+                    pin_messages: false
+                    send_audios: false
+                    send_docs: false
+                    send_games: false
+                    send_gifs: false
+                    send_inline: false
+                    send_media: false
+                    send_messages: false
+                    send_photos: false
+                    send_plain: false
+                    send_polls: false
+                    send_roundvideos: false
+                    send_stickers: false
+                    send_videos: false
+                    send_voices: false
+                    until_date: 0
+                    view_messages: false
+                  bot_verification_icon: 0
+                  broadcast: true
+                  broadcast_messages_allowed: true
+                  call_active: false
+                  call_not_empty: false
+                  color:
+                    background_emoji_id: 5424912684078348000
+                    color: 12
+                    flags: 3
+                  creator: false
+                  date: 1446056458
+                  default_banned_rights:
+                    change_info: false
+                    edit_rank: false
+                    embed_links: false
+                    flags: 0
+                    invite_users: false
+                    manage_topics: false
+                    pin_messages: false
+                    send_audios: false
+                    send_docs: false
+                    send_games: false
+                    send_gifs: false
+                    send_inline: false
+                    send_media: false
+                    send_messages: false
+                    send_photos: false
+                    send_plain: false
+                    send_polls: false
+                    send_roundvideos: false
+                    send_stickers: false
+                    send_videos: false
+                    send_voices: false
+                    until_date: 0
+                    view_messages: false
+                  emoji_status:
+                    center_color: 3553080
+                    collectible_id: 5821047735515611000
+                    document_id: 5228932931224887000
+                    edge_color: 921359
+                    flags: 0
+                    pattern_color: 7104616
+                    pattern_document_id: 5440687192718467000
+                    slug: PartySparkler-5277
+                    text_color: 9211793
+                    title: 'Party Sparkler #5277'
+                    until: 0
+                  fake: false
+                  flags: 8356
+                  flags2: 362381
+                  forum: false
+                  forum_tabs: false
+                  gigagroup: false
+                  has_geo: false
+                  has_link: false
+                  id: 1006503122
+                  join_request: false
+                  join_to_send: false
+                  left: true
+                  level: 100
+                  linked_monoforum_id: 1071006503122
+                  megagroup: false
+                  min: false
+                  monoforum: false
+                  noforwards: false
+                  participants_count: 0
+                  photo:
+                    dcid: 2
+                    flags: 2
+                    has_video: false
+                    photo_id: 5393326112060334000
+                    stripped_thumb: AQgIuMSuqKA8hDA7hg7enAooooA/
+                  profile_color:
+                    background_emoji_id: 5424912684078348000
+                    color: 15
+                    flags: 3
+                  restricted: false
+                  restriction_reason: null
+                  scam: false
+                  send_paid_messages_stars: 0
+                  signature_profiles: false
+                  signatures: false
+                  slowmode_enabled: false
+                  stories_hidden: false
+                  stories_hidden_min: true
+                  stories_max_id:
+                    flags: 0
+                    live: false
+                    max_id: 0
+                  stories_unavailable: true
+                  subscription_until_date: 0
+                  title: Pavel Durov
+                  username: ''
+                  usernames:
+                  - active: true
+                    editable: true
+                    flags: 3
+                    username: durov
+                  verified: true
+                peer:
+                  channel_id: 1006503122
+                users: null
+              schema:
+                $ref: '#/components/schemas/ResolvedPeer'
+          description: Peer reference. `chats[]` and `users[]` may be null.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ResourceUnavailable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+      summary: Resolve a public Telegram @username
+      tags:
+      - Identity
+    servers:
+    - url: https://telegram155.p.rapidapi.com
+      description: RapidAPI gateway
+  /v1/users/{peer_id}:
+    get:
+      description: Returns the extended profile for a user. Fails with 404 if the user does not exist.
+      operationId: getFullUser
+      parameters:
+      - $ref: '#/components/parameters/PeerIDPath'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetails'
+              example:
+                chats: null
+                full_user:
+                  about: BotFather is the one bot to rule them all. Use it to create new bot accounts and manage your existing bots.
+                  birthday:
+                    day: 0
+                    flags: 0
+                    month: 0
+                    year: 0
+                  blocked: false
+                  blocked_my_stories_from: false
+                  bot_broadcast_admin_rights:
+                    add_admins: false
+                    anonymous: false
+                    ban_users: false
+                    change_info: false
+                    delete_messages: false
+                    delete_stories: false
+                    edit_messages: false
+                    edit_stories: false
+                    flags: 0
+                    invite_users: false
+                    manage_call: false
+                    manage_direct_messages: false
+                    manage_ranks: false
+                    manage_topics: false
+                    other: false
+                    pin_messages: false
+                    post_messages: false
+                    post_stories: false
+                  bot_can_manage_emoji_status: false
+                  bot_group_admin_rights:
+                    add_admins: false
+                    anonymous: false
+                    ban_users: false
+                    change_info: false
+                    delete_messages: false
+                    delete_stories: false
+                    edit_messages: false
+                    edit_stories: false
+                    flags: 0
+                    invite_users: false
+                    manage_call: false
+                    manage_direct_messages: false
+                    manage_ranks: false
+                    manage_topics: false
+                    other: false
+                    pin_messages: false
+                    post_messages: false
+                    post_stories: false
+                  bot_info:
+                    app_settings:
+                      background_color: 1712166
+                      background_dark_color: 1712166
+                      flags: 30
+                      header_color: 2173491
+                      header_dark_color: 2173491
+                      placeholder_path: null
+                    commands:
+                    - command: newbot
+                      description: create a new bot
+                    description: 'BotFather is the one bot to rule them all. Use it to create new bot accounts and manage your existing bots.
+
+
+                      About Telegram bots:
+
+                      https://core.telegram.org/b...'
+                    description_document: null
+                    description_photo: null
+                    flags: 270
+                    has_preview_medias: false
+                    menu_button:
+                      text: Open
+                      url: https://webappinternal.telegram.org/botfather
+                    privacy_policy_url: ''
+                    user_id: 0
+                    verifier_settings:
+                      can_modify_custom_description: false
+                      company: ''
+                      custom_description: ''
+                      flags: 0
+                      icon: 0
+                  bot_manager_id: 0
+                  bot_verification:
+                    bot_id: 0
+                    description: ''
+                    icon: 0
+                  business_away_message:
+                    flags: 0
+                    offline_only: false
+                    recipients:
+                      contacts: false
+                      exclude_selected: false
+                      existing_chats: false
+                      flags: 0
+                      new_chats: false
+                      non_contacts: false
+                      users: null
+                    schedule: null
+                    shortcut_id: 0
+                  business_greeting_message:
+                    no_activity_days: 0
+                    recipients:
+                      contacts: false
+                      exclude_selected: false
+                      existing_chats: false
+                      flags: 0
+                      new_chats: false
+                      non_contacts: false
+                      users: null
+                    shortcut_id: 0
+                  business_intro:
+                    description: ''
+                    flags: 0
+                    sticker: null
+                    title: ''
+                  business_location:
+                    address: ''
+                    flags: 0
+                    geo_point: null
+                  business_work_hours:
+                    flags: 0
+                    open_now: false
+                    timezone_id: ''
+                    weekly_open: null
+                  can_pin_message: true
+                  can_view_revenue: false
+                  common_chats_count: 0
+                  contact_require_premium: false
+                  disallowed_gifts:
+                    disallow_limited_stargifts: false
+                    disallow_premium_gifts: false
+                    disallow_stargifts_from_channels: false
+                    disallow_unique_stargifts: false
+                    disallow_unlimited_stargifts: false
+                    flags: 0
+                  display_gifts_button: false
+                  fallback_photo: null
+                  flags: 142
+                  flags2: 0
+                  folder_id: 0
+                  has_scheduled: false
+                  id: 93372553
+                  main_tab: null
+                  noforwards_my_enabled: false
+                  noforwards_peer_enabled: false
+                  note:
+                    entities: null
+                    text: ''
+                  notify_settings:
+                    android_sound: null
+                    flags: 0
+                    ios_sound: null
+                    mute_until: 0
+                    other_sound: null
+                    show_previews: false
+                    silent: false
+                    stories_android_sound: null
+                    stories_hide_sender: false
+                    stories_ios_sound: null
+                    stories_muted: false
+                    stories_other_sound: null
+                  personal_channel_id: 0
+                  personal_channel_message: 0
+                  personal_photo: null
+                  phone_calls_available: false
+                  phone_calls_private: false
+                  pinned_msg_id: 0
+                  private_forward_name: ''
+                  profile_photo:
+                    date: 1435136511
+                    dcid: 1
+                    file_reference: AGqqJaali0lQdF0vj5OEVcXTmkzd
+                    flags: 0
+                    has_stickers: false
+                    id: 401032061935265700
+                    sizes:
+                    - h: 160
+                      size: 12700
+                      type: a
+                      w: 160
+                    video_sizes: null
+                  read_dates_private: false
+                  saved_music: null
+                  send_paid_messages_stars: 0
+                  settings:
+                    add_contact: false
+                    autoarchived: false
+                    block_contact: false
+                    business_bot_can_reply: false
+                    business_bot_id: 0
+                    business_bot_manage_url: ''
+                    business_bot_paused: false
+                    charge_paid_message_stars: 0
+                    flags: 0
+                    geo_distance: 0
+                    invite_members: false
+                    name_change_date: 0
+                    need_contacts_exception: false
+                    phone_country: ''
+                    photo_change_date: 0
+                    registration_month: ''
+                    report_geo: false
+                    report_spam: false
+                    request_chat_broadcast: false
+                    request_chat_date: 0
+                    request_chat_title: ''
+                    share_contact: false
+                  sponsored_enabled: false
+                  stargifts_count: 0
+                  starref_program:
+                    bot_id: 0
+                    commission_permille: 0
+                    daily_revenue_per_user: null
+                    duration_months: 0
+                    end_date: 0
+                    flags: 0
+                  stars_my_pending_rating:
+                    current_level_stars: 0
+                    flags: 0
+                    level: 0
+                    next_level_stars: 0
+                    stars: 0
+                  stars_my_pending_rating_date: 0
+                  stars_rating:
+                    current_level_stars: 0
+                    flags: 0
+                    level: 0
+                    next_level_stars: 0
+                    stars: 0
+                  stories:
+                    flags: 0
+                    max_read_id: 0
+                    peer: null
+                    stories: null
+                  stories_pinned_available: false
+                  theme: null
+                  translations_disabled: false
+                  ttl_period: 0
+                  unofficial_security_risk: false
+                  video_calls_available: false
+                  voice_messages_forbidden: false
+                  wallpaper: null
+                  wallpaper_overridden: false
+                users:
+                - apply_min_photo: true
+                  attach_menu_enabled: false
+                  bot: true
+                  bot_active_users: 8872315
+                  bot_attach_menu: false
+                  bot_business: false
+                  bot_can_edit: false
+                  bot_can_manage_bots: false
+                  bot_chat_history: false
+                  bot_forum_can_manage_topics: false
+                  bot_forum_view: false
+                  bot_has_main_app: true
+                  bot_info_version: 28
+                  bot_inline_geo: false
+                  bot_inline_placeholder: ''
+                  bot_nochats: true
+                  bot_verification_icon: 0
+                  close_friend: false
+                  color: null
+                  contact: false
+                  contact_require_premium: false
+                  deleted: false
+                  emoji_status: null
+                  fake: false
+                  first_name: BotFather
+                  flags: 33767467
+                  flags2: 12304
+                  id: 93372553
+                  lang_code: ''
+                  last_name: ''
+                  min: false
+                  mutual_contact: false
+                  phone: ''
+                  photo:
+                    dcid: 1
+                    flags: 2
+                    has_video: false
+                    personal: false
+                    photo_id: 401032061935265700
+                    stripped_thumb: AQgIn89/tBfsZNlFFFAWPw==
+                  premium: false
+                  profile_color: null
+                  restricted: false
+                  restriction_reason: null
+                  scam: false
+                  self: false
+                  send_paid_messages_stars: 0
+                  status: null
+                  stories_hidden: false
+                  stories_max_id:
+                    flags: 0
+                    live: false
+                    max_id: 0
+                  stories_unavailable: true
+                  support: false
+                  username: BotFather
+                  usernames: null
+                  verified: true
+          description: Extended user profile.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ResourceUnavailable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+      summary: Get full user profile
+      tags:
+      - Identity
+    servers:
+    - url: https://telegram155.p.rapidapi.com
+      description: RapidAPI gateway
+  /v1/users/{peer_id}/photos:
+    get:
+      description: Returns the profile photo history for a user.
+      operationId: getUserPhotos
+      parameters:
+      - $ref: '#/components/parameters/PeerIDPath'
+      - $ref: '#/components/parameters/LimitQuery'
+      - description: Number of photos to skip from the most recent.
+        in: query
+        name: offset
+        schema:
+          type: integer
+      - description: Return photos with id < max_id.
+        in: query
+        name: max_id
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                _note: Shape derived from gotd PhotosPhotosSlice; small hand-built example, not captured live.
+                _synthetic: true
+                count: 1
+                photos:
+                - date: 1725637384
+                  dcid: 2
+                  has_video: false
+                  photo_id: 5393326112060334000
+                  sizes:
+                  - h: 160
+                    size: 4843
+                    type: a
+                    w: 160
+                  - h: 640
+                    size: 22411
+                    type: c
+                    w: 640
+              schema:
+                $ref: '#/components/schemas/UserPhotos'
+          description: Profile photo history.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ResourceUnavailable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+      summary: Get a user's profile photos
+      tags:
+      - Identity
+    servers:
+    - url: https://telegram155.p.rapidapi.com
+      description: RapidAPI gateway
+components:
+  schemas:
+    Peer:
+      additionalProperties: true
+      description: Telegram peer reference. Exactly one of `user_id`, `chat_id`, or `channel_id` is set, identifying the peer type.
+      properties:
+        channel_id:
+          description: Set when this peer is a channel or supergroup.
+          format: int64
+          type: integer
+        chat_id:
+          description: Set when this peer is a legacy basic group chat.
+          format: int64
+          type: integer
+        user_id:
+          description: Set when this peer is a user (1:1 chat partner or contact).
+          format: int64
+          type: integer
+      type: object
+    Photo:
+      additionalProperties: true
+      description: Photo metadata. The image bytes are not returned; clients fetch them out-of-band.
+      properties:
+        dcid:
+          description: Telegram data-center id where the photo lives.
+          type: integer
+        flags:
+          description: Bitfield flags.
+          type: integer
+        has_video:
+          description: True if the photo has a video preview.
+          type: boolean
+        photo_id:
+          description: Photo id.
+          format: int64
+          type: integer
+        stripped_thumb:
+          description: Base64-ish stripped JPEG thumbnail; can be expanded client-side.
+          type: string
+      type: object
+    Chat:
+      additionalProperties: true
+      description: Telegram chat record. Covers legacy groups, channels, and supergroups; the boolean flags `broadcast`, `megagroup`, and `gigagroup` disambiguate the variant.
+      properties:
+        autotranslation:
+          description: True if auto-translation is enabled.
+          type: boolean
+        broadcast:
+          description: True if this is a broadcast channel.
+          type: boolean
+        date:
+          description: Unix timestamp the chat was created.
+          type: integer
+        fake:
+          description: True if Telegram has flagged this chat as fake.
+          type: boolean
+        forum:
+          description: True if this is a forum (channel with topics).
+          type: boolean
+        gigagroup:
+          description: True if this is a gigagroup (broadcast-only supergroup).
+          type: boolean
+        id:
+          description: Chat peer id. Pass this as `peer_id` to channel/peer endpoints.
+          format: int64
+          type: integer
+        join_request:
+          description: True if join requires admin approval.
+          type: boolean
+        join_to_send:
+          description: True if posting requires joining.
+          type: boolean
+        left:
+          description: True if the viewer has left this chat.
+          type: boolean
+        level:
+          description: Boost level.
+          type: integer
+        linked_monoforum_id:
+          description: Linked monoforum id (if any).
+          format: int64
+          type: integer
+        megagroup:
+          description: True if this is a supergroup.
+          type: boolean
+        min:
+          description: True if the record is a stripped (min) representation.
+          type: boolean
+        noforwards:
+          description: True if content protection (no forwards) is enabled.
+          type: boolean
+        participants_count:
+          description: Approximate participant count (may be 0 if not exposed).
+          type: integer
+        photo:
+          description: Chat photo metadata.
+          oneOf:
+          - $ref: '#/components/schemas/Photo'
+          - type: 'null'
+        restricted:
+          description: True if this chat is restricted (see `restriction_reason`).
+          type: boolean
+        restriction_reason:
+          description: Reasons for any restriction.
+          items:
+            additionalProperties: true
+            type: object
+          type:
+          - array
+          - 'null'
+        scam:
+          description: True if Telegram has flagged this chat as a scam.
+          type: boolean
+        signatures:
+          description: True if posts show their author.
+          type: boolean
+        slowmode_enabled:
+          description: True if slow mode is on.
+          type: boolean
+        title:
+          description: Public display title of the chat.
+          type: string
+        username:
+          description: Primary public @username (empty if private).
+          type: string
+        usernames:
+          description: All public usernames bound to this chat.
+          items:
+            $ref: '#/components/schemas/UsernameAlias'
+          type:
+          - array
+          - 'null'
+        verified:
+          description: True if Telegram has verified this chat.
+          type: boolean
+      type: object
+    ContactsSearch:
+      description: Hybrid contact + global directory search. `results[]` are public directory matches; `my_results[]` is reserved for future use and is currently null.
+      properties:
+        chats:
+          items:
+            $ref: '#/components/schemas/Chat'
+          type: array
+        my_results:
+          description: Reserved; currently null.
+          items:
+            $ref: '#/components/schemas/Peer'
+          type:
+          - array
+          - 'null'
+        results:
+          description: Matches from the public directory.
+          items:
+            $ref: '#/components/schemas/Peer'
+          type: array
+        users:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      type: object
+    Error:
+      description: Error envelope returned by all non-2xx responses.
+      properties:
+        code:
+          description: Stable machine-readable error identifier.
+          enum:
+          - INVALID_REQUEST
+          - NOT_FOUND
+          - RESOURCE_UNAVAILABLE
+          - RATE_LIMITED
+          - SERVICE_UNAVAILABLE
+          - TIMEOUT
+          - INTERNAL_ERROR
+          example: SERVICE_UNAVAILABLE
+          type: string
+        error:
+          description: Short human-readable error message.
+          example: service temporarily unavailable
+          type: string
+        hint:
+          description: Optional recovery hint suggesting a concrete next call. Set on RESOURCE_UNAVAILABLE (how to seed an unknown peer id) and SERVICE_UNAVAILABLE.
+          example: retry shortly, or call /v1/usernames/{username} or /v1/peers/{peer_id}/history first.
+          type: string
+      required:
+      - error
+      - code
+      type: object
+    UserFull:
+      additionalProperties: true
+      description: Extended user profile. Returned inside `full_user` of the get-full-user envelope.
+      properties:
+        about:
+          description: Bio text shown on the profile.
+          type: string
+        birthday:
+          additionalProperties: true
+          description: Birthday metadata, if shared.
+          type:
+          - object
+          - 'null'
+        blocked:
+          description: True if the viewer has blocked this user.
+          type: boolean
+        bot_info:
+          additionalProperties: true
+          description: Bot metadata. Present when the user is a bot.
+          type:
+          - object
+          - 'null'
+        business_intro:
+          additionalProperties: true
+          description: Telegram Business intro card.
+          type:
+          - object
+          - 'null'
+        business_location:
+          additionalProperties: true
+          description: Business address & geolocation.
+          type:
+          - object
+          - 'null'
+        business_work_hours:
+          additionalProperties: true
+          description: Business hours.
+          type:
+          - object
+          - 'null'
+        common_chats_count:
+          description: Number of chats this user shares with the viewer.
+          type: integer
+        contact_require_premium:
+          description: True if only premium users may DM this account.
+          type: boolean
+        fallback_photo:
+          description: Fallback profile photo shown to users who lack access to the primary one.
+          oneOf:
+          - $ref: '#/components/schemas/Photo'
+          - type: 'null'
+        has_scheduled:
+          description: True if scheduled messages exist with this peer.
+          type: boolean
+        id:
+          description: User peer id (matches the User.id in the same response).
+          format: int64
+          type: integer
+        notify_settings:
+          additionalProperties: true
+          description: Notification preferences for this peer.
+          type:
+          - object
+          - 'null'
+        personal_channel_id:
+          description: Linked personal channel id, if any.
+          format: int64
+          type: integer
+        personal_channel_message:
+          description: Featured message id in the personal channel.
+          type: integer
+        phone_calls_available:
+          description: True if the user accepts phone calls.
+          type: boolean
+        phone_calls_private:
+          description: True if call privacy is engaged.
+          type: boolean
+        pinned_msg_id:
+          description: Pinned message id, or 0 if no pin.
+          type: integer
+        profile_photo:
+          description: Current profile photo.
+          oneOf:
+          - $ref: '#/components/schemas/Photo'
+          - type: 'null'
+        settings:
+          additionalProperties: true
+          description: Per-peer settings (report buttons, contact requests, etc.).
+          type:
+          - object
+          - 'null'
+        sponsored_enabled:
+          description: True if sponsored messages are enabled.
+          type: boolean
+        translations_disabled:
+          description: True if message translation is opt-out for this peer.
+          type: boolean
+        ttl_period:
+          description: Self-destruct period (seconds), 0 if disabled.
+          type: integer
+        video_calls_available:
+          description: True if video calls are available.
+          type: boolean
+        voice_messages_forbidden:
+          description: True if the user rejects voice messages.
+          type: boolean
+      type: object
+    ResolvedPeer:
+      description: Result of a username or phone lookup. Pass `peer.user_id`/`peer.channel_id` to subsequent endpoints to fetch full data.
+      properties:
+        chats:
+          description: Chat records resolved alongside the peer; may be null when only a cache reference was returned.
+          items:
+            $ref: '#/components/schemas/Chat'
+          type:
+          - array
+          - 'null'
+        peer:
+          $ref: '#/components/schemas/Peer'
+        users:
+          description: User records resolved alongside the peer; may be null when only a cache reference was returned.
+          items:
+            $ref: '#/components/schemas/User'
+          type:
+          - array
+          - 'null'
+      required:
+      - peer
+      type: object
+    UserPhotos:
+      additionalProperties: true
+      description: Profile photo history for a user. `count` is present only when the result is paginated (PhotosPhotosSlice).
+      properties:
+        count:
+          description: Total photo count when paginated. Absent when the full set is returned.
+          type: integer
+        photos:
+          items:
+            $ref: '#/components/schemas/Photo'
+          type: array
+      type: object
+    UserDetails:
+      description: Get-full-user envelope. `full_user` carries the extended profile; `users[0]` carries the regular user record for cross-reference.
+      properties:
+        chats:
+          items:
+            $ref: '#/components/schemas/Chat'
+          type:
+          - array
+          - 'null'
+        full_user:
+          $ref: '#/components/schemas/UserFull'
+        users:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      type: object
+    UsernameAlias:
+      additionalProperties: true
+      description: One public username alias bound to a user or chat.
+      properties:
+        active:
+          description: True if the alias is currently active.
+          type: boolean
+        editable:
+          description: True if the alias can be edited (only true for the primary one).
+          type: boolean
+        flags:
+          description: Bitfield of optional Telegram fields.
+          type: integer
+        username:
+          description: The alias text (no leading @).
+          type: string
+      type: object
+    User:
+      additionalProperties: true
+      description: Telegram user record. Appears in `users[]` arrays of nearly every response.
+      properties:
+        bot:
+          description: True if this account is a bot.
+          type: boolean
+        close_friend:
+          description: Close-friend flag.
+          type: boolean
+        contact:
+          description: Contact-relationship flag.
+          type: boolean
+        deleted:
+          description: True if the account has been deleted.
+          type: boolean
+        fake:
+          description: True if Telegram has flagged this account as fake.
+          type: boolean
+        first_name:
+          description: First name (may be empty for deleted accounts).
+          type: string
+        id:
+          description: User peer id. Pass this as `peer_id` to `/v1/users/{peer_id}`.
+          format: int64
+          type: integer
+        lang_code:
+          description: BCP-47-ish locale code reported by the client (e.g. "en", "ru").
+          type: string
+        last_name:
+          description: Last name (may be empty).
+          type: string
+        mutual_contact:
+          description: True if the contact relationship is mutual.
+          type: boolean
+        phone:
+          description: Phone number in international format. Empty unless the caller has visibility.
+          type: string
+        photo:
+          description: Profile photo metadata. Null if no photo is set.
+          oneOf:
+          - $ref: '#/components/schemas/Photo'
+          - type: 'null'
+        premium:
+          description: True if this account has Telegram Premium.
+          type: boolean
+        restricted:
+          description: True if this user is restricted (see `restriction_reason`).
+          type: boolean
+        restriction_reason:
+          description: Reasons for any restriction. Null when not restricted.
+          items:
+            additionalProperties: true
+            type: object
+          type:
+          - array
+          - 'null'
+        scam:
+          description: True if Telegram has flagged this account as a scam.
+          type: boolean
+        status:
+          additionalProperties: true
+          description: Online status object (varies by privacy settings).
+          type:
+          - object
+          - 'null'
+        username:
+          description: Primary public @username (empty if the user has none).
+          type: string
+        usernames:
+          description: All public usernames bound to this user (some accounts collect multiple).
+          items:
+            $ref: '#/components/schemas/UsernameAlias'
+          type:
+          - array
+          - 'null'
+        verified:
+          description: True if Telegram has verified this user.
+          type: boolean
+      type: object
+  responses:
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not found
+            code: NOT_FOUND
+      description: Not found.
+    UpstreamTimeout:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Request timed out.
+    RateLimited:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Rate limit exceeded.
+    ResourceUnavailable:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: 'The peer id could not be found, so no access hash exists for it. Not transient: seed the id via GET /v1/usernames/{username}, GET /v1/phones/{phone}, or by encountering it in a chat, then retry. Raw MTProto ids only: a Bot-API id like -1001234567890 must be sent as 1234567890 (strip the leading -100), and -123456789 as 123456789. When the request carries such an id, the hint names the exact id to retry with.'
+    BadRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid request — bad path or query parameter.
+    ServiceUnavailable:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Service temporarily unavailable.
+  parameters:
+    LimitQuery:
+      description: Maximum items to return. Defaults to 20 when omitted; values above 100 are clamped to 100.
+      example: 20
+      in: query
+      name: limit
+      required: false
+      schema:
+        default: 20
+        maximum: 100
+        minimum: 1
+        type: integer
+    PeerIDPath:
+      description: Numeric Telegram peer id (channel or user). Obtain from `/v1/usernames/{username}`, `/v1/phones/{phone}`, `/v1/contacts/search`, or any prior response's `peer.user_id` / `peer.channel_id` field.
+      example: 1006503122
+      in: path
+      name: peer_id
+      required: true
+      schema:
+        format: int64
+        type: integer
+x-refined-from:
+- tgatlas-openapi.json
+- tgatlas-openapi.json
