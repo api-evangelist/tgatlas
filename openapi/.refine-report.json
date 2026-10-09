@@ -1,0 +1,33 @@
+{
+  "provider": "tgatlas",
+  "sources": [
+    "_original/tgatlas-openapi.json",
+    "tgatlas-openapi.json"
+  ],
+  "outputs": [
+    "tgatlas-channels-api-openapi.yml",
+    "tgatlas-files-api-openapi.yml",
+    "tgatlas-identity-api-openapi.yml",
+    "tgatlas-messages-api-openapi.yml",
+    "tgatlas-service-api-openapi.yml",
+    "tgatlas-stories-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/tgatlas-openapi.json"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "tgatlas-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tgatlas-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tag 'Channels' spans 2 source specs (tgatlas-openapi.json, tgatlas-openapi.json): per-path servers applied",
+    "tag 'Files' spans 2 source specs (tgatlas-openapi.json, tgatlas-openapi.json): per-path servers applied",
+    "tag 'Identity' spans 2 source specs (tgatlas-openapi.json, tgatlas-openapi.json): per-path servers applied",
+    "tag 'Messages' spans 2 source specs (tgatlas-openapi.json, tgatlas-openapi.json): per-path servers applied",
+    "tag 'Service' spans 2 source specs (tgatlas-openapi.json, tgatlas-openapi.json): per-path servers applied",
+    "tag 'Stories' spans 2 source specs (tgatlas-openapi.json, tgatlas-openapi.json): per-path servers applied",
+    "apis.yml register: written (+6 apis, 6 total)"
+  ],
+  "skipped": []
+}

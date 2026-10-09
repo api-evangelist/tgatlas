@@ -1,0 +1,1875 @@
+openapi: 3.2.0
+info:
+  title: Tgatlas Channels API
+  version: 1.0.0
+  contact:
+    name: tgAtlas
+    url: https://channelindex.starnikovoleg.workers.dev
+    email: starnikovoleg@gmail.com
+  x-rapidapi-url: https://rapidapi.com/starnikovoleg/api/telegram155
+  description: 'Operations tagged Channels across 2 of this provider''s published API definitions: tgatlas-openapi.json, tgatlas-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://telegram155.p.rapidapi.com
+  description: RapidAPI gateway
+tags:
+- name: Channels
+  description: Channel and supergroup profiles, batch lookups, recommendations and members.
+paths:
+  /v1/channels:
+    get:
+      description: Returns channel records for the listed ids. Unresolvable ids appear in `skipped[]`.
+      operationId: getChannels
+      parameters:
+      - description: Comma-separated list of channel peer ids (e.g. `1006503122,1005640892`). Maximum 100.
+        example: 1006503122,1005640892
+        in: query
+        name: ids
+        required: true
+        schema:
+          pattern: ^\d+(,\d+)*$
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                chats:
+                - admin_rights:
+                    add_admins: false
+                    anonymous: false
+                    ban_users: false
+                    change_info: false
+                    delete_messages: false
+                    delete_stories: false
+                    edit_messages: false
+                    edit_stories: false
+                    flags: 0
+                    invite_users: false
+                    manage_call: false
+                    manage_direct_messages: false
+                    manage_ranks: false
+                    manage_topics: false
+                    other: false
+                    pin_messages: false
+                    post_messages: false
+                    post_stories: false
+                  autotranslation: true
+                  banned_rights:
+                    change_info: false
+                    edit_rank: false
+                    embed_links: false
+                    flags: 0
+                    invite_users: false
+                    manage_topics: false
+                    pin_messages: false
+                    send_audios: false
+                    send_docs: false
+                    send_games: false
+                    send_gifs: false
+                    send_inline: false
+                    send_media: false
+                    send_messages: false
+                    send_photos: false
+                    send_plain: false
+                    send_polls: false
+                    send_roundvideos: false
+                    send_stickers: false
+                    send_videos: false
+                    send_voices: false
+                    until_date: 0
+                    view_messages: false
+                  bot_verification_icon: 0
+                  broadcast: true
+                  broadcast_messages_allowed: true
+                  call_active: false
+                  call_not_empty: false
+                  color:
+                    background_emoji_id: 5424912684078348000
+                    color: 12
+                    flags: 3
+                  creator: false
+                  date: 1446056458
+                  default_banned_rights:
+                    change_info: false
+                    edit_rank: false
+                    embed_links: false
+                    flags: 0
+                    invite_users: false
+                    manage_topics: false
+                    pin_messages: false
+                    send_audios: false
+                    send_docs: false
+                    send_games: false
+                    send_gifs: false
+                    send_inline: false
+                    send_media: false
+                    send_messages: false
+                    send_photos: false
+                    send_plain: false
+                    send_polls: false
+                    send_roundvideos: false
+                    send_stickers: false
+                    send_videos: false
+                    send_voices: false
+                    until_date: 0
+                    view_messages: false
+                  emoji_status:
+                    center_color: 3553080
+                    collectible_id: 5821047735515611000
+                    document_id: 5228932931224887000
+                    edge_color: 921359
+                    flags: 0
+                    pattern_color: 7104616
+                    pattern_document_id: 5440687192718467000
+                    slug: PartySparkler-5277
+                    text_color: 9211793
+                    title: 'Party Sparkler #5277'
+                    until: 0
+                  fake: false
+                  flags: 8356
+                  flags2: 362381
+                  forum: false
+                  forum_tabs: false
+                  gigagroup: false
+                  has_geo: false
+                  has_link: false
+                  id: 1006503122
+                  join_request: false
+                  join_to_send: false
+                  left: true
+                  level: 100
+                  linked_monoforum_id: 1071006503122
+                  megagroup: false
+                  min: false
+                  monoforum: false
+                  noforwards: false
+                  participants_count: 0
+                  photo:
+                    dcid: 2
+                    flags: 2
+                    has_video: false
+                    photo_id: 5393326112060334000
+                    stripped_thumb: AQgIuMSuqKA8hDA7hg7enAooooA/
+                  profile_color:
+                    background_emoji_id: 5424912684078348000
+                    color: 15
+                    flags: 3
+                  restricted: false
+                  restriction_reason: null
+                  scam: false
+                  send_paid_messages_stars: 0
+                  signature_profiles: false
+                  signatures: false
+                  slowmode_enabled: false
+                  stories_hidden: false
+                  stories_hidden_min: true
+                  stories_max_id:
+                    flags: 0
+                    live: false
+                    max_id: 0
+                  stories_unavailable: true
+                  subscription_until_date: 0
+                  title: Pavel Durov
+                  username: ''
+                  usernames:
+                  - active: true
+                    editable: true
+                    flags: 3
+                    username: durov
+                  verified: true
+                skipped: []
+              schema:
+                $ref: '#/components/schemas/ChannelsBatch'
+          description: Resolved channels.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ResourceUnavailable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+      summary: Batch fetch channels by id
+      tags:
+      - Channels
+    servers:
+    - url: https://telegram155.p.rapidapi.com
+      description: RapidAPI gateway
+  /v1/channels/recommendations:
+    get:
+      description: Returns channels similar to `peer_id`. Omit `peer_id` for generic recommendations.
+      operationId: getChannelRecommendations
+      parameters:
+      - description: Channel peer id to seed the recommendation. Omit (or set to 0) for generic recommendations.
+        example: 1006503122
+        in: query
+        name: peer_id
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                chats:
+                - admin_rights:
+                    add_admins: false
+                    anonymous: false
+                    ban_users: false
+                    change_info: false
+                    delete_messages: false
+                    delete_stories: false
+                    edit_messages: false
+                    edit_stories: false
+                    flags: 0
+                    invite_users: false
+                    manage_call: false
+                    manage_direct_messages: false
+                    manage_ranks: false
+                    manage_topics: false
+                    other: false
+                    pin_messages: false
+                    post_messages: false
+                    post_stories: false
+                  autotranslation: false
+                  banned_rights:
+                    change_info: false
+                    edit_rank: false
+                    embed_links: false
+                    flags: 0
+                    invite_users: false
+                    manage_topics: false
+                    pin_messages: false
+                    send_audios: false
+                    send_docs: false
+                    send_games: false
+                    send_gifs: false
+                    send_inline: false
+                    send_media: false
+                    send_messages: false
+                    send_photos: false
+                    send_plain: false
+                    send_polls: false
+                    send_roundvideos: false
+                    send_stickers: false
+                    send_videos: false
+                    send_voices: false
+                    until_date: 0
+                    view_messages: false
+                  bot_verification_icon: 0
+                  broadcast: true
+                  broadcast_messages_allowed: false
+                  call_active: false
+                  call_not_empty: false
+                  color: null
+                  creator: false
+                  date: 1720755410
+                  default_banned_rights:
+                    change_info: false
+                    edit_rank: false
+                    embed_links: false
+                    flags: 0
+                    invite_users: false
+                    manage_topics: false
+                    pin_messages: false
+                    send_audios: false
+                    send_docs: false
+                    send_games: false
+                    send_gifs: false
+                    send_inline: false
+                    send_media: false
+                    send_messages: false
+                    send_photos: false
+                    send_plain: false
+                    send_polls: false
+                    send_roundvideos: false
+                    send_stickers: false
+                    send_videos: false
+                    send_voices: false
+                    until_date: 0
+                    view_messages: false
+                  emoji_status: null
+                  fake: false
+                  flags: 139492
+                  flags2: 12
+                  forum: false
+                  forum_tabs: false
+                  gigagroup: false
+                  has_geo: false
+                  has_link: false
+                  id: 2180851629
+                  join_request: false
+                  join_to_send: false
+                  left: true
+                  level: 0
+                  linked_monoforum_id: 0
+                  megagroup: false
+                  min: false
+                  monoforum: false
+                  noforwards: false
+                  participants_count: 7995908
+                  photo:
+                    dcid: 2
+                    flags: 2
+                    has_video: false
+                    photo_id: 5188221318934426000
+                    stripped_thumb: AQgInxem8YfvQnmAjptxnnnr0ooooA8=
+                  profile_color: null
+                  restricted: false
+                  restriction_reason: null
+                  scam: false
+                  send_paid_messages_stars: 0
+                  signature_profiles: false
+                  signatures: false
+                  slowmode_enabled: false
+                  stories_hidden: false
+                  stories_hidden_min: true
+                  stories_max_id:
+                    flags: 0
+                    live: false
+                    max_id: 0
+                  stories_unavailable: true
+                  subscription_until_date: 0
+                  title: CATS Community
+                  username: Cats_housewtf
+                  usernames: null
+                  verified: true
+                count: 72
+              schema:
+                $ref: '#/components/schemas/ChannelsList'
+          description: Recommended channels.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ResourceUnavailable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+      summary: Get channel recommendations
+      tags:
+      - Channels
+    servers:
+    - url: https://telegram155.p.rapidapi.com
+      description: RapidAPI gateway
+  /v1/channels/{peer_id}:
+    get:
+      description: Returns the extended profile for a channel or supergroup. Fails with 404 if the channel does not exist.
+      operationId: getFullChannel
+      parameters:
+      - $ref: '#/components/parameters/PeerIDPath'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelDetails'
+              example:
+                chats:
+                - admin_rights:
+                    add_admins: false
+                    anonymous: false
+                    ban_users: false
+                    change_info: false
+                    delete_messages: false
+                    delete_stories: false
+                    edit_messages: false
+                    edit_stories: false
+                    flags: 0
+                    invite_users: false
+                    manage_call: false
+                    manage_direct_messages: false
+                    manage_ranks: false
+                    manage_topics: false
+                    other: false
+                    pin_messages: false
+                    post_messages: false
+                    post_stories: false
+                  autotranslation: true
+                  banned_rights:
+                    change_info: false
+                    edit_rank: false
+                    embed_links: false
+                    flags: 0
+                    invite_users: false
+                    manage_topics: false
+                    pin_messages: false
+                    send_audios: false
+                    send_docs: false
+                    send_games: false
+                    send_gifs: false
+                    send_inline: false
+                    send_media: false
+                    send_messages: false
+                    send_photos: false
+                    send_plain: false
+                    send_polls: false
+                    send_roundvideos: false
+                    send_stickers: false
+                    send_videos: false
+                    send_voices: false
+                    until_date: 0
+                    view_messages: false
+                  bot_verification_icon: 0
+                  broadcast: true
+                  broadcast_messages_allowed: true
+                  call_active: false
+                  call_not_empty: false
+                  color:
+                    background_emoji_id: 5424912684078348000
+                    color: 12
+                    flags: 3
+                  creator: false
+                  date: 1446056458
+                  default_banned_rights:
+                    change_info: false
+                    edit_rank: false
+                    embed_links: false
+                    flags: 0
+                    invite_users: false
+                    manage_topics: false
+                    pin_messages: false
+                    send_audios: false
+                    send_docs: false
+                    send_games: false
+                    send_gifs: false
+                    send_inline: false
+                    send_media: false
+                    send_messages: false
+                    send_photos: false
+                    send_plain: false
+                    send_polls: false
+                    send_roundvideos: false
+                    send_stickers: false
+                    send_videos: false
+                    send_voices: false
+                    until_date: 0
+                    view_messages: false
+                  emoji_status:
+                    center_color: 3553080
+                    collectible_id: 5821047735515611000
+                    document_id: 5228932931224887000
+                    edge_color: 921359
+                    flags: 0
+                    pattern_color: 7104616
+                    pattern_document_id: 5440687192718467000
+                    slug: PartySparkler-5277
+                    text_color: 9211793
+                    title: 'Party Sparkler #5277'
+                    until: 0
+                  fake: false
+                  flags: 8356
+                  flags2: 362381
+                  forum: false
+                  forum_tabs: false
+                  gigagroup: false
+                  has_geo: false
+                  has_link: false
+                  id: 1006503122
+                  join_request: false
+                  join_to_send: false
+                  left: true
+                  level: 100
+                  linked_monoforum_id: 1071006503122
+                  megagroup: false
+                  min: false
+                  monoforum: false
+                  noforwards: false
+                  participants_count: 0
+                  photo:
+                    dcid: 2
+                    flags: 2
+                    has_video: false
+                    photo_id: 5393326112060334000
+                    stripped_thumb: AQgIuMSuqKA8hDA7hg7enAooooA/
+                  profile_color:
+                    background_emoji_id: 5424912684078348000
+                    color: 15
+                    flags: 3
+                  restricted: false
+                  restriction_reason: null
+                  scam: false
+                  send_paid_messages_stars: 0
+                  signature_profiles: false
+                  signatures: false
+                  slowmode_enabled: false
+                  stories_hidden: false
+                  stories_hidden_min: true
+                  stories_max_id:
+                    flags: 0
+                    live: false
+                    max_id: 0
+                  stories_unavailable: true
+                  subscription_until_date: 0
+                  title: Pavel Durov
+                  username: ''
+                  usernames:
+                  - active: true
+                    editable: true
+                    flags: 3
+                    username: durov
+                  verified: true
+                full_chat:
+                  about: Founder of Telegram.
+                  admins_count: 0
+                  antispam: false
+                  available_min_id: 0
+                  available_reactions:
+                    reactions:
+                    - document_id: 5399847211989246000
+                  banned_count: 0
+                  blocked: false
+                  boosts_applied: 0
+                  boosts_unrestrict: 0
+                  bot_info: null
+                  bot_verification:
+                    bot_id: 0
+                    description: ''
+                    icon: 0
+                  call: null
+                  can_delete_channel: false
+                  can_set_location: false
+                  can_set_stickers: false
+                  can_set_username: false
+                  can_view_participants: false
+                  can_view_revenue: false
+                  can_view_stars_revenue: false
+                  can_view_stats: false
+                  chat_photo:
+                    date: 1725637384
+                    dcid: 2
+                    file_reference: AGqqJZ5xtSdi5IgNQFR8qkpg8E2d
+                    flags: 0
+                    has_stickers: false
+                    id: 5393326112060334000
+                    sizes:
+                    - h: 160
+                      size: 4843
+                      type: a
+                      w: 160
+                    video_sizes: null
+                  default_send_as: null
+                  emojiset:
+                    archived: false
+                    channel_emoji_status: false
+                    count: 0
+                    creator: false
+                    emojis: false
+                    flags: 0
+                    hash: 0
+                    id: 0
+                    installed_date: 0
+                    masks: false
+                    official: false
+                    short_name: ''
+                    text_color: false
+                    thumb_dcid: 0
+                    thumb_document_id: 0
+                    thumb_version: 0
+                    thumbs: null
+                    title: ''
+                  exported_invite: null
+                  flags: 1073741825
+                  flags2: 4022304
+                  folder_id: 0
+                  groupcall_default_join_as: null
+                  has_scheduled: false
+                  hidden_prehistory: false
+                  id: 1006503122
+                  kicked_count: 0
+                  linked_chat_id: 0
+                  location: null
+                  main_tab: null
+                  migrated_from_chat_id: 0
+                  migrated_from_max_id: 0
+                  notify_settings:
+                    android_sound: null
+                    flags: 0
+                    ios_sound: null
+                    mute_until: 0
+                    other_sound: null
+                    show_previews: false
+                    silent: false
+                    stories_android_sound: null
+                    stories_hide_sender: false
+                    stories_ios_sound: null
+                    stories_muted: false
+                    stories_other_sound: null
+                  online_count: 0
+                  paid_media_allowed: true
+                  paid_messages_available: true
+                  paid_reactions_available: true
+                  participants_count: 10739366
+                  participants_hidden: false
+                  pending_suggestions: null
+                  pinned_msg_id: 0
+                  pts: 1804
+                  reactions_limit: 5
+                  read_inbox_max_id: 0
+                  read_outbox_max_id: 0
+                  recent_requesters: null
+                  requests_pending: 0
+                  restricted_sponsored: false
+                  send_paid_messages_stars: 5000
+                  slowmode_next_send_date: 0
+                  slowmode_seconds: 0
+                  stargifts_available: true
+                  stargifts_count: 59472
+                  stats_dc: 0
+                  stickerset:
+                    archived: false
+                    channel_emoji_status: false
+                    count: 0
+                    creator: false
+                    emojis: false
+                    flags: 0
+                    hash: 0
+                    id: 0
+                    installed_date: 0
+                    masks: false
+                    official: false
+                    short_name: ''
+                    text_color: false
+                    thumb_dcid: 0
+                    thumb_document_id: 0
+                    thumb_version: 0
+                    thumbs: null
+                    title: ''
+                  stories:
+                    flags: 0
+                    max_read_id: 0
+                    peer: null
+                    stories: null
+                  stories_pinned_available: true
+                  theme_emoticon: ''
+                  translations_disabled: false
+                  ttl_period: 0
+                  unread_count: 0
+                  view_forum_as_messages: false
+                  wallpaper: null
+                users: null
+          description: Extended channel profile.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ResourceUnavailable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+      summary: Get full channel info
+      tags:
+      - Channels
+    servers:
+    - url: https://telegram155.p.rapidapi.com
+      description: RapidAPI gateway
+  /v1/channels/{peer_id}/messages:
+    get:
+      description: Returns the listed message ids from a single channel.
+      operationId: getChannelMessages
+      parameters:
+      - $ref: '#/components/parameters/PeerIDPath'
+      - description: Comma-separated list of message ids (e.g. `519,518,517`). Maximum 100.
+        example: 519,518
+        in: query
+        name: ids
+        required: true
+        schema:
+          pattern: ^\d+(,\d+)*$
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessagesEnvelope'
+              example:
+                chats:
+                - admin_rights:
+                    add_admins: false
+                    anonymous: false
+                    ban_users: false
+                    change_info: false
+                    delete_messages: false
+                    delete_stories: false
+                    edit_messages: false
+                    edit_stories: false
+                    flags: 0
+                    invite_users: false
+                    manage_call: false
+                    manage_direct_messages: false
+                    manage_ranks: false
+                    manage_topics: false
+                    other: false
+                    pin_messages: false
+                    post_messages: false
+                    post_stories: false
+                  autotranslation: true
+                  banned_rights:
+                    change_info: false
+                    edit_rank: false
+                    embed_links: false
+                    flags: 0
+                    invite_users: false
+                    manage_topics: false
+                    pin_messages: false
+                    send_audios: false
+                    send_docs: false
+                    send_games: false
+                    send_gifs: false
+                    send_inline: false
+                    send_media: false
+                    send_messages: false
+                    send_photos: false
+                    send_plain: false
+                    send_polls: false
+                    send_roundvideos: false
+                    send_stickers: false
+                    send_videos: false
+                    send_voices: false
+                    until_date: 0
+                    view_messages: false
+                  bot_verification_icon: 0
+                  broadcast: true
+                  broadcast_messages_allowed: true
+                  call_active: false
+                  call_not_empty: false
+                  color:
+                    background_emoji_id: 5424912684078348000
+                    color: 12
+                    flags: 3
+                  creator: false
+                  date: 1446056458
+                  default_banned_rights:
+                    change_info: false
+                    edit_rank: false
+                    embed_links: false
+                    flags: 0
+                    invite_users: false
+                    manage_topics: false
+                    pin_messages: false
+                    send_audios: false
+                    send_docs: false
+                    send_games: false
+                    send_gifs: false
+                    send_inline: false
+                    send_media: false
+                    send_messages: false
+                    send_photos: false
+                    send_plain: false
+                    send_polls: false
+                    send_roundvideos: false
+                    send_stickers: false
+                    send_videos: false
+                    send_voices: false
+                    until_date: 0
+                    view_messages: false
+                  emoji_status:
+                    center_color: 3553080
+                    collectible_id: 5821047735515611000
+                    document_id: 5228932931224887000
+                    edge_color: 921359
+                    flags: 0
+                    pattern_color: 7104616
+                    pattern_document_id: 5440687192718467000
+                    slug: PartySparkler-5277
+                    text_color: 9211793
+                    title: 'Party Sparkler #5277'
+                    until: 0
+                  fake: false
+                  flags: 8356
+                  flags2: 362381
+                  forum: false
+                  forum_tabs: false
+                  gigagroup: false
+                  has_geo: false
+                  has_link: false
+                  id: 1006503122
+                  join_request: false
+                  join_to_send: false
+                  left: true
+                  level: 100
+                  linked_monoforum_id: 1071006503122
+                  megagroup: false
+                  min: false
+                  monoforum: false
+                  noforwards: false
+                  participants_count: 0
+                  photo:
+                    dcid: 2
+                    flags: 2
+                    has_video: false
+                    photo_id: 5393326112060334000
+                    stripped_thumb: AQgIuMSuqKA8hDA7hg7enAooooA/
+                  profile_color:
+                    background_emoji_id: 5424912684078348000
+                    color: 15
+                    flags: 3
+                  restricted: false
+                  restriction_reason: null
+                  scam: false
+                  send_paid_messages_stars: 0
+                  signature_profiles: false
+                  signatures: false
+                  slowmode_enabled: false
+                  stories_hidden: false
+                  stories_hidden_min: true
+                  stories_max_id:
+                    flags: 0
+                    live: false
+                    max_id: 0
+                  stories_unavailable: true
+                  subscription_until_date: 0
+                  title: Pavel Durov
+                  username: ''
+                  usernames:
+                  - active: true
+                    editable: true
+                    flags: 3
+                    username: durov
+                  verified: true
+                count: 1
+                flags: 0
+                inexact: false
+                messages:
+                - date: 1789142642
+                  edit_date: 1789142657
+                  edit_hide: true
+                  effect: 0
+                  entities:
+                  - document_id: 5463249828450425000
+                    length: 2
+                    offset: 0
+                  factcheck:
+                    country: ''
+                    flags: 0
+                    hash: 0
+                    need_check: false
+                    text:
+                      entities: null
+                      text: ''
+                  flags: 3270272
+                  flags2: 0
+                  forwards: 3291
+                  from_boosts_applied: 0
+                  from_id: null
+                  from_rank: ''
+                  from_scheduled: false
+                  fwd_from:
+                    channel_post: 0
+                    date: 0
+                    flags: 0
+                    from_id: null
+                    from_name: ''
+                    imported: false
+                    post_author: ''
+                    psa_type: ''
+                    saved_date: 0
+                    saved_from_id: null
+                    saved_from_msg_id: 0
+                    saved_from_name: ''
+                    saved_from_peer: null
+                    saved_out: false
+                  grouped_id: 0
+                  id: 548
+                  invert_media: false
+                  legacy: false
+                  media:
+                    flags: 0
+                    force_large_media: false
+                    force_small_media: false
+                    manual: false
+                    safe: false
+                    webpage:
+                      attributes: null
+                      author: MikeMirzayanov
+                      cached_page:
+                        blocks: null
+                        documents: null
+                        flags: 0
+                        part: false
+                        photos: null
+                        rtl: false
+                        url: ''
+                        v2: false
+                        views: 0
+                      description: Hi, Codeforces!
+                      display_url: codeforces.com/blog/entry/156620
+                      document: null
+                      duration: 0
+                      embed_height: 0
+                      embed_type: ''
+                      embed_url: ''
+                      embed_width: 0
+                      flags: 8479
+                      has_large_media: true
+                      hash: 0
+                      id: 1848272979037921500
+                      photo:
+                        date: 1789098340
+                        dcid: 4
+                        file_reference: AGqqJaCxklKFxRU0KTk5J4cPbB3M
+                        flags: 0
+                        has_stickers: false
+                        id: 5847358396393263000
+                        sizes:
+                        - bytes: ASgo2aKKYHBOMUm0gsHmx79m8bvSn1k/8vX/AAP+taD3MUb7GcA+lXJWJg3ImoozmipKEb7p+lQRn94KkMqDfknCnDcVD9otk+YsRg4yVPX0qJRbaY09Cjn/AEv/ALaf1pt//wAfsn4fyFX/AC7bf5mDuznof...
+                          type: i
+                        video_sizes: null
+                      site_name: Codeforces
+                      title: Telegram Returns as Title Sponsor of Codeforces!
+                      type: article
+                      url: https://codeforces.com/blog/entry/156620
+                      video_cover_photo: false
+                  media_unread: false
+                  mentioned: false
+                  message: "\U0001F91D Telegram has become the sponsor of Codeforces — the largest competitive programming platform in the world. \n\n ⚡CodeForces organizes over 100 coding contest..."
+                  noforwards: false
+                  offline: false
+                  out: false
+                  paid_message_stars: 0
+                  paid_suggested_post_stars: false
+                  paid_suggested_post_ton: false
+                  peer_id:
+                    channel_id: 1006503122
+                  pinned: false
+                  post: true
+                  post_author: Pavel Durov
+                  quick_reply_shortcut_id: 0
+                  reactions:
+                    can_see_list: false
+                    flags: 16
+                    min: false
+                    reactions_as_tags: false
+                    recent_reactions: null
+                    results:
+                    - chosen_order: 0
+                      count: 10379
+                      flags: 0
+                      reaction: {}
+                    top_reactors:
+                    - anonymous: false
+                      count: 6666
+                      flags: 9
+                      my: false
+                      peer_id:
+                        user_id: 7957547929
+                      top: true
+                  replies:
+                    channel_id: 0
+                    comments: false
+                    flags: 0
+                    max_id: 0
+                    read_max_id: 0
+                    recent_repliers: null
+                    replies: 0
+                    replies_pts: 0
+                  reply_markup: null
+                  reply_to: null
+                  report_delivery_until_date: 0
+                  restriction_reason: null
+                  saved_peer_id: null
+                  schedule_repeat_period: 0
+                  silent: true
+                  suggested_post:
+                    accepted: false
+                    flags: 0
+                    price: null
+                    rejected: false
+                    schedule_date: 0
+                  summary_from_language: ''
+                  ttl_period: 0
+                  via_bot_id: 0
+                  via_business_bot_id: 0
+                  video_processing_pending: false
+                  views: 1011229
+                offset_id_offset: 0
+                pts: 1804
+                topics: null
+                users:
+                - apply_min_photo: true
+                  attach_menu_enabled: false
+                  bot: true
+                  bot_active_users: 0
+                  bot_attach_menu: false
+                  bot_business: false
+                  bot_can_edit: false
+                  bot_can_manage_bots: false
+                  bot_chat_history: false
+                  bot_forum_can_manage_topics: false
+                  bot_forum_view: false
+                  bot_has_main_app: false
+                  bot_info_version: 4
+                  bot_inline_geo: false
+                  bot_inline_placeholder: ''
+                  bot_nochats: false
+                  bot_verification_icon: 0
+                  close_friend: false
+                  color: null
+                  contact: false
+                  contact_require_premium: false
+                  deleted: false
+                  emoji_status: null
+                  fake: false
+                  first_name: Channel
+                  flags: 33570859
+                  flags2: 16
+                  id: 136817688
+                  lang_code: ''
+                  last_name: ''
+                  min: false
+                  mutual_contact: false
+                  phone: ''
+                  photo:
+                    dcid: 1
+                    flags: 2
+                    has_video: false
+                    personal: false
+                    photo_id: 587627495930570600
+                    stripped_thumb: AQgIsfL5X+1nNFFFcDOtHw==
+                  premium: false
+                  profile_color: null
+                  restricted: false
+                  restriction_reason: null
+                  scam: false
+                  self: false
+                  send_paid_messages_stars: 0
+                  status: null
+                  stories_hidden: false
+                  stories_max_id:
+                    flags: 0
+                    live: false
+                    max_id: 0
+                  stories_unavailable: true
+                  support: false
+                  username: Channel_Bot
+                  usernames: null
+                  verified: false
+          description: Requested messages.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ResourceUnavailable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+      summary: Fetch specific channel messages by id
+      tags:
+      - Channels
+    servers:
+    - url: https://telegram155.p.rapidapi.com
+      description: RapidAPI gateway
+  /v1/channels/{peer_id}/participants:
+    get:
+      description: 'Members of a public **group (megagroup)**, paginated.
+
+
+        **Precondition.** Telegram exposes member lists for groups, not for broadcast channels: check `full_chat.can_view_participants` from `GET /v1/channels/{peer_id}` first. `true` means this call returns the list; `false` means it answers `404 NOT_FOUND`, which is Telegram''s rule rather than an outage. Discussion groups linked to a channel (`full_chat.linked_chat_id`) normally do allow it.
+
+
+        Use `filter` to narrow the list — `recent` (default), `admins`, `bots`, `kicked`, `banned`, or `search` together with `q`. `limit` defaults to 20 and is clamped to 100. Resolve a `@username` with `/v1/usernames/{username}` first to get the numeric `peer_id`.'
+      operationId: getChannelParticipants
+      parameters:
+      - $ref: '#/components/parameters/PeerIDPath'
+      - description: One of `recent` (default), `admins`, `bots`, `kicked`, `banned`, `search`. `kicked`/`banned`/`search` use `q`.
+        in: query
+        name: filter
+        schema:
+          enum:
+          - recent
+          - admins
+          - bots
+          - kicked
+          - banned
+          - search
+          type: string
+      - description: Search query, used by the `kicked`/`banned`/`search` filters.
+        in: query
+        name: q
+        schema:
+          type: string
+      - $ref: '#/components/parameters/LimitQuery'
+      - description: Number of participants to skip.
+        in: query
+        name: offset
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                chats: null
+                count: 2
+                participants:
+                - admin_rights:
+                    add_admins: false
+                    anonymous: false
+                    ban_users: true
+                    change_info: false
+                    delete_messages: true
+                    delete_stories: true
+                    edit_messages: false
+                    edit_stories: true
+                    flags: 383032
+                    invite_users: true
+                    manage_call: true
+                    manage_direct_messages: false
+                    manage_ranks: true
+                    manage_topics: false
+                    other: true
+                    pin_messages: false
+                    post_messages: false
+                    post_stories: true
+                  can_edit: false
+                  date: 1705605083
+                  flags: 0
+                  inviter_id: 0
+                  promoted_by: 2112945353
+                  rank: ''
+                  self: false
+                  user_id: 6660998254
+                users:
+                - apply_min_photo: true
+                  attach_menu_enabled: false
+                  bot: true
+                  bot_active_users: 0
+                  bot_attach_menu: false
+                  bot_business: false
+                  bot_can_edit: false
+                  bot_can_manage_bots: false
+                  bot_chat_history: false
+                  bot_forum_can_manage_topics: false
+                  bot_forum_view: false
+                  bot_has_main_app: false
+                  bot_info_version: 2
+                  bot_inline_geo: false
+                  bot_inline_placeholder: ''
+                  bot_nochats: false
+                  bot_verification_icon: 0
+                  close_friend: false
+                  color: null
+                  contact: false
+                  contact_require_premium: false
+                  deleted: false
+                  emoji_status: null
+                  fake: false
+                  first_name: KILL BOT
+                  flags: 33570859
+                  flags2: 16
+                  id: 6660998254
+                  lang_code: ''
+                  last_name: ''
+                  min: false
+                  mutual_contact: false
+                  phone: ''
+                  photo:
+                    dcid: 2
+                    flags: 2
+                    has_video: false
+                    personal: false
+                    photo_id: 5384252555560864000
+                    stripped_thumb: AQgIoHy/IGMbh19c0UUUJAc=
+                  premium: false
+                  profile_color: null
+                  restricted: false
+                  restriction_reason: null
+                  scam: false
+                  self: false
+                  send_paid_messages_stars: 0
+                  status: null
+                  stories_hidden: false
+                  stories_max_id:
+                    flags: 0
+                    live: false
+                    max_id: 0
+                  stories_unavailable: true
+                  support: false
+                  username: Killbotcrypto_bot
+                  usernames: null
+                  verified: false
+              schema:
+                $ref: '#/components/schemas/ChannelParticipants'
+          description: Matching participants.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/ResourceUnavailable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+      summary: Get channel participants
+      tags:
+      - Channels
+    servers:
+    - url: https://telegram155.p.rapidapi.com
+      description: RapidAPI gateway
+components:
+  schemas:
+    ChannelsBatch:
+      description: Batch channels fetch result. Channels that could not be resolved appear in `skipped[]` instead of `chats[]`.
+      properties:
+        chats:
+          items:
+            $ref: '#/components/schemas/Chat'
+          type: array
+        skipped:
+          description: Channel ids that could not be resolved.
+          items:
+            format: int64
+            type: integer
+          type: array
+      type: object
+    Peer:
+      additionalProperties: true
+      description: Telegram peer reference. Exactly one of `user_id`, `chat_id`, or `channel_id` is set, identifying the peer type.
+      properties:
+        channel_id:
+          description: Set when this peer is a channel or supergroup.
+          format: int64
+          type: integer
+        chat_id:
+          description: Set when this peer is a legacy basic group chat.
+          format: int64
+          type: integer
+        user_id:
+          description: Set when this peer is a user (1:1 chat partner or contact).
+          format: int64
+          type: integer
+      type: object
+    Message:
+      additionalProperties: true
+      description: Telegram message. Appears in history, replies, channel-message-by-id, and search responses.
+      properties:
+        date:
+          description: Unix timestamp when sent.
+          type: integer
+        edit_date:
+          description: Unix timestamp of the last edit, or 0 if never edited.
+          type: integer
+        entities:
+          description: Inline message entities (bold, mention, url, etc.).
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+        forwards:
+          description: Forward count.
+          type: integer
+        from_id:
+          description: Sender peer. Null for channel posts (where the channel itself is the author).
+          oneOf:
+          - $ref: '#/components/schemas/Peer'
+          - type: 'null'
+        fwd_from:
+          additionalProperties: true
+          description: Forwarded-from envelope. Present only if the message was forwarded.
+          type:
+          - object
+          - 'null'
+        grouped_id:
+          description: Album group id; messages with the same value belong to one album.
+          format: int64
+          type: integer
+        id:
+          description: Message id within its peer.
+          type: integer
+        media:
+          additionalProperties: true
+          description: Attached media (photo / video / document / poll / webpage). Shape varies by type.
+          type:
+          - object
+          - 'null'
+        media_unread:
+          description: True if the media is unread.
+          type: boolean
+        mentioned:
+          description: True if the viewer is mentioned in this message.
+          type: boolean
+        message:
+          description: Plain-text body of the message.
+          type: string
+        noforwards:
+          description: True if forwarding is disabled.
+          type: boolean
+        out:
+          description: True if the message was outgoing from the viewer's perspective.
+          type: boolean
+        peer_id:
+          $ref: '#/components/schemas/Peer'
+          description: Peer that owns this message.
+        pinned:
+          description: True if pinned.
+          type: boolean
+        post:
+          description: True if this is a channel post (rather than a chat message).
+          type: boolean
+        post_author:
+          description: Display name of the post's author (signed broadcasts).
+          type: string
+        reactions:
+          additionalProperties: true
+          description: Aggregated reaction counts.
+          type:
+          - object
+          - 'null'
+        replies:
+          additionalProperties: true
+          description: Reply thread summary (count, latest reply id). 0 replies if no discussion.
+          type:
+          - object
+          - 'null'
+        reply_markup:
+          additionalProperties: true
+          description: Inline keyboard / reply markup, if attached.
+          type:
+          - object
+          - 'null'
+        reply_to:
+          additionalProperties: true
+          description: Reply / thread reference. Present only if the message is a reply.
+          type:
+          - object
+          - 'null'
+        silent:
+          description: True if the message was sent without notification.
+          type: boolean
+        views:
+          description: View count (broadcast channels only).
+          type: integer
+      type: object
+    Photo:
+      additionalProperties: true
+      description: Photo metadata. The image bytes are not returned; clients fetch them out-of-band.
+      properties:
+        dcid:
+          description: Telegram data-center id where the photo lives.
+          type: integer
+        flags:
+          description: Bitfield flags.
+          type: integer
+        has_video:
+          description: True if the photo has a video preview.
+          type: boolean
+        photo_id:
+          description: Photo id.
+          format: int64
+          type: integer
+        stripped_thumb:
+          description: Base64-ish stripped JPEG thumbnail; can be expanded client-side.
+          type: string
+      type: object
+    Chat:
+      additionalProperties: true
+      description: Telegram chat record. Covers legacy groups, channels, and supergroups; the boolean flags `broadcast`, `megagroup`, and `gigagroup` disambiguate the variant.
+      properties:
+        autotranslation:
+          description: True if auto-translation is enabled.
+          type: boolean
+        broadcast:
+          description: True if this is a broadcast channel.
+          type: boolean
+        date:
+          description: Unix timestamp the chat was created.
+          type: integer
+        fake:
+          description: True if Telegram has flagged this chat as fake.
+          type: boolean
+        forum:
+          description: True if this is a forum (channel with topics).
+          type: boolean
+        gigagroup:
+          description: True if this is a gigagroup (broadcast-only supergroup).
+          type: boolean
+        id:
+          description: Chat peer id. Pass this as `peer_id` to channel/peer endpoints.
+          format: int64
+          type: integer
+        join_request:
+          description: True if join requires admin approval.
+          type: boolean
+        join_to_send:
+          description: True if posting requires joining.
+          type: boolean
+        left:
+          description: True if the viewer has left this chat.
+          type: boolean
+        level:
+          description: Boost level.
+          type: integer
+        linked_monoforum_id:
+          description: Linked monoforum id (if any).
+          format: int64
+          type: integer
+        megagroup:
+          description: True if this is a supergroup.
+          type: boolean
+        min:
+          description: True if the record is a stripped (min) representation.
+          type: boolean
+        noforwards:
+          description: True if content protection (no forwards) is enabled.
+          type: boolean
+        participants_count:
+          description: Approximate participant count (may be 0 if not exposed).
+          type: integer
+        photo:
+          description: Chat photo metadata.
+          oneOf:
+          - $ref: '#/components/schemas/Photo'
+          - type: 'null'
+        restricted:
+          description: True if this chat is restricted (see `restriction_reason`).
+          type: boolean
+        restriction_reason:
+          description: Reasons for any restriction.
+          items:
+            additionalProperties: true
+            type: object
+          type:
+          - array
+          - 'null'
+        scam:
+          description: True if Telegram has flagged this chat as a scam.
+          type: boolean
+        signatures:
+          description: True if posts show their author.
+          type: boolean
+        slowmode_enabled:
+          description: True if slow mode is on.
+          type: boolean
+        title:
+          description: Public display title of the chat.
+          type: string
+        username:
+          description: Primary public @username (empty if private).
+          type: string
+        usernames:
+          description: All public usernames bound to this chat.
+          items:
+            $ref: '#/components/schemas/UsernameAlias'
+          type:
+          - array
+          - 'null'
+        verified:
+          description: True if Telegram has verified this chat.
+          type: boolean
+      type: object
+    ChatFull:
+      additionalProperties: true
+      description: Extended chat/channel profile. Returned inside `full_chat` of the get-full-channel envelope.
+      properties:
+        about:
+          description: Description / about text.
+          type: string
+        admins_count:
+          description: Admin count.
+          type: integer
+        antispam:
+          description: True if antispam is on.
+          type: boolean
+        available_min_id:
+          description: Earliest fetchable message id.
+          type: integer
+        available_reactions:
+          additionalProperties: true
+          description: Allowed reactions (all / some / none).
+          type:
+          - object
+          - 'null'
+        banned_count:
+          description: Banned-member count.
+          type: integer
+        boosts_applied:
+          description: Number of boosts applied to the channel.
+          type: integer
+        boosts_unrestrict:
+          description: Boosts required to lift restrictions.
+          type: integer
+        bot_info:
+          description: Bot descriptions for bots in this chat.
+          items:
+            additionalProperties: true
+            type: object
+          type:
+          - array
+          - 'null'
+        call:
+          additionalProperties: true
+          description: Active group call descriptor, null if no call.
+          type:
+          - object
+          - 'null'
+        can_delete_channel:
+          description: True if the channel may be deleted.
+          type: boolean
+        can_set_stickers:
+          description: True if a sticker set may be assigned.
+          type: boolean
+        can_set_username:
+          description: True if the username is editable.
+          type: boolean
+        can_view_participants:
+          description: True if participants are listable.
+          type: boolean
+        can_view_revenue:
+          description: True if monetisation stats are exposed.
+          type: boolean
+        can_view_stats:
+          description: True if statistics are exposed.
+          type: boolean
+        chat_photo:
+          description: Full chat photo.
+          oneOf:
+          - $ref: '#/components/schemas/Photo'
+          - type: 'null'
+        exported_invite:
+          additionalProperties: true
+          description: Primary chat invite link.
+          type:
+          - object
+          - 'null'
+        folder_id:
+          description: Chat folder id, 0 if none.
+          type: integer
+        hidden_prehistory:
+          description: True if history is hidden from new members.
+          type: boolean
+        id:
+          description: Chat peer id (matches the Chat.id in the same response).
+          format: int64
+          type: integer
+        kicked_count:
+          description: Kicked-member count.
+          type: integer
+        linked_chat_id:
+          description: Linked discussion chat id (for broadcast channels with a comments group).
+          format: int64
+          type: integer
+        online_count:
+          description: Currently-online member count.
+          type: integer
+        participants_count:
+          description: Approximate member count.
+          type: integer
+        pinned_msg_id:
+          description: Pinned message id, 0 if none.
+          type: integer
+        slowmode_next_send_date:
+          description: Unix timestamp of the next allowed post under slow mode.
+          type: integer
+        slowmode_seconds:
+          description: Slow-mode interval in seconds, 0 if disabled.
+          type: integer
+        ttl_period:
+          description: Self-destruct period (seconds), 0 if disabled.
+          type: integer
+        unread_count:
+          description: Unread message count for the viewer.
+          type: integer
+      type: object
+    MessagesEnvelope:
+      description: Messages list with related chats/users. Used by history, replies, and channel-messages-by-id endpoints.
+      properties:
+        chats:
+          items:
+            $ref: '#/components/schemas/Chat'
+          type: array
+        count:
+          description: Total number of messages matching the query (may exceed the returned page).
+          type: integer
+        flags:
+          description: Bitfield of optional Telegram fields.
+          type: integer
+        inexact:
+          description: True if `count` is an estimate.
+          type: boolean
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        next_page:
+          description: Opaque cursor for the next (older) page. Pass back as `?cursor=`. Absent when no further page exists.
+          type: string
+        offset_id_offset:
+          description: Absolute position of `messages[0]` in the full result set.
+          type: integer
+        prev_page:
+          description: Opaque cursor for the previous (newer) page. Pass back as `?cursor=`. Absent when already on the first page.
+          type: string
+        pts:
+          description: State-update counter; opaque to callers.
+          type: integer
+        topics:
+          description: Forum topics referenced by the messages, if the chat is a forum.
+          items:
+            additionalProperties: true
+            type: object
+          type:
+          - array
+          - 'null'
+        users:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      type: object
+    ChannelsList:
+      description: Wrapper carrying a `chats[]` list. Used by channel-recommendations.
+      properties:
+        chats:
+          items:
+            $ref: '#/components/schemas/Chat'
+          type:
+          - array
+          - 'null'
+      type: object
+    ChannelDetails:
+      description: Get-full-channel envelope. `full_chat` carries the extended profile; `chats[0]` carries the regular chat record for cross-reference.
+      properties:
+        chats:
+          items:
+            $ref: '#/components/schemas/Chat'
+          type: array
+        full_chat:
+          $ref: '#/components/schemas/ChatFull'
+        users:
+          items:
+            $ref: '#/components/schemas/User'
+          type:
+          - array
+          - 'null'
+      type: object
+    ChannelParticipants:
+      additionalProperties: true
+      description: Channel/supergroup members matching the requested filter.
+      properties:
+        chats:
+          items:
+            $ref: '#/components/schemas/Chat'
+          type:
+          - array
+          - 'null'
+        count:
+          description: Total participant count matching the filter.
+          type: integer
+        participants:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+        users:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      type: object
+    Error:
+      description: Error envelope returned by all non-2xx responses.
+      properties:
+        code:
+          description: Stable machine-readable error identifier.
+          enum:
+          - INVALID_REQUEST
+          - NOT_FOUND
+          - RESOURCE_UNAVAILABLE
+          - RATE_LIMITED
+          - SERVICE_UNAVAILABLE
+          - TIMEOUT
+          - INTERNAL_ERROR
+          example: SERVICE_UNAVAILABLE
+          type: string
+        error:
+          description: Short human-readable error message.
+          example: service temporarily unavailable
+          type: string
+        hint:
+          description: Optional recovery hint suggesting a concrete next call. Set on RESOURCE_UNAVAILABLE (how to seed an unknown peer id) and SERVICE_UNAVAILABLE.
+          example: retry shortly, or call /v1/usernames/{username} or /v1/peers/{peer_id}/history first.
+          type: string
+      required:
+      - error
+      - code
+      type: object
+    UsernameAlias:
+      additionalProperties: true
+      description: One public username alias bound to a user or chat.
+      properties:
+        active:
+          description: True if the alias is currently active.
+          type: boolean
+        editable:
+          description: True if the alias can be edited (only true for the primary one).
+          type: boolean
+        flags:
+          description: Bitfield of optional Telegram fields.
+          type: integer
+        username:
+          description: The alias text (no leading @).
+          type: string
+      type: object
+    User:
+      additionalProperties: true
+      description: Telegram user record. Appears in `users[]` arrays of nearly every response.
+      properties:
+        bot:
+          description: True if this account is a bot.
+          type: boolean
+        close_friend:
+          description: Close-friend flag.
+          type: boolean
+        contact:
+          description: Contact-relationship flag.
+          type: boolean
+        deleted:
+          description: True if the account has been deleted.
+          type: boolean
+        fake:
+          description: True if Telegram has flagged this account as fake.
+          type: boolean
+        first_name:
+          description: First name (may be empty for deleted accounts).
+          type: string
+        id:
+          description: User peer id. Pass this as `peer_id` to `/v1/users/{peer_id}`.
+          format: int64
+          type: integer
+        lang_code:
+          description: BCP-47-ish locale code reported by the client (e.g. "en", "ru").
+          type: string
+        last_name:
+          description: Last name (may be empty).
+          type: string
+        mutual_contact:
+          description: True if the contact relationship is mutual.
+          type: boolean
+        phone:
+          description: Phone number in international format. Empty unless the caller has visibility.
+          type: string
+        photo:
+          description: Profile photo metadata. Null if no photo is set.
+          oneOf:
+          - $ref: '#/components/schemas/Photo'
+          - type: 'null'
+        premium:
+          description: True if this account has Telegram Premium.
+          type: boolean
+        restricted:
+          description: True if this user is restricted (see `restriction_reason`).
+          type: boolean
+        restriction_reason:
+          description: Reasons for any restriction. Null when not restricted.
+          items:
+            additionalProperties: true
+            type: object
+          type:
+          - array
+          - 'null'
+        scam:
+          description: True if Telegram has flagged this account as a scam.
+          type: boolean
+        status:
+          additionalProperties: true
+          description: Online status object (varies by privacy settings).
+          type:
+          - object
+          - 'null'
+        username:
+          description: Primary public @username (empty if the user has none).
+          type: string
+        usernames:
+          description: All public usernames bound to this user (some accounts collect multiple).
+          items:
+            $ref: '#/components/schemas/UsernameAlias'
+          type:
+          - array
+          - 'null'
+        verified:
+          description: True if Telegram has verified this user.
+          type: boolean
+      type: object
+  responses:
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not found
+            code: NOT_FOUND
+      description: Not found.
+    UpstreamTimeout:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Request timed out.
+    RateLimited:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Rate limit exceeded.
+    ResourceUnavailable:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: 'The peer id could not be found, so no access hash exists for it. Not transient: seed the id via GET /v1/usernames/{username}, GET /v1/phones/{phone}, or by encountering it in a chat, then retry. Raw MTProto ids only: a Bot-API id like -1001234567890 must be sent as 1234567890 (strip the leading -100), and -123456789 as 123456789. When the request carries such an id, the hint names the exact id to retry with.'
+    BadRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid request — bad path or query parameter.
+    ServiceUnavailable:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Service temporarily unavailable.
+  parameters:
+    LimitQuery:
+      description: Maximum items to return. Defaults to 20 when omitted; values above 100 are clamped to 100.
+      example: 20
+      in: query
+      name: limit
+      required: false
+      schema:
+        default: 20
+        maximum: 100
+        minimum: 1
+        type: integer
+    PeerIDPath:
+      description: Numeric Telegram peer id (channel or user). Obtain from `/v1/usernames/{username}`, `/v1/phones/{phone}`, `/v1/contacts/search`, or any prior response's `peer.user_id` / `peer.channel_id` field.
+      example: 1006503122
+      in: path
+      name: peer_id
+      required: true
+      schema:
+        format: int64
+        type: integer
+x-refined-from:
+- tgatlas-openapi.json
+- tgatlas-openapi.json

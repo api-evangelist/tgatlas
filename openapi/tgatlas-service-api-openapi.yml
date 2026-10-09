@@ -1,0 +1,61 @@
+openapi: 3.2.0
+info:
+  title: Tgatlas Service API
+  version: 1.0.0
+  contact:
+    name: tgAtlas
+    url: https://channelindex.starnikovoleg.workers.dev
+    email: starnikovoleg@gmail.com
+  x-rapidapi-url: https://rapidapi.com/starnikovoleg/api/telegram155
+  description: 'Operations tagged Service across 2 of this provider''s published API definitions: tgatlas-openapi.json, tgatlas-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://telegram155.p.rapidapi.com
+  description: RapidAPI gateway
+tags:
+- name: Service
+  description: Liveness probe and the machine-readable contract.
+paths:
+  /health:
+    get:
+      description: Returns 200 if the process is up.
+      operationId: health
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                status: ok
+              schema:
+                properties:
+                  status:
+                    example: ok
+                    type: string
+                type: object
+          description: OK
+      summary: Liveness probe
+      tags:
+      - Service
+    servers:
+    - url: https://telegram155.p.rapidapi.com
+      description: RapidAPI gateway
+  /v1/openapi.json:
+    get:
+      description: Returns this OpenAPI document. Cache-friendly.
+      operationId: getOpenAPIDocument
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+          description: OpenAPI 3.0 spec.
+      summary: OpenAPI document
+      tags:
+      - Service
+    servers:
+    - url: https://telegram155.p.rapidapi.com
+      description: RapidAPI gateway
+x-refined-from:
+- tgatlas-openapi.json
+- tgatlas-openapi.json
