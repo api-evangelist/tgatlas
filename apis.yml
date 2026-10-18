@@ -14,6 +14,18 @@ specificationVersion: '0.21'
 tags:
   - Telegram
   - Public Channels
+  - Social Media
+  - Social Monitoring
+  - Messaging
+  - Directory
+  - Search
+  - Analytics
+  - OSINT
+  - Market Research
+  - AI-agent context
+tags_raw:
+  - Telegram
+  - Public Channels
   - Social-Media
   - Social Monitoring
   - Messaging
@@ -58,6 +70,8 @@ apis:
   humanURL: https://channelindex.starnikovoleg.workers.dev/docs
   baseURL: https://telegram155.p.rapidapi.com/v1
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -114,6 +128,8 @@ apis:
   humanURL: https://channelindex.starnikovoleg.workers.dev/docs
   baseURL: https://telegram155.p.rapidapi.com/v1
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
@@ -142,6 +158,8 @@ apis:
   humanURL: https://channelindex.starnikovoleg.workers.dev/docs
   baseURL: https://telegram155.p.rapidapi.com/v1
   tags:
+  - Services
+  tags_raw:
   - Service
   properties:
   - type: OpenAPI
